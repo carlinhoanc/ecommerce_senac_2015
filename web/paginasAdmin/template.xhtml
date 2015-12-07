@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Area do Administrador</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet library="awesome" name="css/font-awesome.css" />
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="100" rendered="true" closable="false" collapsible="false">
+                <h:form>
+                    <p>OLA :#{controleUsuario.userLogado.nome}</p>
+                    <h:commandLink value="SAIR" action="#{controleUsuario.logout()}"/>
+                </h:form>
+            </p:layoutUnit>
+            <p:layoutUnit position="west" size="200" header="Menu pesquisa" resizable="true" closable="false" collapsible="false">
+                <h:form id="formPag">                       
+                    <p:menubar>
+                        <p:menuitem value="Produto" action="#{controleProdutos.paginaProduto()}" ajax="false"/>
+                        <p:menuitem value="Marca" action="#{controleMarca.paginaMarca()}" ajax="false" process="@this"/>
+                        <p:menuitem value="Categoria" action="#{controleCategoriaProduto.paginaCtg()}" ajax="false" process="@this"/>
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>
+            <ui:insert name="centro">
+                <p:layoutUnit position="center" header="HOME" resizable="true" closable="false" collapsible="false">
+
+                </p:layoutUnit>
+            </ui:insert>
+        </p:layout>
+    </h:body>
+</html>

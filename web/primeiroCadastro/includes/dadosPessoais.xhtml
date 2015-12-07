@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"               
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <p:fieldset id="pessoa" legend="Dados Pessoais" >
+        <h:panelGrid id="cadDadosPessaoas" columns="4">
+            <p:outputLabel value="Nome Completo : " for="nomeCli"/>
+            <p:inputText value="#{controleCliente.pessoa.nome}" id="nomeCli"/>
+            <h:outputText/>
+            <h:outputText/>            
+            <p:outputLabel value="CPF : " for="cpfCli" />
+            <p:inputMask mask="999.999.999-99" value="#{controleCliente.pessoa.cpfCnpj}" id="cpfCli" />
+            <h:outputText />
+            <h:outputText />
+            <p:outputLabel for="sexoCli" value="Sexo : "/>
+            <p:selectOneRadio id="sexoCli" value="#{controleCliente.pessoa.sexo}">
+                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                <f:selectItem itemLabel="Feminino" itemValue="F"/>
+            </p:selectOneRadio>
+            <h:outputText />
+            <h:outputText />
+            <p:outputLabel value="Data de Nascimento : " for="dataNascCli" />
+            <p:calendar id="dataNascCli"  value="#{controleCliente.pessoa.dataNascimento}" pattern="dd-MM-yyyy" mask="true"/>
+            <h:outputText />
+            <h:outputText />
+            <p:outputLabel value="Tel :" for="ddTelCli" />
+            <p:inputMask mask="99" value="#{controleCliente.pessoa.dddRes}" id="ddTelCli" size="1"/>
+            <p:outputLabel value="-" for="telCli"/>
+            <p:inputMask mask="99999999" value="#{controleCliente.pessoa.telRes}" id="telCli" size="6"/>
+            <p:outputLabel value="Cel :" for="ddCelCli" />
+            <p:inputMask mask="99" value="#{controleCliente.pessoa.dddRes}" id="ddCelCli" size="1"/>
+            <p:outputLabel value="-" for="celCli"/>
+            <p:inputMask mask="99999999" value="#{controleCliente.pessoa.telRes}" id="celCli" size="6"/>
+            <p:outputLabel for="dataCadCli" value="Data de cadastro :"/>
+            <p:inputText id="dataCadCli" value="#{controleCliente.pessoa.dataCadastro}" disabled="true">
+                <f:convertDateTime pattern="dd/MM/yyyy"/>  
+            </p:inputText>
+            <h:outputText/>
+            <h:outputText/>
+        </h:panelGrid>
+<!--        <p:commandButton value="{ Anterior" action="#"/>
+        <p:commandButton value="Proximo >" action="#"/>-->
+    </p:fieldset>
+</ui:composition>
+
+
+<!-- <p:selectOneRadio  id="cpfCnpj" value="#{controleCliente.cpfCnpj}">
+                <f:selectItem itemLabel="CPF" itemValue="true"/>
+                <f:selectItem itemLabel="CNPJ" itemValue="false"/>
+                <f:ajax event="change" render="cpfCli" execute="@this"/>
+                <p:ajax listener="#{controleCliente.ocutarCampos}" event="change" update="cpfCli, cnpjCli, sexoCli, dataNascCli, cpfCli2, cnpjCli2, sexoCli2, dataNascCli2" />
+                cnpjCli sexoCli dataNascCli cpfCli2 cnpjCli2 sexoCli2 dataNascCli2
+            </p:selectOneRadio>-->

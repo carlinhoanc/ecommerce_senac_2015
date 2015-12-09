@@ -19,7 +19,7 @@ public class ProdutoDaoImp implements ProdutoDao {
     private Connection conn = null;
     private PreparedStatement pstm = null;
     private ResultSet rs = null;
-
+ 
     @Override
     public boolean salvar(Object obj) throws Exception {
         boolean flag = true;
@@ -38,6 +38,7 @@ public class ProdutoDaoImp implements ProdutoDao {
             pstm.setInt(8, p.getMarca().getCodigo());
             pstm.setBoolean(9, p.isAtivo());
             pstm.executeUpdate();
+            
         } catch (Exception e) {
             System.out.println("Erro conexão salvar Produto " + e.getMessage());
         } finally {
@@ -66,7 +67,7 @@ public class ProdutoDaoImp implements ProdutoDao {
             pstm.setInt(9, p.getCodigo());
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro conexão Alterar Produto MSN :" + e.getMessage());
+            System.out.println("Erro ao alterar produto:" + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm);
         }
@@ -86,7 +87,6 @@ public class ProdutoDaoImp implements ProdutoDao {
 
     @Override
     public Produto salvarProduto(Produto produto) throws Exception {
-        //  Produto produto = (Produto) obj;
         try {
             String query = "INSERT INTO produto (nome,descricao,quantidade,valorCompra,valorVenda,dataCadastro,idCategoriaProduto,idMarca,ativo) VALUES(?,?,?,?,?,?,?,?,?)";
             conn = Conexao.abrirConexao();

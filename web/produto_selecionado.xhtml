@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Produto Selecionado #{foto.nome}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,11 +23,12 @@
 
         <ui:include src="menu_principal.xhtml" />
 
+        <ui:include src="menu_principal.xhtml" />
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        
+
                         <p:galleria 
                             value="#{controleProdutos.p.fotos}"
                             var="foto" 
@@ -46,15 +48,19 @@
                         </div>
 
                         <div class="nomeProd">
-                            Nome do produto
+                            <!--Nome do produto-->
+                            #{controleProdutos.p.nome}
                         </div>
 
                         <div class="descricaoProd">
-                            Descricao do produto
+                            <!--Descricao do produto-->
+                            #{controleProdutos.p.descricao}
                         </div>
 
                         <div class="precoProduto">
-                            R$ preço do prod
+                            R$ <h:outputText value="#{controleProdutos.p.valorVenda}" >
+                                <f:convertNumber pattern="#0.00"/>
+                            </h:outputText>
                         </div>
 
                         <div class="addProd">

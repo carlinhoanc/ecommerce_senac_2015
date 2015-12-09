@@ -23,7 +23,7 @@
                         <f:selectItem itemLabel="Sim" itemValue="sim"/>
                         <f:selectItem itemLabel="Não" itemValue="nao"/>
                     </p:selectOneRadio>
-                    <p:commandButton value="Filtar" action="#{controleProdutos.filtroProdutoAdmin()}" ajax="true" update=":formTabelaProd:gridProduto" process="@this,filtroMarca,ativoProd"/>
+                    <p:commandButton value="Filtar" actionListener="#{controleProdutos.filtroProdutoAdmin()}" update=":formTabelaProd:gridProduto, filtroCategoria filtroMarca ativoProd" process="@this,filtroMarca filtroCategoria "/>
                 </h:panelGrid>
             </h:form>
         </p:panel>

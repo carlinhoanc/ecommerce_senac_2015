@@ -12,9 +12,18 @@ public class Venda {
     private int codigo;
     private String protocolo;
     private Date dataVenda;
-    private double valorTotal; // trocar tipo no banco de dados
+    private double valorTotal;
     private Status statusVenda;
     private List<Produto> produtos;
+    private Pessoa pessoa;
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
 
     public int getCodigo() {
         return codigo;

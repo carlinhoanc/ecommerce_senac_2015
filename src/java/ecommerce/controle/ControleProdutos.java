@@ -194,6 +194,7 @@ public class ControleProdutos {
     /**
      * Metodo responsavel por pegar o caminho relativo da pasta onde sera salvo
      * o aqruivo
+     * @return 
      */
     public String getRealPath() {
         ExternalContext externalContext
@@ -206,8 +207,9 @@ public class ControleProdutos {
     }
 
     /**
-     * Metodo responsavel por pegar o aquivo(comprovante bancario) da tela
+     * Metodo responsavel por pegar o aquivo(Imagen do produto) da tela
      *
+     * @param event
      */
     public void handleFileUploadAction(FileUploadEvent event) {
         fpDao = new FotosProdutoDaoImp();
@@ -246,6 +248,9 @@ public class ControleProdutos {
     /**
      * Metodo responsavel por salvar o arquivo na pasta comprocantesBancarios
      *
+     * @param bytes
+     * @param arquivo
+     * @throws java.io.IOException
      */
     public void criaArquivo(byte[] bytes, String arquivo) throws IOException {
         FileOutputStream fos;
@@ -319,11 +324,11 @@ public class ControleProdutos {
         pDao = new ProdutoDaoImp();
         try {
             produtosSite = pDao.listarProdutosAtivosSite();
-            return produtosSite;
+         
         } catch (Exception e) {
             System.out.println("Erro ao listar produto site : " + e.getMessage());
         }
-        return null;
+          return produtosSite;
     }
 
     public void adicionarImagemPrincipal() {
@@ -356,5 +361,8 @@ public class ControleProdutos {
         } catch (Exception e) {
             System.out.println("Erro controle filtroProdutoAdmin() MSN :" + e.getMessage());
         }
+        cp = null;
+        marca = null;
+        ativo = null;
     }
 }

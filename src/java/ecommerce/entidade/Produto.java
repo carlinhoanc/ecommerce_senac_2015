@@ -12,7 +12,7 @@ public class Produto {
     private int codigo;
     private String nome;
     private String descricao;
-    private int quantidade; //trocar tipo do campo no banco
+    private int quantidade; 
     private double valorCompra;
     private double valorVenda;
     private int acessos;
@@ -22,7 +22,6 @@ public class Produto {
     private CategoriaProduto categoria;
     private String ativoString;
     private List<FotosProduto> fotos;
-    //criar classe carrinho
 
     public int getCodigo() {
         return codigo;

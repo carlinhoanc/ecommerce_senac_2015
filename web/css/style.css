@@ -65,3 +65,10 @@ form.listaProdutoHome {
 .addProd {
     margin-top: 20px;
 }
+.nomeProd {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1em;
+    padding: 7px 0;
+    text-transform: capitalize;
+}

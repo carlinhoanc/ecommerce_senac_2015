@@ -23,36 +23,72 @@
 
                 <div class="row">
                     <h:form class="listaProdutoHome">
-                        <div>
-                            <c:forEach var="produto" items="#{controleProdutos.listaProdutosSite()}">
-                                <div class="col-md-2 verifica4">
-                                    <div class="imagemProduto">
-                                        <c:forEach var="foto" items="#{produto.fotos}">
-                                            <h:commandLink  action="#{controleProdutos.produtoSelectSite(produto.codigo)}">
-                                                <img src="imagensProdutos/#{foto.nome}" class="img-responsive img-thumbnail center-block"/>
-                                            </h:commandLink>
-                                        </c:forEach>
+                        <fieldset>
+                            <legend>Mais acessados</legend>
+                            <div>
+                                <c:forEach var="produto" items="#{controleProdutos.listaProdutosSite()}">
+                                    <div class="col-md-3 verifica4">
+                                        <div class="imagemProduto">
+                                            <c:forEach var="foto" items="#{produto.fotos}">
+                                                <h:commandLink  action="#{controleProdutos.produtoSelectSite(produto.codigo)}">
+                                                    <img src="imagensProdutos/#{foto.nome}" class="img-responsive img-thumbnail center-block"/>
+                                                </h:commandLink>
+                                            </c:forEach>
+                                        </div>
+                                        <div class="descricao">
+                                            <div class="idProduto">
+                                                id do produto
+                                            </div>
+                                            <div class="nomeProduto">
+                                                #{produto.nome} 
+                                            </div>
+                                            <div class="precoProduto">
+                                                R$ #{produto.valorVenda}
+                                            </div>
+
+                                            <div class="vejamais">
+                                                <h:commandLink  action="#{controleProdutos.produtoSelectSite(produto.codigo)}">
+                                                    Veja mais
+                                                </h:commandLink>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="descricao">
-                                        <div class="idProduto">
-                                            id do produto
+                                </c:forEach>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Produtos recentes</legend>
+                            <div>
+                                <c:forEach var="produto" items="#{controleProdutos.listaProdutosSite()}">
+                                    <div class="col-md-3 verifica4">
+                                        <div class="imagemProduto">
+                                            <c:forEach var="foto" items="#{produto.fotos}">
+                                                <h:commandLink  action="#{controleProdutos.produtoSelectSite(produto.codigo)}">
+                                                    <img src="imagensProdutos/#{foto.nome}" class="img-responsive img-thumbnail center-block"/>
+                                                </h:commandLink>
+                                            </c:forEach>
                                         </div>
-                                        <div class="nomeProduto">
-                                            #{produto.nome} 
-                                        </div>
-                                        <div class="precoProduto">
-                                            R$ #{produto.valorVenda}
-                                        </div>
-                                        
-                                        <div class="vejamais">
-                                            <h:commandLink  action="#{controleProdutos.produtoSelectSite(produto.codigo)}">
-                                            Veja mais
-                                            </h:commandLink>
+                                        <div class="descricao">
+                                            <div class="idProduto">
+                                                id do produto
+                                            </div>
+                                            <div class="nomeProduto">
+                                                #{produto.nome} 
+                                            </div>
+                                            <div class="precoProduto">
+                                                R$ #{produto.valorVenda}
+                                            </div>
+
+                                            <div class="vejamais">
+                                                <h:commandLink  action="#{controleProdutos.produtoSelectSite(produto.codigo)}">
+                                                    Veja mais
+                                                </h:commandLink>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </c:forEach>
-                        </div>
+                                </c:forEach>
+                            </div>
+                        </fieldset>
                     </h:form>
                 </div>            
             </div>

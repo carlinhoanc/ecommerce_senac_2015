@@ -55,3 +55,7 @@ form.listaProdutoHome {
 .imagemProduto {
     height: 170px;
 }
+.divFooter {
+    padding: 10px 0;
+    text-align: center;
+}

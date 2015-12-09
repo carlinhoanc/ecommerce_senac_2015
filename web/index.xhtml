@@ -9,28 +9,53 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link type="text/css" rel="stylesheet" href="css/bootstrap-min.css"/>
         <link type="text/css" rel="stylesheet" href="../css/bootstrap-min.css"/>
+
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
+        <link type="text/css" rel="stylesheet" href="../css/style.css"/>
+
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="../js/bootstrap.js"></script>
     </h:head>
     <h:body>
         <ui:include src="menu_principal.xhtml" />
         <div class="container-fluid">
-            <div class="row">
-                <h:form>
-                    <c:forEach var="produto" items="#{controleProdutos.listaProdutosSite()}">
-                        <div class="col-md-2">
-                            <div class="col-md-12">
-                                <c:forEach var="foto" items="#{produto.fotos}">
-                                    <h:commandLink  action="#{controleProdutos.produtoSelectSite(produto.codigo)}"> <img src="imagensProdutos/#{foto.nome}" class="img-responsive img-thumbnail center-block"/></h:commandLink>
-                                </c:forEach>
-                            </div>
-                            <div class="col-md-12">
-                                #{produto.nome} <br/> #{produto.valorVenda}
-                            </div>
+            <div class="container">
+
+                <div class="row">
+                    <h:form class="listaProdutoHome">
+                        <div>
+                            <c:forEach var="produto" items="#{controleProdutos.listaProdutosSite()}">
+                                <div class="col-md-2 verifica4">
+                                    <div class="imagemProduto">
+                                        <c:forEach var="foto" items="#{produto.fotos}">
+                                            <h:commandLink  action="#{controleProdutos.produtoSelectSite(produto.codigo)}">
+                                                <img src="imagensProdutos/#{foto.nome}" class="img-responsive img-thumbnail center-block"/>
+                                            </h:commandLink>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="descricao">
+                                        <div class="idProduto">
+                                            id do produto
+                                        </div>
+                                        <div class="nomeProduto">
+                                            #{produto.nome} 
+                                        </div>
+                                        <div class="precoProduto">
+                                            R$ #{produto.valorVenda}
+                                        </div>
+                                        
+                                        <div class="vejamais">
+                                            <h:commandLink  action="#{controleProdutos.produtoSelectSite(produto.codigo)}">
+                                            Veja mais
+                                            </h:commandLink>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
                         </div>
-                    </c:forEach>
-                </h:form>
-            </div>            
+                    </h:form>
+                </div>            
+            </div>
         </div>
     </h:body>
 </html>

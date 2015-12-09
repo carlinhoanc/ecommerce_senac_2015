@@ -15,8 +15,39 @@ and open the template in the editor.
     display: none;
 }
 
-.fixo{
-  
-
+.listaProdutoHome .verifica4:nth-child(5){
+    clear: none !important;
+}
+.listaProdutoHome .verifica4:nth-child(5n+1){
+    clear: both;
 }
 
+.listaProdutoHome .verifica4 {
+    margin-bottom: 20px;
+}
+.listaProdutoHome .verifica4 img {
+    border: 0 none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.vejamais > a {
+    background-color: green;
+    color: #fff;
+    font-size: 15px;
+    line-height: 1em;
+    padding: 4px 15px;
+    text-transform: lowercase;
+}
+.vejamais {
+    margin-top: 12px;
+}
+.precoProduto {
+    color: red;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1em;
+    margin-top: 12px;
+}

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>E-commerce</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -37,13 +38,16 @@
                                         </div>
                                         <div class="descricao">
                                             <div class="idProduto">
-                                                id do produto
+                                               Cód.: #{produto.codigo} 
                                             </div>
                                             <div class="nomeProduto">
                                                 #{produto.nome} 
                                             </div>
                                             <div class="precoProduto">
-                                                R$ #{produto.valorVenda}
+                                                R$ <h:outputText value="#{produto.valorVenda}" >
+                                                  <f:convertNumber pattern="#0.00"/>
+                                                </h:outputText>
+                                             <!--   R$ #-{produto.valorVenda}!-->
                                             </div>
 
                                             <div class="vejamais">
@@ -70,7 +74,7 @@
                                         </div>
                                         <div class="descricao">
                                             <div class="idProduto">
-                                                id do produto
+                                             Cód.: #{produto.codigo} 
                                             </div>
                                             <div class="nomeProduto">
                                                 #{produto.nome} 

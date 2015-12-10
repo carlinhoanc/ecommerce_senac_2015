@@ -27,7 +27,7 @@
                         <fieldset>
                             <legend>Mais acessados</legend>
                             <div>
-                                <c:forEach var="produto" items="#{controleProdutos.listaProdutosSite()}">
+                                <c:forEach var="produto" items="#{controleProdutos.listaProdutosSiteAcessos()}">
                                     <div class="col-md-3 verifica4">
                                         <div class="imagemProduto">
                                             <c:forEach var="foto" items="#{produto.fotos}">
@@ -63,7 +63,7 @@
                         <fieldset>
                             <legend>Produtos recentes</legend>
                             <div>
-                                <c:forEach var="produto" items="#{controleProdutos.listaProdutosSite()}">
+                                <c:forEach var="produto" items="#{controleProdutos.listaProdutosSiteUltimosSalvos()}">
                                     <div class="col-md-3 verifica4">
                                         <div class="imagemProduto">
                                             <c:forEach var="foto" items="#{produto.fotos}">
@@ -82,7 +82,6 @@
                                             <div class="precoProduto">
                                                 R$ #{produto.valorVenda}
                                             </div>
-
                                             <div class="vejamais">
                                                 <h:commandLink  action="#{controleProdutos.produtoSelectSite(produto.codigo)}">
                                                     Veja mais

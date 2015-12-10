@@ -19,7 +19,7 @@ public class ProdutoDaoImp implements ProdutoDao {
     private Connection conn = null;
     private PreparedStatement pstm = null;
     private ResultSet rs = null;
- 
+
     @Override
     public boolean salvar(Object obj) throws Exception {
         boolean flag = true;
@@ -38,7 +38,7 @@ public class ProdutoDaoImp implements ProdutoDao {
             pstm.setInt(8, p.getMarca().getCodigo());
             pstm.setBoolean(9, p.isAtivo());
             pstm.executeUpdate();
-            
+
         } catch (Exception e) {
             System.out.println("Erro conexão salvar Produto " + e.getMessage());
         } finally {
@@ -88,7 +88,7 @@ public class ProdutoDaoImp implements ProdutoDao {
     @Override
     public Produto salvarProduto(Produto produto) throws Exception {
         try {
-            String query = "INSERT INTO produto (nome,descricao,quantidade,valorCompra,valorVenda,dataCadastro,idCategoriaProduto,idMarca,ativo) VALUES(?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO produto (nome,descricao,quantidade,valorCompra,valorVenda,acessos,dataCadastro,idCategoriaProduto,idMarca,ativo) VALUES(?,?,?,?,?,?,?,?,?,?)";
             conn = Conexao.abrirConexao();
             pstm = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, produto.getNome());
@@ -96,10 +96,11 @@ public class ProdutoDaoImp implements ProdutoDao {
             pstm.setInt(3, produto.getQuantidade());
             pstm.setDouble(4, produto.getValorCompra());
             pstm.setDouble(5, produto.getValorVenda());
-            pstm.setDate(6, new java.sql.Date(produto.getDataCadastro().getTime()));
-            pstm.setInt(7, produto.getCategoria().getCodigo());
-            pstm.setInt(8, produto.getMarca().getCodigo());
-            pstm.setBoolean(9, produto.isAtivo());
+            pstm.setInt(6, 0);
+            pstm.setDate(7, new java.sql.Date(produto.getDataCadastro().getTime()));
+            pstm.setInt(8, produto.getCategoria().getCodigo());
+            pstm.setInt(9, produto.getMarca().getCodigo());
+            pstm.setBoolean(10, produto.isAtivo());
             pstm.executeUpdate();
             rs = pstm.getGeneratedKeys();
             rs.next();
@@ -156,15 +157,15 @@ public class ProdutoDaoImp implements ProdutoDao {
     }
 
     @Override
-    public List<Produto> listarProdutosAtivosSite() throws Exception {
+    public List<Produto> listarProdutosAtivosSiteAcessos() throws Exception {
         List<Produto> produtos = new ArrayList();
         try {
             String query = "SELECT p.*, m.*, cp.* FROM produto p JOIN marca m ON p.idMarca = m.codigo "
-                    + "JOIN categoriaproduto cp ON p.idCategoriaProduto = cp.codigo WHERE p.ativo = ? AND p.quantidade > ?";
+                    + "JOIN categoriaproduto cp ON p.idCategoriaProduto = cp.codigo WHERE p.ativo = ? AND p.quantidade > ? ORDER BY p.acessos DESC LIMIT 8";
             conn = Conexao.abrirConexao();
             pstm = conn.prepareCall(query);
             pstm.setBoolean(1, true);
-            pstm.setInt(2, 1);
+            pstm.setInt(2, 2);
             rs = pstm.executeQuery();
             FotosProdutoDao fpDao = new FotosProdutoDaoImp();
             while (rs.next()) {
@@ -297,7 +298,7 @@ public class ProdutoDaoImp implements ProdutoDao {
 
     @Override
     public Produto pesqProdutoSelectSite(int idProduto) throws Exception {
-        Produto p = null;
+        Produto produto = null;
         try {
             String query = "SELECT p.*, m.*, cp.* FROM produto p JOIN marca m ON p.idMarca = m.codigo "
                     + "JOIN categoriaproduto cp ON p.idCategoriaProduto = cp.codigo WHERE p.codigo = ?";
@@ -309,28 +310,88 @@ public class ProdutoDaoImp implements ProdutoDao {
                 FotosProdutoDao fpDao = new FotosProdutoDaoImp();
                 Marca m = new Marca();
                 CategoriaProduto cp = new CategoriaProduto();
-                p = new Produto();
+                produto = new Produto();
                 m.setCodigo(rs.getInt("m.codigo"));
                 m.setNome(rs.getString("m.nome"));
                 cp.setCodigo(rs.getInt("cp.codigo"));
                 cp.setNome(rs.getString("cp.nome"));
-                p.setCodigo(rs.getInt("p.codigo"));
-                p.setNome(rs.getString("p.nome"));
-                p.setDescricao(rs.getString("p.descricao"));
-                p.setQuantidade(rs.getInt("p.quantidade"));
-                p.setValorCompra(rs.getDouble("p.valorCompra"));
-                p.setValorVenda(rs.getDouble("p.valorVenda"));
-                p.setDataCadastro(rs.getDate("p.dataCadastro"));
-                p.setFotos(fpDao.pesquisaImgProduto(p.getCodigo()));
-                p.setMarca(m);
-                p.setCategoria(cp);
+                produto.setCodigo(rs.getInt("p.codigo"));
+                produto.setNome(rs.getString("p.nome"));
+                produto.setDescricao(rs.getString("p.descricao"));
+                produto.setQuantidade(rs.getInt("p.quantidade"));
+                produto.setValorCompra(rs.getDouble("p.valorCompra"));
+                produto.setValorVenda(rs.getDouble("p.valorVenda"));
+                produto.setDataCadastro(rs.getDate("p.dataCadastro"));
+                produto.setFotos(fpDao.pesquisaImgProduto(produto.getCodigo()));
+                produto.setMarca(m);
+                produto.setCategoria(cp);
+                marcaVisualizacao(produto.getCodigo());
             }
         } catch (Exception e) {
             System.out.println("Erro conexão pesqProdutoSelectSite() : " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
-        return p;
+        return produto;
     }
 
+    public void marcaVisualizacao(int idProduto) throws Exception {
+        String queryConsuta = "SELECT acessos FROM produto WHERE codigo = ?";
+        String queryUpdade = "UPDATE produto SET acessos = ? WHERE codigo = ?";
+        try {
+            int acessos = 0;
+            conn = Conexao.abrirConexao();
+            pstm = conn.prepareCall(queryConsuta);
+            pstm.setInt(1, idProduto);
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                acessos = rs.getInt("acessos");
+            }
+            ++acessos;
+            pstm = conn.prepareCall(queryUpdade);
+            pstm.setInt(1, acessos);
+            pstm.setInt(2, idProduto);
+            pstm.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println("Erro marcaVisualizacao() MSG :" + ex.getMessage());
+        } finally {
+            Conexao.fechaConexao(conn, pstm, rs);
+        }
+
+    }
+
+    @Override
+    public List<Produto> listarProdutosAtivosSiteRecentes() throws Exception {
+        List<Produto> produtos = new ArrayList();
+        try {
+            String query = "SELECT p.*, m.*, cp.* FROM produto p JOIN marca m ON p.idMarca = m.codigo "
+                    + "JOIN categoriaproduto cp ON p.idCategoriaProduto = cp.codigo WHERE p.ativo = ? AND p.quantidade > ? ORDER BY p.codigo DESC LIMIT 8";
+            conn = Conexao.abrirConexao();
+            pstm = conn.prepareCall(query);
+            pstm.setBoolean(1, true);
+            pstm.setInt(2, 2);
+            rs = pstm.executeQuery();
+            FotosProdutoDao fpDao = new FotosProdutoDaoImp();
+            while (rs.next()) {
+                Marca m = new Marca();
+                CategoriaProduto cp = new CategoriaProduto();
+                Produto p = new Produto();
+                m.setNome(rs.getString("m.nome"));
+                cp.setNome(rs.getString("cp.nome"));
+                p.setCodigo(rs.getInt("p.codigo"));
+                p.setNome(rs.getString("p.nome"));
+                p.setDescricao(rs.getString("p.descricao"));
+                p.setValorVenda(rs.getDouble("p.valorVenda"));
+                p.setMarca(m);
+                p.setCategoria(cp);
+                p.setFotos(fpDao.bustaImgPrincipal(p.getCodigo()));
+                produtos.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro conexão Dao Listar produto : " + e.getMessage());
+        } finally {
+            Conexao.fechaConexao(conn, pstm, rs);
+        }
+        return produtos;
+    }
 }

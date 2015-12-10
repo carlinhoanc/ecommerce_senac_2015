@@ -13,9 +13,24 @@ public interface ProdutoDao extends BaseDao {
 
     List<Produto> listarProdutos() throws Exception;
 
-    List<Produto> listarProdutosAtivosSite() throws Exception;
-    
+    /**
+     * Metodo responsanvel por pesquiar os 8 (oito) produtos mais acessados
+     *
+     * @return List produtos
+     * @throws Exception
+     */
+    List<Produto> listarProdutosAtivosSiteAcessos() throws Exception;
+
+    /**
+     * Metodo responsanvel por pesquiar os 8 (oito) produtos que foram inseridos
+     * recentemente
+     *
+     * @return List produtos
+     * @throws Exception
+     */
+    List<Produto> listarProdutosAtivosSiteRecentes() throws Exception;
+
     List<Produto> filtroProdutoAdmin(int idCategoria, int idMarca, String ativo) throws Exception;
-    
-    Produto pesqProdutoSelectSite(int idProduto)throws Exception;
+
+    Produto pesqProdutoSelectSite(int idProduto) throws Exception;
 }

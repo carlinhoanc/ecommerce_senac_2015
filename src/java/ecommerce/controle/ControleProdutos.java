@@ -65,10 +65,14 @@ public class ControleProdutos {
 
     private static final long serialVersionUID = 1L;
 
-//    @PostConstruct
-//    public void inicia(){
-//        listarTodosProdutos();
-//    }
+    @PostConstruct
+    public void inicia() {
+        limpa();
+        produto = new Produto();
+        produto.setDataCadastro(new Date());
+
+    }
+
     public DataModel getModelProduto() {
         return modelProduto;
     }
@@ -139,10 +143,10 @@ public class ControleProdutos {
         return produtosSite;
     }
 
-   @PostConstruct
-    public void inicia() {
-        limpa();
-    }
+//    @PostConstruct
+//    public void inicia() {
+//       
+//    }
     public List<SelectItem> getComboboxMarcas() {
         List<SelectItem> listMarcas = new ArrayList<SelectItem>();
         MarcaDao mDao = new MarcaDaoImp();
@@ -194,7 +198,8 @@ public class ControleProdutos {
     /**
      * Metodo responsavel por pegar o caminho relativo da pasta onde sera salvo
      * o aqruivo
-     * @return 
+     *
+     * @return
      */
     public String getRealPath() {
         ExternalContext externalContext
@@ -320,15 +325,28 @@ public class ControleProdutos {
         return "produtos";
     }
 
-    public List<Produto> listaProdutosSite() {
+    public List<Produto> listaProdutosSiteAcessos() {
         pDao = new ProdutoDaoImp();
         try {
-            produtosSite = pDao.listarProdutosAtivosSite();
-         
+            produtosSite = null;
+            produtosSite = pDao.listarProdutosAtivosSiteAcessos();
+
         } catch (Exception e) {
             System.out.println("Erro ao listar produto site : " + e.getMessage());
         }
-          return produtosSite;
+        return produtosSite;
+    }
+
+    public List<Produto> listaProdutosSiteUltimosSalvos() {
+        pDao = new ProdutoDaoImp();
+        try {
+            produtosSite = null;
+            produtosSite = pDao.listarProdutosAtivosSiteRecentes();
+
+        } catch (Exception e) {
+            System.out.println("Erro ao listar produto site : " + e.getMessage());
+        }
+        return produtosSite;
     }
 
     public void adicionarImagemPrincipal() {

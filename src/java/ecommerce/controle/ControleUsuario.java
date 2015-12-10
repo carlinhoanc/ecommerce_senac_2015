@@ -50,7 +50,7 @@ public class ControleUsuario {
     }
     public String logout(){
         SessionContext.getInstance().encerrarSessao();
-        return "../login.xhtml?faces-redirect=true";
+        return "../login.faces?faces-redirect=true";
     }
     public Pessoa getUserLogado(){
       return (Pessoa) SessionContext.getInstance().getUsuarioLogado();

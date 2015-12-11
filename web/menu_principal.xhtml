@@ -33,10 +33,14 @@
                     <c:if var="log" test="#{controleUsuario.userLogado.nome !=null}">
                         <a href="#{request.contextPath}/login.faces">Are usuario</a>
                     </c:if>
-                    <c:if var="log" test="#{controleUsuario.userLogado.nome ==null}">
+                    <c:if var="log" test="#{controleUsuario.userLogado.nome ==null ||controleUsuario.userLogado.usuario.tpUsuario != 'admin'}">
                         <a href="#{request.contextPath}/login.faces">Logar</a>
                     </c:if>
-                    </li>                        
+                    </li>
+                    <li >
+                      
+                    <p:commandLink id="btnCarrinho" class="buttonProd btn btn-warning" >Carrinho <span class="badge">#{controleProdutos.quantidadeItensCarrinho()}</span></p:commandLink>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -392,6 +392,7 @@ public class ControleProdutos {
     }
 
     public void adicionarProdutoCarrinho() {
+        produto.setQuantidade(1);
         if (carrinhoCompra == null) {
             carrinhoCompra = new ArrayList();
         }
@@ -400,5 +401,56 @@ public class ControleProdutos {
 
     public List<Produto> listarCarrinho() {
         return carrinhoCompra;
+    }
+
+    public void addMiasProduto(int idProduto, int quantidade) {
+        pDao = new ProdutoDaoImp();
+        ++quantidade;
+        try {
+            Produto p;
+            if (pDao.verificaQuantidadeProduto(idProduto, quantidade)) {
+                p = new Produto();
+                for (Produto prod : carrinhoCompra) {
+                    if (prod.getCodigo() == idProduto) {
+                        p = prod;
+                        carrinhoCompra.remove(prod);
+                        break;
+                    }
+                }
+                p.setQuantidade(quantidade);
+                carrinhoCompra.add(p);
+            }else{
+                System.out.println("Ultrapassa o estoque porra");            
+            }
+        } catch (Exception e) {
+            System.out.println("FUDEU DEU ERRO MSG : " + e.getMessage());
+        }
+        listarCarrinho();
+    }
+
+    public void removeProdutoCarrinho(int idProduto, int quantidade) {
+        --quantidade;
+        if (quantidade > 0) {
+            Produto p;
+            p = new Produto();
+            for (Produto prod : carrinhoCompra) {
+                if (prod.getCodigo() == idProduto) {
+                    p = prod;
+                    carrinhoCompra.remove(prod);
+                    break;
+                }
+            }
+            p.setQuantidade(quantidade);
+            carrinhoCompra.add(p);
+
+        } else {
+            for (Produto prod : carrinhoCompra) {
+                if (prod.getCodigo() == idProduto) {
+                    carrinhoCompra.remove(prod);
+                    break;
+                }
+            }
+        }
+        listarCarrinho();
     }
 }

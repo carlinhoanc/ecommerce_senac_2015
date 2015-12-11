@@ -3,7 +3,7 @@ package ecommerce.entidade;
 import java.util.Date;
 
 /**
- *
+ * Classe contém todos os dados da tabela usuário.
  * @author Jéssica
  */
 public class Usuario {

@@ -1,7 +1,7 @@
 package ecommerce.entidade;
 
 /**
- *
+ * Classe contém todos os dados da tabela marca.
  * @author Jéssica
  */
 public class Marca {

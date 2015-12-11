@@ -3,7 +3,9 @@ package ecommerce.entidade;
 import java.util.Date;
 
 /**
- *
+ * Classe contém todos os dados da tabela pessoa, contém também objetos
+ * do tipo endereço, usuario e venda.
+ * 
  * @author Jéssica
  */
 public class Pessoa {

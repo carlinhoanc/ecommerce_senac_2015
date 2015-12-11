@@ -1,7 +1,7 @@
 package ecommerce.entidade;
 
 /**
- *
+ * Classe contém todos os dados da tabela de fotos dos produtos.
  * @author Gustavo
  */
 public class FotosProduto {

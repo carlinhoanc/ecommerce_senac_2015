@@ -2,7 +2,7 @@
 package ecommerce.entidade;
 
 /**
- *
+ * Classe contém todos os dados da tabela tipoUsuario.
  * @author Jéssica
  */
 public class TipoUsuario {

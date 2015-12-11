@@ -1,7 +1,7 @@
 package ecommerce.entidade;
 
 /**
- * 
+ * Classe contém todos os dados da tabela categoria do produto.
  * @author Jéssica
  */
 public class CategoriaProduto {

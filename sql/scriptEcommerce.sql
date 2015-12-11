@@ -168,7 +168,7 @@ CREATE TABLE `fotosproduto` (
   PRIMARY KEY (`codigo`),
   KEY `fotoProduto_produtp_idx` (`idProduto`),
   CONSTRAINT `fotoProduto_produtp` FOREIGN KEY (`idProduto`) REFERENCES `produto` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +177,7 @@ CREATE TABLE `fotosproduto` (
 
 LOCK TABLES `fotosproduto` WRITE;
 /*!40000 ALTER TABLE `fotosproduto` DISABLE KEYS */;
-INSERT INTO `fotosproduto` VALUES (20,'1332437623_Save.png','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\1332437623_Save.png','.png',8529,18,''),(21,'cash_register_91371.jpg','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\cash_register_91371.jpg','.jpg',12194,19,''),(22,'custom_reports_98549.jpg','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\custom_reports_98549.jpg','.jpg',8198,20,''),(23,'edit.png','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\edit.png','.png',66081,21,''),(24,'misc_edit_98007.jpg','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\misc_edit_98007.jpg','.jpg',23147,22,'');
+INSERT INTO `fotosproduto` VALUES (20,'1332437623_Save.png','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\1332437623_Save.png','.png',8529,18,''),(21,'cash_register_91371.jpg','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\cash_register_91371.jpg','.jpg',12194,19,''),(22,'custom_reports_98549.jpg','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\custom_reports_98549.jpg','.jpg',8198,20,''),(23,'edit.png','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\edit.png','.png',66081,21,''),(24,'misc_edit_98007.jpg','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\misc_edit_98007.jpg','.jpg',23147,22,''),(25,'new-titles.png','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\ecommerce\\build\\web\\imagensProdutos\\new-titles.png','.png',5071,18,'\0'),(26,'Sem tÃ­tulo-4.png','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-GIT\\trunk\\build\\web\\imagensProdutos\\Sem tÃ­tulo-4.png','.png',83190,24,'');
 /*!40000 ALTER TABLE `fotosproduto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +221,7 @@ CREATE TABLE `pedido` (
   KEY `fk_produto_has_venda_venda1_idx` (`idVenda`),
   KEY `fk_produto_has_venda_produto1_idx` (`idProduto`),
   CONSTRAINT `fk_produto_has_venda_produto` FOREIGN KEY (`idProduto`) REFERENCES `produto` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_produto_has_venda_venda` FOREIGN KEY (`idVenda`) REFERENCES `venda` (`coidgo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_produto_has_venda_venda` FOREIGN KEY (`idVenda`) REFERENCES `venda` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -231,6 +231,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+INSERT INTO `pedido` VALUES (6,1),(7,1);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -293,7 +294,7 @@ CREATE TABLE `produto` (
   KEY `fk_produto_marca1_idx` (`idMarca`),
   CONSTRAINT `fk_produto_categoria_produto` FOREIGN KEY (`idCategoriaProduto`) REFERENCES `categoriaproduto` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_produto_marca` FOREIGN KEY (`idMarca`) REFERENCES `marca` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,7 +303,7 @@ CREATE TABLE `produto` (
 
 LOCK TABLES `produto` WRITE;
 /*!40000 ALTER TABLE `produto` DISABLE KEYS */;
-INSERT INTO `produto` VALUES (6,'produto1','produto 1',1,12,14,NULL,'2015-11-24 00:00:00',2,1,'\0'),(7,'produto 2','produto2',1,12,14,NULL,'2015-11-24 00:00:00',2,1,'\0'),(18,'prod teste img 1','ewweqewq',3,33,33,NULL,'2015-11-24 00:00:00',1,1,''),(19,'prod teste img 2','ewweqewq',3,33,33,NULL,'2015-11-24 00:00:00',1,1,''),(20,'prod teste img 3','ewweqewq',3,33,33,NULL,'2015-11-24 00:00:00',1,1,''),(21,'prod teste img 4','ewweqewq',3,33,33,NULL,'2015-11-24 00:00:00',1,1,''),(22,'adasd','wqweqwe',12312,2,3,NULL,'2015-11-26 00:00:00',1,1,''),(23,'Aletrado dinovo','wqweqwe',12312,2,3,NULL,'2015-11-26 00:00:00',1,1,'\0');
+INSERT INTO `produto` VALUES (6,'produto1','produto 1',1,12,14,0,'2015-11-24 00:00:00',2,1,'\0'),(7,'produto 2','produto2',1,12,14,0,'2015-11-24 00:00:00',2,3,''),(18,'prod teste img 1','ewweqewq',3,60,80,1,'2015-11-24 00:00:00',1,1,''),(19,'prod teste img 2','ewweqewq',3,1000,1200,5,'2015-11-24 00:00:00',1,1,''),(20,'prod teste img 3','ewweqewq',3,33,33,7,'2015-11-24 00:00:00',1,1,''),(21,'prod teste img 4','ewweqewq',3,33,33,2,'2015-11-24 00:00:00',1,2,''),(22,'adasd','wqweqwe',12312,2,3,3,'2015-11-26 00:00:00',1,1,''),(23,'Aletrado dinovo','wqweqwe',12312,2,3,0,'2015-11-26 00:00:00',1,1,'\0'),(24,'Produto novo','sdasdasdasdasd',10,500,560,0,'2015-12-09 00:00:00',1,3,'');
 /*!40000 ALTER TABLE `produto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,7 +320,7 @@ CREATE TABLE `status` (
   `descricao` varchar(50) DEFAULT NULL,
   `ativo` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -328,6 +329,7 @@ CREATE TABLE `status` (
 
 LOCK TABLES `status` WRITE;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
+INSERT INTO `status` VALUES (1,'Pendente','pendente',''),(2,'Aprovada','aprovada',''),(3,'Reprovada','reprovada',''),(4,'Enviada','enviada','');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,18 +396,18 @@ DROP TABLE IF EXISTS `venda`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `venda` (
-  `coidgo` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `protocolo` varchar(45) NOT NULL,
   `dataVenda` datetime NOT NULL,
   `valorTotal` double NOT NULL,
   `idPessoa` int(11) NOT NULL,
   `idStatus` int(11) NOT NULL,
-  PRIMARY KEY (`coidgo`),
+  PRIMARY KEY (`codigo`),
   KEY `fk_venda_pessoa1_idx` (`idPessoa`),
   KEY `fk_venda_status` (`idStatus`),
   CONSTRAINT `fk_venda_pessoa` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_venda_status` FOREIGN KEY (`idStatus`) REFERENCES `status` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -414,6 +416,7 @@ CREATE TABLE `venda` (
 
 LOCK TABLES `venda` WRITE;
 /*!40000 ALTER TABLE `venda` DISABLE KEYS */;
+INSERT INTO `venda` VALUES (1,'0123456','2015-12-10 00:00:00',30,8,4);
 /*!40000 ALTER TABLE `venda` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -426,4 +429,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-04  8:38:18
+-- Dump completed on 2015-12-11  9:56:52

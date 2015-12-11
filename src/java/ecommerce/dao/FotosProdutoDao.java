@@ -11,7 +11,7 @@ public interface FotosProdutoDao extends BaseDao {
 
     List<FotosProduto> pesquisaImgProduto(int idProduto) throws Exception;
 
-    void ativerImgPrincipal(int idProduto, int idImg) throws Exception;
+    void ativarImgPrincipal(int idProduto, int idImg) throws Exception;
 
-    List<FotosProduto> bustaImgPrincipal(int idProduto) throws Exception;
+    List<FotosProduto> buscaImgPrincipal(int idProduto) throws Exception;
 }

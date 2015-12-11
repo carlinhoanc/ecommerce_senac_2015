@@ -17,6 +17,13 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
     private PreparedStatement pstm = null;
     private ResultSet rs = null;
 
+    /**
+     * Este método é responsável por salvar as fotos dos produtos.
+     * 
+     * @param obj
+     * @return
+     * @throws Exception 
+     */
     @Override
     public boolean salvar(Object obj) throws Exception {
         FotosProduto fp = (FotosProduto) obj;
@@ -33,7 +40,7 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
             pstm.setBoolean(6, fp.isPrincipal());
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro conexao salver fotos :" + e.getMessage());
+            System.out.println("Erro ao salvar fotos:" + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm);
         }
@@ -45,6 +52,14 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Este método é responsável por pesquisar a foto do produto de acordo
+     * com o código informado.
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     @Override
     public Object pesquisar(int id) throws Exception {
         FotosProduto fp = null;
@@ -60,7 +75,7 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
                 fp.setCodigo(rs.getInt("codigo"));
             }
         } catch (Exception e) {
-            System.out.println("erro conexão " + e.getMessage());
+            System.out.println("Erro ao pesquisar fotos: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
@@ -68,6 +83,14 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
 
     }
 
+    /**
+     * Este método é responsável por excluir a foto de um produto de acordo
+     * com o código informado.
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     @Override
     public boolean excluir(int id) throws Exception {
         boolean flag = false;
@@ -78,13 +101,21 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
             pstm.setInt(1, id);
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro conexão MSN : " + e.getMessage());
+            System.out.println("Erro ao excluir foto: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm);
         }
         return flag;
     }
 
+    /**
+     * Este método é responsável por pesquisar uma lista de fotos de acordo
+     * com o código do produto informado.
+     * 
+     * @param idProduto
+     * @return
+     * @throws Exception 
+     */
     @Override
     public List<FotosProduto> pesquisaImgProduto(int idProduto) throws Exception {
         List<FotosProduto> imagens = new ArrayList();
@@ -109,8 +140,16 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
         return imagens;
     }
 
+    /**
+     * Este método é responsável por ativar a imagem principal do produto,
+     * é essa imagem que aparece quando o cliente pesquisa o produto.
+     * 
+     * @param idProduto
+     * @param idImg
+     * @throws Exception 
+     */
     @Override
-    public void ativerImgPrincipal(int idProduto, int idImg) throws Exception {
+    public void ativarImgPrincipal(int idProduto, int idImg) throws Exception {
         try {
             String query1 = "UPDATE fotosproduto SET principal = ? WHERE idProduto = ?";
             String query2 = "UPDATE fotosproduto SET principal = ? WHERE codigo = ?";
@@ -124,14 +163,21 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
             pstm.setInt(2, idImg);
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro ao alterar " + e.getMessage());
+            System.out.println("Erro ao alterar imagem principal: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm);
         }
     }
 
+    /**
+     * Este método é responsável por pesquisar a imagem principal do produto.
+     * 
+     * @param idProduto
+     * @return
+     * @throws Exception 
+     */
     @Override
-    public List<FotosProduto> bustaImgPrincipal(int idProduto) throws Exception {
+    public List<FotosProduto> buscaImgPrincipal(int idProduto) throws Exception {
         List<FotosProduto> fps = new ArrayList();
         try {
             String query = "SELECT * FROM fotosproduto WHERE idProduto = ? AND principal = ?";
@@ -146,7 +192,7 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
                 fps.add(fp);
             }
         } catch (Exception e) {
-            System.out.println("Erro conexao buscarImgPrincipal : " + e.getMessage());
+            System.out.println("Erro buscar lista de imagens: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }

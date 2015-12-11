@@ -2,7 +2,6 @@ package ecommerce.dao;
 
 import ecommerce.entidade.Endereco;
 import ecommerce.entidade.Pessoa;
-import ecommerce.entidade.Produto;
 import ecommerce.entidade.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +19,13 @@ public class PessoaDaoImp implements PessoaDao {
     private PreparedStatement pstm = null;
     private ResultSet rs = null;
 
+    /**
+     * Este método é responsável por salvar os dados da pessoa e endereço.
+     *
+     * @param obj
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean salvar(Object obj) throws Exception {
         boolean flag = false;
@@ -28,7 +34,7 @@ public class PessoaDaoImp implements PessoaDao {
         UsuarioDao uDao = new UsuarioDaoImp();
         try {
             u = uDao.salvar(u);
-            
+
             EnderecoDao eDao = new EnderecoDaoImp();
             String query = "INSERT INTO pessoa (nome,cpfCnpj,sexo,dataNascimento,dddRes,telRes,dddCel,telCel,dataCadastro,idUsuario) VALUES (?,?,?,?,?,?,?,?,?,?)";
             conn = Conexao.abrirConexao();
@@ -47,11 +53,13 @@ public class PessoaDaoImp implements PessoaDao {
             rs = pstm.getGeneratedKeys();
             rs.next();
             p.setCodigo(rs.getInt(1));
+
+            //salva endereço
             if (eDao.salvar(p)) {
                 flag = true;
             }
         } catch (Exception e) {
-            System.out.println("Erro conexao salvar pessoa " + e.getMessage());
+            System.out.println("Erro ao salvar pessoa: " + e.getMessage());
             flag = false;
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
@@ -60,6 +68,13 @@ public class PessoaDaoImp implements PessoaDao {
         return flag;
     }
 
+    /**
+     * Este método é responsável por alterar os dados da pessoa e endereço.
+     *
+     * @param obj
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean alterar(Object obj) throws Exception {
         boolean flag = false;
@@ -80,18 +95,28 @@ public class PessoaDaoImp implements PessoaDao {
             pstm.setInt(9, p.getUsuario().getCodigo());
             pstm.setInt(10, p.getCodigo());
             pstm.executeUpdate();
+
+            //altera endereço
             if (eDao.alterar(p)) {
                 flag = true;
             }
         } catch (Exception e) {
             flag = false;
-            System.out.println("Erro conexão salvar pessoa " + e.getMessage());
+            System.out.println("Erro ao alterar pessoa: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm);
         }
         return flag;
     }
 
+    /**
+     * Método responsável por pesquisar dados da pessoa de acordo com o código
+     * informado.
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @Override
     public Object pesquisar(int id) throws Exception {
         Pessoa p = null;
@@ -114,6 +139,9 @@ public class PessoaDaoImp implements PessoaDao {
                 p.setEndereco((Endereco) eDao.pesquisar(p.getCodigo()));
             }
         } catch (Exception e) {
+            System.out.println("Erro ao pesquisar pessoa: " + e.getMessage());
+        } finally {
+            Conexao.fechaConexao(conn, pstm, rs);
         }
         return p;
     }

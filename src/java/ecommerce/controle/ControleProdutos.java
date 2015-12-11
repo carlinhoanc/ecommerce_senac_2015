@@ -360,7 +360,7 @@ public class ControleProdutos {
         try {
             fotoProd = (FotosProduto) modelImgProd.getRowData();
             fpDao = new FotosProdutoDaoImp();
-            fpDao.ativerImgPrincipal(produto.getCodigo(), fotoProd.getCodigo());
+            fpDao.ativarImgPrincipal(produto.getCodigo(), fotoProd.getCodigo());
             pesquisarImagensPriduto();
         } catch (Exception e) {
             System.out.println("Erro ativar a imagem " + e.getMessage());

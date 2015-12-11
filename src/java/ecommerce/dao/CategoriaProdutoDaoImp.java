@@ -48,7 +48,7 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
 
     /**
      * Este método é responsável por alterar os dados da categoria do produto 
-     * de acordo com o id informado.
+     * de acordo com o código informado.
      * 
      * @param obj
      * @return boolean
@@ -87,8 +87,8 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
     }
 
     /**
-     * Este método é responsável por listar todas as categorias de produtos
-     * cadastradas ativas no banco de dados.
+     * Este método é responsável por listar todas as categorias de produtos ativas
+     * cadastradas no banco de dados.
      * 
      * @return List<CategoriaProduto>
      * @throws Exception 

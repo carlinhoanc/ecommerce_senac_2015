@@ -67,14 +67,14 @@ public class VendaDaoImp implements VendaDao {
      * Este método é responsável por inserir idVenda e idProduto na tabela
      * pedido que é um relacionamento n > m entre a tabela venda e produto
      *
-     * 
+     *
      * @param v
      * @throws java.lang.Exception
      */
     public void salvarPedido(Venda v) throws Exception {
         try {
             conn = Conexao.abrirConexao();
-            
+
             //percorre a lista de produtos e salva
             for (Produto p : v.getProdutos()) {
                 String query = "insert into pedido (idVenda, idProduto) values (?,?)";
@@ -105,6 +105,11 @@ public class VendaDaoImp implements VendaDao {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Método responsável por listar todas as vendas pendentes.
+     * @return
+     * @throws Exception 
+     */
     @Override
     public List<Venda> listarVendaPendente() throws Exception {
         List<Venda> vendasPendentes = new ArrayList();
@@ -130,13 +135,18 @@ public class VendaDaoImp implements VendaDao {
                 vendasPendentes.add(venda);
             }
         } catch (Exception e) {
-            System.out.println("Erro litarVendaPendente() MSG :" + e.getMessage());
+            System.out.println("Erro ao listar vendas pendentes: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return vendasPendentes;
     }
 
+    /**
+     * Método responsável por listar todas as vendas que estão com o status: "despachar".
+     * @return
+     * @throws Exception 
+     */
     @Override
     public List<Venda> listarVendaDespachar() throws Exception {
         List<Venda> vendasDespachar = new ArrayList();
@@ -162,13 +172,21 @@ public class VendaDaoImp implements VendaDao {
                 vendasDespachar.add(venda);
             }
         } catch (Exception e) {
-            System.out.println("Erro listarVendaDespachar() MSG :" + e.getMessage());
+            System.out.println("Erro ao listar as vendas para despache: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return vendasDespachar;
     }
 
+    /**
+     * Método responsável por alterar o status da venda para "aprovada", 
+     * de acordo com o código informado.
+     * 
+     * @param idVenda
+     * @return
+     * @throws Exception 
+     */
     @Override
     public boolean aprovarVenda(int idVenda) throws Exception {
         boolean flag = true;
@@ -180,7 +198,7 @@ public class VendaDaoImp implements VendaDao {
             pstm.setInt(2, idVenda);
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro Dao aprovarVenda MSG : " + e.getMessage());
+            System.out.println("Erro ao aprovar venda: " + e.getMessage());
             flag = false;
         } finally {
             Conexao.fechaConexao(conn, pstm);
@@ -189,8 +207,16 @@ public class VendaDaoImp implements VendaDao {
         return flag;
     }
 
+    /**
+     * Método responsável por alterar o status da venda para "rejeitada", ação
+     * permitida apenas pelo admin do sistema.
+     * 
+     * @param idVenda
+     * @return
+     * @throws Exception 
+     */
     @Override
-    public boolean regeitarVenda(int idVenda) throws Exception {
+    public boolean rejeitarVenda(int idVenda) throws Exception {
         boolean flag = true;
         String query = "UPDATE venda SET idStatus = ? WHERE codigo = ?";
         try {
@@ -200,7 +226,7 @@ public class VendaDaoImp implements VendaDao {
             pstm.setInt(2, idVenda);
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro Dao aprovarVenda MSG : " + e.getMessage());
+            System.out.println("Erro ao rejeitar a venda: " + e.getMessage());
             flag = false;
         } finally {
             Conexao.fechaConexao(conn, pstm);
@@ -208,6 +234,12 @@ public class VendaDaoImp implements VendaDao {
         return flag;
     }
 
+    /**
+     * Método responsável por alterar o status da venda para "despachada".
+     * @param idVenda
+     * @return
+     * @throws Exception 
+     */
     @Override
     public boolean despacharVenda(int idVenda) throws Exception {
         boolean flag = true;
@@ -219,7 +251,7 @@ public class VendaDaoImp implements VendaDao {
             pstm.setInt(2, idVenda);
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro Dao aprovarVenda MSG : " + e.getMessage());
+            System.out.println("Erro ao despachar a venda: " + e.getMessage());
             flag = false;
         } finally {
             Conexao.fechaConexao(conn, pstm);

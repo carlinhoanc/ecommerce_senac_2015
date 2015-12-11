@@ -36,13 +36,13 @@ public interface VendaDao extends BaseDao {
     boolean aprovarVenda(int idVenda) throws Exception;
 
     /**
-     * Metodo responsavel por regeitar a venda especifica informado pelo a
+     * Metodo responsavel por rejeitar a venda especifica informado pelo a
      *
      * @param idVenda
      * @return
      * @throws Exception
      */
-    boolean regeitarVenda(int idVenda) throws Exception;
+    boolean rejeitarVenda(int idVenda) throws Exception;
 
     /**
      * Metodo responsavel por mudar os estatos da venda para enviado

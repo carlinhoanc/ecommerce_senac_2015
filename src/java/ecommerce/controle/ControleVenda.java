@@ -103,7 +103,7 @@ public class ControleVenda {
             List<Venda> vendas = vDao.listarVendaDespachar();
             modelVendaDespachar = new ListDataModel(vendas);
         } catch (Exception e) {
-            System.out.println("Erro controle MSG : " + e.getMessage());
+            System.out.println("Erro ao listar despache: " + e.getMessage());
         }
     }
 
@@ -124,21 +124,21 @@ public class ControleVenda {
             listarVendasDespache();
             listarVendasPendentes();
         } catch (Exception e) {
-            System.out.println("FUDEU MSG :" + e.getMessage());
+            System.out.println("Erro ao aprovar a venda: " + e.getMessage());
         }
     }
 
-    public void regeitarVenda() {
+    public void rejeitarVenda() {
         vDao = new VendaDaoImp();
         Venda v = carregaModalVenda(modelVendaPendente);
         try {
-            if (vDao.regeitarVenda(v.getCodigo())) {
+            if (vDao.rejeitarVenda(v.getCodigo())) {
                 System.out.println("BOA CACHOEIRA!!");
             } else {
                 System.out.println("DEU RUIM CACHOEIRA!!");
             }
         } catch (Exception e) {
-            System.out.println("FUDEU MSG :" + e.getMessage());
+            System.out.println("Erro ao rejeitar a venda: " + e.getMessage());
         }
     }
 
@@ -153,7 +153,7 @@ public class ControleVenda {
             }
             listarVendasDespache();
         } catch (Exception e) {
-            System.out.println("FUDEU MSG :" + e.getMessage());
+            System.out.println("Erro ao despachar venda:" + e.getMessage());
         }
     }
 }

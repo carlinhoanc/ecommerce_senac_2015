@@ -22,31 +22,16 @@ public class ProdutoDaoImp implements ProdutoDao {
 
     @Override
     public boolean salvar(Object obj) throws Exception {
-        boolean flag = true;
-        Produto p = (Produto) obj;
-        try {
-            String query = "INSERT INTO produto (nome,descricao,quantidade,valorCompra,valorVenda,dataCadastro,idCategoriaProduto,idMarca,ativo) VALUES(?,?,?,?,?,?,?,?,?)";
-            conn = Conexao.abrirConexao();
-            pstm = conn.prepareCall(query);
-            pstm.setString(1, p.getNome());
-            pstm.setString(2, p.getDescricao());
-            pstm.setInt(3, p.getQuantidade());
-            pstm.setDouble(4, p.getValorCompra());
-            pstm.setDouble(5, p.getValorVenda());
-            pstm.setDate(6, new java.sql.Date(p.getDataCadastro().getTime()));
-            pstm.setInt(7, p.getCategoria().getCodigo());
-            pstm.setInt(8, p.getMarca().getCodigo());
-            pstm.setBoolean(9, p.isAtivo());
-            pstm.executeUpdate();
-
-        } catch (Exception e) {
-            System.out.println("Erro conexão salvar Produto " + e.getMessage());
-        } finally {
-            Conexao.fechaConexao(conn, pstm);
-        }
-        return flag;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Método responsável por alterar todos os dados do produto de acordo 
+     * com o código informado.
+     * @param obj
+     * @return
+     * @throws Exception 
+     */
     @Override
     public boolean alterar(Object obj) throws Exception {
         boolean flag = false;
@@ -67,7 +52,7 @@ public class ProdutoDaoImp implements ProdutoDao {
             pstm.setInt(9, p.getCodigo());
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro ao alterar produto:" + e.getMessage());
+            System.out.println("Erro ao alterar o produto: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm);
         }
@@ -85,6 +70,13 @@ public class ProdutoDaoImp implements ProdutoDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Método responsável por salvar dados do produto retornando o código inserido.
+     * 
+     * @param produto
+     * @return
+     * @throws Exception 
+     */
     @Override
     public Produto salvarProduto(Produto produto) throws Exception {
         try {
@@ -107,13 +99,18 @@ public class ProdutoDaoImp implements ProdutoDao {
             produto.setCodigo(rs.getInt(1));
 
         } catch (Exception e) {
-            System.out.println("Erro conexão salvar Produto " + e.getMessage());
+            System.out.println("Erro ao salvar o produto: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return produto;
     }
 
+    /**
+     * Método responsável por listar todos os produtos cadastrados no banco de dados.
+     * @return
+     * @throws Exception 
+     */
     @Override
     public List<Produto> listarProdutos() throws Exception {
         List<Produto> produtos = new ArrayList();
@@ -149,13 +146,18 @@ public class ProdutoDaoImp implements ProdutoDao {
                 produtos.add(p);
             }
         } catch (Exception e) {
-            System.out.println("Erro conexão Dao Listar produto : " + e.getMessage());
+            System.out.println("Erro ao listar produtos cadastrados: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return produtos;
     }
 
+    /**
+     * Método responsável por listar os oito produtos mais acessados no site.
+     * @return
+     * @throws Exception 
+     */
     @Override
     public List<Produto> listarProdutosAtivosSiteAcessos() throws Exception {
         List<Produto> produtos = new ArrayList();
@@ -180,17 +182,25 @@ public class ProdutoDaoImp implements ProdutoDao {
                 p.setValorVenda(rs.getDouble("p.valorVenda"));
                 p.setMarca(m);
                 p.setCategoria(cp);
-                p.setFotos(fpDao.bustaImgPrincipal(p.getCodigo()));
+                p.setFotos(fpDao.buscaImgPrincipal(p.getCodigo()));
                 produtos.add(p);
             }
         } catch (Exception e) {
-            System.out.println("Erro conexão Dao Listar produto : " + e.getMessage());
+            System.out.println("Erro ao listar produtos mais acessados: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return produtos;
     }
 
+    /**
+     * Método responsável por listar produtos pelo filtro escolhido pelo administador.
+     * @param idCategoria
+     * @param idMarca
+     * @param ativo
+     * @return
+     * @throws Exception 
+     */
     @Override
     public List<Produto> filtroProdutoAdmin(int idCategoria, int idMarca, String ativo) throws Exception {
         List<Produto> produtos = new ArrayList();
@@ -289,13 +299,19 @@ public class ProdutoDaoImp implements ProdutoDao {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Erro no filtro do produto Admin :" + e.getMessage());
+            System.out.println("Erro ao filtrar produtos: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return produtos;
     }
 
+    /**
+     * Método responsável por pesquisar os dados do produto selecionado.
+     * @param idProduto
+     * @return
+     * @throws Exception 
+     */
     @Override
     public Produto pesqProdutoSelectSite(int idProduto) throws Exception {
         Produto produto = null;
@@ -328,13 +344,19 @@ public class ProdutoDaoImp implements ProdutoDao {
                 marcaVisualizacao(produto.getCodigo());
             }
         } catch (Exception e) {
-            System.out.println("Erro conexão pesqProdutoSelectSite() : " + e.getMessage());
+            System.out.println("Erro ao pesquisar dados do produto: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return produto;
     }
 
+    /**
+     * Método responsável por inserir número de acessos de determinado produto.
+     * 
+     * @param idProduto
+     * @throws Exception 
+     */
     public void marcaVisualizacao(int idProduto) throws Exception {
         String queryConsuta = "SELECT acessos FROM produto WHERE codigo = ?";
         String queryUpdade = "UPDATE produto SET acessos = ? WHERE codigo = ?";
@@ -353,13 +375,18 @@ public class ProdutoDaoImp implements ProdutoDao {
             pstm.setInt(2, idProduto);
             pstm.executeUpdate();
         } catch (Exception ex) {
-            System.out.println("Erro marcaVisualizacao() MSG :" + ex.getMessage());
+            System.out.println("Erro ao registrar acessos do produto: " + ex.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
 
     }
 
+    /**
+     * Método responsável por listar os últimos oito produtos cadastrados no site.
+     * @return
+     * @throws Exception 
+     */
     @Override
     public List<Produto> listarProdutosAtivosSiteRecentes() throws Exception {
         List<Produto> produtos = new ArrayList();
@@ -384,17 +411,24 @@ public class ProdutoDaoImp implements ProdutoDao {
                 p.setValorVenda(rs.getDouble("p.valorVenda"));
                 p.setMarca(m);
                 p.setCategoria(cp);
-                p.setFotos(fpDao.bustaImgPrincipal(p.getCodigo()));
+                p.setFotos(fpDao.buscaImgPrincipal(p.getCodigo()));
                 produtos.add(p);
             }
         } catch (Exception e) {
-            System.out.println("Erro conexão Dao Listar produto : " + e.getMessage());
+            System.out.println("Erro ao listar últimos produtos inseridos: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return produtos;
     }
 
+    /**
+     * Método responsável por verificar a quantidade do produto de acordo com o código informado.
+     * @param idProduto
+     * @param quantidade
+     * @return
+     * @throws Exception 
+     */
     @Override
     public boolean verificaQuantidadeProduto(int idProduto, int quantidade) throws Exception {
         boolean flag = false;
@@ -409,7 +443,7 @@ public class ProdutoDaoImp implements ProdutoDao {
                 flag = true;
             }
         } catch (Exception e) {
-            System.out.println("Erro DAO MSG :" + e.getMessage());
+            System.out.println("Erro ao pesquisar quantidade do produto: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }

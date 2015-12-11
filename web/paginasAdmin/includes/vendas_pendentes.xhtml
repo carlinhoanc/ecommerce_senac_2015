@@ -56,7 +56,7 @@
                         CONFIRMAR/CANCELAR                       
                     </f:facet>            
                     <p:commandButton title="Altorizar Venda" ajax="true" actionListener="#{controleVenda.aprovarVanda()}" icon="fa fa-check" update=":formGridVendaDespachar:gridVendaDespachar gridProduto" disabled="#{pendente.statusVenda.nome == 'aprovada'}"/>/
-                    <p:commandButton title="Cancelar venda" action="#{controleVenda.regeitarVenda()}" icon="fa fa-times-circle"/>
+                    <p:commandButton title="Cancelar venda" action="#{controleVenda.rejeitarVenda()}" icon="fa fa-times-circle"/>
                 </p:column>
             </p:dataTable>
         </h:form>

@@ -34,17 +34,15 @@ public class ControleUsuario {
     public String altenticarAdmin() {
         try {
             uDao = new UsuarioDaoImp();
-            Pessoa p = uDao.altenticar(usuario);
+            Pessoa p = uDao.autenticar(usuario);
             if (p == null) {
-                System.out.println("Deu RUIM usuario ou senha incorretoss");
+                System.out.println("Usuário ou senha incorretos!");
             } else {
                 SessionContext.getInstance().setAttribute("usuarioLogado", p);
-               
-                System.out.println("Boa garoto");
                 return "/paginasAdmin/venda_pendente_despacho.faces?faces-redirect=true";
             }
         } catch (Exception e) {
-            System.out.println("Erro ao altenticar Usuario : " + e.getMessage());
+            System.out.println("Erro ao autenticar usuário : " + e.getMessage());
         }
         return null;
     }

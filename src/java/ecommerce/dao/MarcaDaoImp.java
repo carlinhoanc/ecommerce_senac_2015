@@ -19,7 +19,9 @@ public class MarcaDaoImp implements MarcaDao {
     
     
     /**
-     * Este método é responsável por salvar os dados da marca
+     * Este método é responsável por salvar os dados da marca, como: nome, descrição
+     * e se está ativa.
+     * 
      * @param obj
      * @return boolean
      * @throws Exception 
@@ -46,7 +48,8 @@ public class MarcaDaoImp implements MarcaDao {
     }
     
     /**
-     * Este método é responsável por alterar os dados da marca 
+     * Este método é responsável por alterar os dados da marca.
+     * 
      * @param obj
      * @return boolean
      * @throws Exception 
@@ -72,7 +75,7 @@ public class MarcaDaoImp implements MarcaDao {
     }
     
     /**
-     * Este método é responsável por pesquisar a marca de acordo com o id informado
+     * Este método é responsável por pesquisar a marca de acordo com o código informado.
      * @param id
      * @return Object do tipo Marca
      * @throws Exception 
@@ -102,7 +105,7 @@ public class MarcaDaoImp implements MarcaDao {
     }
     
     /**
-     * Este método é responsável por excluir a marca de acordo com o id informado
+     * Este método é responsável por excluir a marca de acordo com o código informado.
      * @param id
      * @return boolean
      * @throws Exception 
@@ -117,7 +120,7 @@ public class MarcaDaoImp implements MarcaDao {
             pstm.setInt(1, id);
             pstm.executeQuery();
         } catch (Exception e) {
-            System.out.println("Erro na conexão excluir " + e.getMessage());
+            System.out.println("Erro ao excluir marca: " + e.getMessage());
             flag = false;
         } finally {
             Conexao.fechaConexao(conn, pstm);
@@ -126,7 +129,7 @@ public class MarcaDaoImp implements MarcaDao {
     }
     
     /**
-     * Este método é responsável por listar todas as marcas ativas no banco de dados
+     * Este método é responsável por listar todas as marcas ativas no banco de dados.
      * @return List<Marca>
      * @throws Exception 
      */
@@ -147,7 +150,7 @@ public class MarcaDaoImp implements MarcaDao {
                 marcas.add(m);
             }
         } catch (Exception e) {
-            System.out.println("Erro ao conexão listar " + e.getMessage());
+            System.out.println("Erro ao listar marcas ativas: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
@@ -156,17 +159,19 @@ public class MarcaDaoImp implements MarcaDao {
     
     /**
      * Este método é responsável por listar todas as marcas cadastradas no banco,
-     * independente se está ativa ou não.
+     * independente se está ativa ou não para que possam ser editadas. 
      * @return List<Marca>
      * @throws Exception 
      */
     @Override
     public List<Marca> listarEdicao() throws Exception {
         List<Marca> marcas = new ArrayList();
+        try {
         String query = "SELECT * FROM marca";
         conn = Conexao.abrirConexao();
         pstm = conn.prepareCall(query);
         rs = pstm.executeQuery();
+        
         while (rs.next()) {
             Marca m = new Marca();
             m.setCodigo(rs.getInt("codigo"));
@@ -179,6 +184,11 @@ public class MarcaDaoImp implements MarcaDao {
                 m.setAtivoString("nao");
             }
             marcas.add(m);
+        }
+        } catch (Exception e) {
+            System.out.println("Erro ao listar marcas para edição: " + e.getMessage());
+        } finally {
+            Conexao.fechaConexao(conn, pstm, rs);
         }
         return marcas;
     }

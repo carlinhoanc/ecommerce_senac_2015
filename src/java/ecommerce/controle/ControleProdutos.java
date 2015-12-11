@@ -11,18 +11,16 @@ import ecommerce.dao.ProdutoDaoImp;
 import ecommerce.entidade.CategoriaProduto;
 import ecommerce.entidade.FotosProduto;
 import ecommerce.entidade.Marca;
-import ecommerce.entidade.Pessoa;
 import ecommerce.entidade.Produto;
-import ecommerce.util.SessionContext;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -68,7 +66,7 @@ public class ControleProdutos {
 
     @PostConstruct
     public void inicia() {
-      
+
 //        Pessoa p = (Pessoa) SessionContext.getInstance().getUsuarioLogado();
 //        if (p.getUsuario().getTpUsuario().equals("admin")) {
 //            produto = new Produto();
@@ -85,10 +83,10 @@ public class ControleProdutos {
     }
 
     public Produto getP() {
-//        if (produto == null) {
-//            produto = new Produto();
-//            produto.setDataCadastro(new Date());
-//        }
+        if (produto == null) {
+            produto = new Produto();
+            produto.setDataCadastro(new Date());
+        }
         return produto;
     }
 
@@ -398,5 +396,9 @@ public class ControleProdutos {
             carrinhoCompra = new ArrayList();
         }
         carrinhoCompra.add(produto);
+    }
+
+    public List<Produto> listarCarrinho() {
+        return carrinhoCompra;
     }
 }

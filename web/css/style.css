@@ -145,6 +145,10 @@ fieldset.cadastro legend {
     padding-top: 10px !important;
     width: 260px;
 }
+.buttonProd.btn.btn-info{
+    box-shadow: 0 0 0 0  !important;
+    color: #fff !important;
+}
 
 .buttonProd.btn.btn-warning{
     box-shadow: 0 0 0 0  !important;

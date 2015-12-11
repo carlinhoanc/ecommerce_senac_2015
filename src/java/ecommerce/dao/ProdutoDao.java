@@ -33,4 +33,17 @@ public interface ProdutoDao extends BaseDao {
     List<Produto> filtroProdutoAdmin(int idCategoria, int idMarca, String ativo) throws Exception;
 
     Produto pesqProdutoSelectSite(int idProduto) throws Exception;
+    
+     /**
+     * Metodo responsavel por verificar a quantidade do produto quanto o usuario esta na 
+     * tebela do carrinho de compras e adiciona mais um produto do mesmo tipo se a 
+     * quantidade fornecida pelo o usuario for maior que a quantidade em estoque o
+     * metodo retorna false.
+     * 
+     * @param idProduto
+     * @param quantidade
+     * @return
+     * @throws Exception 
+     */    
+    boolean verificaQuantidadeProduto(int idProduto , int quantidade) throws Exception;
 }

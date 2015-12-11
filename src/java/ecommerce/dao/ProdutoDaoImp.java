@@ -394,4 +394,25 @@ public class ProdutoDaoImp implements ProdutoDao {
         }
         return produtos;
     }
+
+    @Override
+    public boolean verificaQuantidadeProduto(int idProduto, int quantidade) throws Exception {
+        boolean flag = false;
+        String query = "SELECT quantidade FROM produto WHERE codigo = ? AND quantidade >= ?";
+        try {
+            conn = Conexao.abrirConexao();
+            pstm = conn.prepareCall(query);
+            pstm.setInt(1, idProduto);
+            pstm.setInt(2, quantidade);
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                flag = true;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro DAO MSG :" + e.getMessage());
+        } finally {
+            Conexao.fechaConexao(conn, pstm, rs);
+        }
+        return flag;
+    }
 }

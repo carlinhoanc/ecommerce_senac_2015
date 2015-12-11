@@ -25,40 +25,44 @@ and open the template in the editor.
     <h:body>
         <ui:include src="menu_principal.xhtml" />
         <div class="container">
-            <p:dataTable id="gridProduto" value="#{controleProdutos.listarCarrinho()}" var="carrinho" paginator="true" rows="15">
-                <p:column>
-                    <f:facet name="header">
-                        Codigo
-                    </f:facet>
-                    #{carrinho.codigo}
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        Nome
-                    </f:facet>
-                    #{carrinho.nome}
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        Quantidade
-                    </f:facet>
-                    <p:commandButton title="Retirar produto" ajax="true" actionListener="#" icon="fa fa-minus"/>
-                    <h:inputText value="#{carrinho.quantidade}" size="2" />
-                    <p:commandButton title="Adicionar Produto" ajax="true" actionListener="#" icon="fa fa-plus"/>
-                </p:column>                   
-                <p:column>
-                    <f:facet name="header">
-                        Valor 
-                    </f:facet>
-                    #{carrinho.valorVenda}    
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        Marca
-                    </f:facet>
-                  #{carrinho.marca.nome}
-                </p:column>
-            </p:dataTable>
+            <h:form>
+                <p:dataTable id="gridCarrinho" value="#{controleProdutos.listarCarrinho()}" var="carrinho" paginator="true" rows="15">
+                    <p:column>
+                        <f:facet name="header">
+                            Codigo
+                        </f:facet>
+                        #{carrinho.codigo}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            Nome
+                        </f:facet>
+                        #{carrinho.nome}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            Quantidade
+                        </f:facet>
+
+                        <p:commandButton title="Retirar produto" ajax="true" actionListener="#{controleProdutos.removeProdutoCarrinho(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-minus" update="gridCarrinho"/>
+                        <h:inputText value="#{carrinho.quantidade}" size="2" />
+                        <p:commandButton title="Adicionar Produto" ajax="true" actionListener="#{controleProdutos.addMiasProduto(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-plus" update="gridCarrinho"/>
+
+                    </p:column>                   
+                    <p:column>
+                        <f:facet name="header">
+                            Valor 
+                        </f:facet>
+                        #{carrinho.valorVenda}    
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            Marca
+                        </f:facet>
+                        #{carrinho.marca.nome}
+                    </p:column>
+                </p:dataTable>
+            </h:form>
         </div>
         <ui:include src="footer.xhtml"/>
     </h:body>

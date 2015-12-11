@@ -4,15 +4,24 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <p:fieldset id="usuario" legend="Dados de Usuario">
-        <h:panelGrid id="cadDadosUsuario" columns="2">
-            <p:outputLabel value="E-mail : " for="emailCli"/>
-            <p:inputText value="#{controleCliente.usuario.email}" id="emailCli"/>
-            <p:outputLabel value="Senha : " for="senhaCli"/>
-            <p:password id="senhaCli" value="#{controleCliente.usuario.senha}" required="true" requiredMessage="Senha Obrigatorio!!" feedback="true"  
-                        promptLabel="verificando senha" weakLabel="Fraca" goodLabel="Média" strongLabel="Forte"/>
-
-        </h:panelGrid>
-<!--        <p:commandButton ajax="true" value="Proximo" actionListener="#-{controleCliente.showHide('hide')}" process="@this" update="pessoa" />-->
+    <p:fieldset id="usuario" legend="Dados de Usuario" styleClass="cadastro">
+        <p:panelGrid layout="grid" id="cadDadosUsuario" columns="2"  >
+            <p:column>
+                <div class="radio form-group">
+                    <p:outputLabel for="emailCli" value="E-mail : " styleClass="labelHorus"/>
+                    <p:inputText value="#{controleCliente.usuario.email}" 
+                                 id="emailCli" styleClass="form-control" />
+                </div>
+            </p:column>
+            <p:column>
+                <div class="radio form-group">
+                <p:outputLabel for="senhaCli" value="Senha : " styleClass="labelHorus"/>
+                <p:password id="senhaCli" value="#{controleCliente.usuario.senha}" required="true" 
+                            requiredMessage="Senha Obrigatorio!!" feedback="true"  weakLabel="Fraca"
+                            promptLabel="verificando senha" 
+                            goodLabel="Média" strongLabel="Forte" styleClass="form-control" />
+                </div>
+            </p:column>
+        </p:panelGrid>
     </p:fieldset>
 </ui:composition>

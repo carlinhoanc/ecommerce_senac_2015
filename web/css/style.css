@@ -72,3 +72,76 @@ form.listaProdutoHome {
     padding: 7px 0;
     text-transform: capitalize;
 }
+
+.form-control {
+    box-shadow: 0 0 0 0 !important;
+}
+
+.cadastro .ui-panelgrid-cell.ui-grid-col-6 {
+    border: 0 none !important;
+}
+.cadastro .ui-grid-row {
+    border: 0 none !important;
+    padding: 0 !important;
+}
+.cadastro .ui-panelgrid-content.ui-widget-content.ui-grid.ui-grid-responsive {
+    border: 0 none !important;
+}
+.radio.form-group label.labelHorus {
+    margin-left: 0 !important;
+    padding-left: 0;
+}
+.radio.form-group table {
+    border: 0 none;
+}
+
+.radio.form-group label + span {
+    border: 0 none;
+    border-radius: 0;
+    margin: 0 !important;
+    padding: 0;
+}
+.radio.form-group .hasDatepicker ,input{
+    box-shadow: 0 0 0 0 !important;
+}
+.radio.form-group .btn-success {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 3px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    box-shadow: 0 0 0 0 !important;
+    color: #fff;
+}
+.radio.form-group .btn-success span{
+    text-shadow: 0 0 0 !important;
+    color: #fff;
+}
+.radio.form-group .btn-success:hover,.radio.form-group .btn-success:focus, 
+.radio.form-group .btn-success:active, .radio.form-group .btn-success.active, 
+.radio.form-group .open > .dropdown-toggle.btn-success {
+    background-color: #449d44;
+    border-color: #398439;
+    color: #fff;
+}
+
+fieldset.cadastro legend {
+    background: transparent !important;
+    border-radius: 0 !important;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 0 !important;
+    padding-bottom: 10px !important;
+    padding-top: 10px !important;
+    width: 260px;
+}

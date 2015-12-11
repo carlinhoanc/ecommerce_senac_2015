@@ -8,11 +8,11 @@ public class Endereco {
 
     private int codigo;
     private String rua;
-    private int numero; // alterar o tipo do campo no banco de dados
+    private int numero; 
     private String complemento;
     private String bairro;
     private String cidade;
-    private String cep; //alterar o tipo no banco
+    private String cep; 
     private String estado;
 
     public int getCodigo() {

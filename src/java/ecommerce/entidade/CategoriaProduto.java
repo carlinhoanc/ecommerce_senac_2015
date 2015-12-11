@@ -1,7 +1,7 @@
 package ecommerce.entidade;
 
 /**
- *
+ * 
  * @author Jéssica
  */
 public class CategoriaProduto {
@@ -9,7 +9,7 @@ public class CategoriaProduto {
     private int codigo;
     private String nome;
     private String descricao;
-    private boolean ativo; // criar no banco
+    private boolean ativo; 
     private String ativoString;
 
     public int getCodigo() {

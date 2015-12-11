@@ -19,8 +19,8 @@ public class Pessoa {
     private int telCel;
     private Date dataCadastro;
     private Usuario usuario;
-    private Endereco endereco; // tem que ser lista de endereço
-    private Venda venda; //lista
+    private Endereco endereco; //criar lista
+    private Venda venda; //criar lista
 
     public Venda getVenda() {
         return venda;

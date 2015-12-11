@@ -9,7 +9,7 @@ public class Marca {
     private int codigo;
     private String nome;
     private String descricao;
-    private boolean ativo; //criar campo no banco de dados
+    private boolean ativo; 
     private String ativoString;
 
     public int getCodigo() {

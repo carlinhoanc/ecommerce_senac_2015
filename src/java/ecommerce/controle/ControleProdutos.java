@@ -418,6 +418,7 @@ public class ControleProdutos {
                 produto.setQuantidade(1);
                 carrinhoCompra.add(produto);
             }
+            quantidadeItensCarrinho();
         } catch (Exception ex) {
             System.out.println("DEU erro nesta merda MSG :" + ex.getMessage());
         }
@@ -476,5 +477,15 @@ public class ControleProdutos {
             }
         }
         listarCarrinho();
+    }
+
+    public int quantidadeItensCarrinho() {
+
+        if (carrinhoCompra == null) {
+            return 0;
+        } else {
+            return carrinhoCompra.size();
+        }
+
     }
 }

@@ -392,11 +392,35 @@ public class ControleProdutos {
     }
 
     public void adicionarProdutoCarrinho() {
-        produto.setQuantidade(1);
         if (carrinhoCompra == null) {
             carrinhoCompra = new ArrayList();
         }
-        carrinhoCompra.add(produto);
+        try {
+            Produto p = null;
+            if (carrinhoCompra.size() != 0) {
+                for (Produto prod : carrinhoCompra) {
+                    if (prod.getCodigo() == produto.getCodigo()) {
+                        int qtd = produto.getQuantidade();
+                        ++qtd;
+                        if (pDao.verificaQuantidadeProduto(produto.getCodigo(), qtd)) {
+                            // p = new Produto();
+                            p = prod;
+                            p.setQuantidade(qtd);
+                            carrinhoCompra.remove(prod);
+                            break;
+                        } else {
+                            System.out.println("Ultrapassou o estoque porra");
+                        }
+                    }
+                }
+                carrinhoCompra.add(p);
+            } else {
+                produto.setQuantidade(1);
+                carrinhoCompra.add(produto);
+            }
+        } catch (Exception ex) {
+            System.out.println("DEU erro nesta merda MSG :" + ex.getMessage());
+        }
     }
 
     public List<Produto> listarCarrinho() {
@@ -419,8 +443,8 @@ public class ControleProdutos {
                 }
                 p.setQuantidade(quantidade);
                 carrinhoCompra.add(p);
-            }else{
-                System.out.println("Ultrapassa o estoque porra");            
+            } else {
+                System.out.println("Ultrapassa o estoque porra");
             }
         } catch (Exception e) {
             System.out.println("FUDEU DEU ERRO MSG : " + e.getMessage());

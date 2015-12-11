@@ -34,7 +34,7 @@
                         <a href="#{request.contextPath}/login.faces">Are usuario</a>
                     </c:if>
                     <c:if var="log" test="#{controleUsuario.userLogado.nome ==null}">
-                        <a href="login.faces">Logar</a>
+                        <a href="#{request.contextPath}/login.faces">Logar</a>
                     </c:if>
                     </li>                        
                 </ul>

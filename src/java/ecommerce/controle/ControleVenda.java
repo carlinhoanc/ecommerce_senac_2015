@@ -5,7 +5,9 @@ import ecommerce.dao.VendaDaoImp;
 import ecommerce.entidade.Pessoa;
 import ecommerce.entidade.Produto;
 import ecommerce.entidade.Venda;
+import ecommerce.util.SessionContext;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -52,6 +54,15 @@ public class ControleVenda {
 //       VendaDao vDao = new VendaDaoImp();
 //       vDao.salvar(venda);
 //    }
+    @PostConstruct
+    public void inicia() {
+        Pessoa p = (Pessoa) SessionContext.getInstance().getUsuarioLogado();
+        if (p.getUsuario().getTpUsuario().equals("admin")) {
+            listarVendasDespache();
+            listarVendasPendentes();
+        }
+    }
+
     public DataModel getModelVendaPendente() {
         return modelVendaPendente;
     }
@@ -93,6 +104,56 @@ public class ControleVenda {
             modelVendaDespachar = new ListDataModel(vendas);
         } catch (Exception e) {
             System.out.println("Erro controle MSG : " + e.getMessage());
+        }
+    }
+
+    private Venda carregaModalVenda(DataModel model) {
+        Venda v = (Venda) model.getRowData();
+        return v;
+    }
+
+    public void aprovarVanda() {
+        vDao = new VendaDaoImp();
+        Venda v = carregaModalVenda(modelVendaPendente);
+        try {
+            if (vDao.aprovarVenda(v.getCodigo())) {
+                System.out.println("BOA CACHOEIRA!!");
+            } else {
+                System.out.println("DEU RUIM CACHOEIRA!!");
+            }
+            listarVendasDespache();
+            listarVendasPendentes();
+        } catch (Exception e) {
+            System.out.println("FUDEU MSG :" + e.getMessage());
+        }
+    }
+
+    public void regeitarVenda() {
+        vDao = new VendaDaoImp();
+        Venda v = carregaModalVenda(modelVendaPendente);
+        try {
+            if (vDao.regeitarVenda(v.getCodigo())) {
+                System.out.println("BOA CACHOEIRA!!");
+            } else {
+                System.out.println("DEU RUIM CACHOEIRA!!");
+            }
+        } catch (Exception e) {
+            System.out.println("FUDEU MSG :" + e.getMessage());
+        }
+    }
+
+    public void despacharVenda() {
+        vDao = new VendaDaoImp();
+        Venda v = carregaModalVenda(modelVendaDespachar);
+        try {
+            if (vDao.despacharVenda(v.getCodigo())) {
+                System.out.println("BOA CACHOEIRA!!");
+            } else {
+                System.out.println("DEU RUIM CACHOEIRA!!");
+            }
+            listarVendasDespache();
+        } catch (Exception e) {
+            System.out.println("FUDEU MSG :" + e.getMessage());
         }
     }
 }

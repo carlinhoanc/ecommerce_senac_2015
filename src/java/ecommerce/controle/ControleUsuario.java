@@ -31,7 +31,7 @@ public class ControleUsuario {
         this.usuario = usuario;
     }
 
-    public String altenticar() {
+    public String altenticarAdmin() {
         try {
             uDao = new UsuarioDaoImp();
             Pessoa p = uDao.altenticar(usuario);
@@ -41,16 +41,16 @@ public class ControleUsuario {
                 SessionContext.getInstance().setAttribute("usuarioLogado", p);
                
                 System.out.println("Boa garoto");
-                return "/paginasAdmin/produtos.faces?faces-redirect=true";
+                return "/paginasAdmin/venda_pendente_despacho.faces?faces-redirect=true";
             }
         } catch (Exception e) {
             System.out.println("Erro ao altenticar Usuario : " + e.getMessage());
         }
         return null;
     }
-    public String logout(){
+    public String logoutAdmin(){
         SessionContext.getInstance().encerrarSessao();
-        return "../login.faces?faces-redirect=true";
+        return "../../admin/index.faces";
     }
     public Pessoa getUserLogado(){
       return (Pessoa) SessionContext.getInstance().getUsuarioLogado();

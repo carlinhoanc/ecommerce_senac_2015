@@ -13,18 +13,21 @@
     <h:body>
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="100" rendered="true" closable="false" collapsible="false">
+
                 <h:form>
-                    <p>OLA :#{controleUsuario.userLogado.nome}</p>
-                    <h:commandLink value="SAIR" action="#{controleUsuario.logout()}"/>
+                    <h:panelGrid columns="2">
+                        <p>OLA :#{controleUsuario.userLogado.nome}</p>
+                        <p:commandButton title="SAIR" icon="fa fa-times-circle" action="#{controleUsuario.logoutAdmin()}" />
+                    </h:panelGrid>
                 </h:form>
             </p:layoutUnit>
-            <p:layoutUnit position="west" size="200" header="Menu pesquisa" resizable="true" closable="false" collapsible="false">
+            <p:layoutUnit position="west" size="150" header="Menu" resizable="true" closable="false" collapsible="false">
                 <h:form id="formPag">                       
-                    <p:menubar>
+                    <p:menu style="width: 127px;">
                         <p:menuitem value="Produto" action="#{controleProdutos.paginaProduto()}" ajax="false"/>
                         <p:menuitem value="Marca" action="#{controleMarca.paginaMarca()}" ajax="false" process="@this"/>
                         <p:menuitem value="Categoria" action="#{controleCategoriaProduto.paginaCtg()}" ajax="false" process="@this"/>
-                    </p:menubar>
+                    </p:menu>
                 </h:form>
             </p:layoutUnit>
             <ui:insert name="centro">

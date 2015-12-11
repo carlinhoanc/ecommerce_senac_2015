@@ -11,7 +11,9 @@ import ecommerce.dao.ProdutoDaoImp;
 import ecommerce.entidade.CategoriaProduto;
 import ecommerce.entidade.FotosProduto;
 import ecommerce.entidade.Marca;
+import ecommerce.entidade.Pessoa;
 import ecommerce.entidade.Produto;
+import ecommerce.util.SessionContext;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
@@ -52,7 +53,7 @@ public class ControleProdutos {
     private List<Marca> marcas;
     private List<CategoriaProduto> categoProdutos;
     private List<Produto> produtosSite;
-
+    private List<Produto> carrinhoCompra;
     private StreamedContent file;
 
     private ProdutoDao pDao;
@@ -67,10 +68,16 @@ public class ControleProdutos {
 
     @PostConstruct
     public void inicia() {
-        limpa();
-        produto = new Produto();
-        produto.setDataCadastro(new Date());
-
+      
+//        Pessoa p = (Pessoa) SessionContext.getInstance().getUsuarioLogado();
+//        if (p.getUsuario().getTpUsuario().equals("admin")) {
+//            produto = new Produto();
+//            produto.setDataCadastro(new Date());
+//        } else {
+//            if (produto == null) {
+//                produto = new Produto();
+//            }
+//        }
     }
 
     public DataModel getModelProduto() {
@@ -78,10 +85,10 @@ public class ControleProdutos {
     }
 
     public Produto getP() {
-        if (produto == null) {
-            produto = new Produto();
-            produto.setDataCadastro(new Date());
-        }
+//        if (produto == null) {
+//            produto = new Produto();
+//            produto.setDataCadastro(new Date());
+//        }
         return produto;
     }
 
@@ -141,6 +148,10 @@ public class ControleProdutos {
 
     public List<Produto> getProdutosSite() {
         return produtosSite;
+    }
+
+    public List<Produto> getCarrinhoCompra() {
+        return carrinhoCompra;
     }
 
 //    @PostConstruct
@@ -330,7 +341,6 @@ public class ControleProdutos {
         try {
             produtosSite = null;
             produtosSite = pDao.listarProdutosAtivosSiteAcessos();
-
         } catch (Exception e) {
             System.out.println("Erro ao listar produto site : " + e.getMessage());
         }
@@ -342,7 +352,6 @@ public class ControleProdutos {
         try {
             produtosSite = null;
             produtosSite = pDao.listarProdutosAtivosSiteRecentes();
-
         } catch (Exception e) {
             System.out.println("Erro ao listar produto site : " + e.getMessage());
         }
@@ -382,5 +391,12 @@ public class ControleProdutos {
         cp = null;
         marca = null;
         ativo = null;
+    }
+
+    public void adicionarProdutoCarrinho() {
+        if (carrinhoCompra == null) {
+            carrinhoCompra = new ArrayList();
+        }
+        carrinhoCompra.add(produto);
     }
 }

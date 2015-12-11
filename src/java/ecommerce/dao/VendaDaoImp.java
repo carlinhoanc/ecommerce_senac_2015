@@ -67,12 +67,15 @@ public class VendaDaoImp implements VendaDao {
      * Este método é responsável por inserir idVenda e idProduto na tabela
      * pedido que é um relacionamento n > m entre a tabela venda e produto
      *
+     * 
      * @param v
      * @throws java.lang.Exception
      */
     public void salvarPedido(Venda v) throws Exception {
         try {
             conn = Conexao.abrirConexao();
+            
+            //percorre a lista de produtos e salva
             for (Produto p : v.getProdutos()) {
                 String query = "insert into pedido (idVenda, idProduto) values (?,?)";
                 pstm = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

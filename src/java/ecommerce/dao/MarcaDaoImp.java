@@ -17,12 +17,19 @@ public class MarcaDaoImp implements MarcaDao {
     private PreparedStatement pstm = null;
     private ResultSet rs = null;
     
+    
+    /**
+     * Este método é responsável por salvar os dados da marca
+     * @param obj
+     * @return boolean
+     * @throws Exception 
+     */
     @Override
     public boolean salvar(Object obj) throws Exception {
         Marca m = (Marca) obj;
         boolean flag = true;
         try {
-            String query = "INSERT INTO marca (nome, descricao,ativo) values(?,?,?)";
+            String query = "INSERT INTO marca (nome, descricao, ativo) values(?,?,?)";
             conn = Conexao.abrirConexao();
             pstm = conn.prepareCall(query);
             pstm.setString(1, m.getNome());
@@ -30,7 +37,7 @@ public class MarcaDaoImp implements MarcaDao {
             pstm.setBoolean(3, m.isAtivo());
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro de conexão " + e.getMessage());
+            System.out.println("Erro ao salvar a marca: " + e.getMessage());
             flag = false;
         } finally {
             Conexao.fechaConexao(conn, pstm);
@@ -38,6 +45,12 @@ public class MarcaDaoImp implements MarcaDao {
         return flag;
     }
     
+    /**
+     * Este método é responsável por alterar os dados da marca 
+     * @param obj
+     * @return boolean
+     * @throws Exception 
+     */
     @Override
     public boolean alterar(Object obj) throws Exception {
         Marca m = (Marca) obj;
@@ -52,12 +65,18 @@ public class MarcaDaoImp implements MarcaDao {
             pstm.setInt(4, m.getCodigo());
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro conexao altarar " + e.getMessage());
+            System.out.println("Erro ao alterar marca: " + e.getMessage());
             flag = false;
         }
         return flag;
     }
     
+    /**
+     * Este método é responsável por pesquisar a marca de acordo com o id informado
+     * @param id
+     * @return Object do tipo Marca
+     * @throws Exception 
+     */
     @Override
     public Object pesquisar(int id) throws Exception {
         Marca m = null;
@@ -75,13 +94,19 @@ public class MarcaDaoImp implements MarcaDao {
                 m.setAtivo(rs.getBoolean("ativo"));
             }
         } catch (Exception e) {
-            System.out.println("Erro conexão pesquisar " + e.getMessage());
+            System.out.println("Erro ao pesquisar marca: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return m;
     }
     
+    /**
+     * Este método é responsável por excluir a marca de acordo com o id informado
+     * @param id
+     * @return boolean
+     * @throws Exception 
+     */
     @Override
     public boolean excluir(int id) throws Exception {
         boolean flag = true;
@@ -100,6 +125,11 @@ public class MarcaDaoImp implements MarcaDao {
         return flag;
     }
     
+    /**
+     * Este método é responsável por listar todas as marcas ativas no banco de dados
+     * @return List<Marca>
+     * @throws Exception 
+     */
     @Override
     public List<Marca> listar() throws Exception {
         List<Marca> marcas = new ArrayList();
@@ -124,6 +154,12 @@ public class MarcaDaoImp implements MarcaDao {
         return marcas;
     }
     
+    /**
+     * Este método é responsável por listar todas as marcas cadastradas no banco,
+     * independente se está ativa ou não.
+     * @return List<Marca>
+     * @throws Exception 
+     */
     @Override
     public List<Marca> listarEdicao() throws Exception {
         List<Marca> marcas = new ArrayList();

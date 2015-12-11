@@ -16,6 +16,13 @@ public class EnderecoDaoImp implements EnderecoDao {
     private PreparedStatement pstm = null;
     private ResultSet rs = null;
 
+    /**
+     * Este método é responsável por salvar os dados de endereço da pessoa
+     *
+     * @param obj
+     * @return boolean
+     * @throws Exception
+     */
     @Override
     public boolean salvar(Object obj) throws Exception {
         boolean flag = true;
@@ -34,7 +41,7 @@ public class EnderecoDaoImp implements EnderecoDao {
             pstm.setString(8, p.getEndereco().getEstado());
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro conexão salvar Endereço " + e.getMessage());
+            System.out.println("Erro ao salvar endereço: " + e.getMessage());
             flag = false;
         } finally {
             Conexao.fechaConexao(conn, pstm);
@@ -42,6 +49,14 @@ public class EnderecoDaoImp implements EnderecoDao {
         return flag;
     }
 
+    /**
+     * Este método é responsável por alterar o endereço da pessoa pelo código
+     * informado
+     *
+     * @param obj
+     * @return boolean
+     * @throws Exception
+     */
     @Override
     public boolean alterar(Object obj) throws Exception {
         boolean flag = true;
@@ -60,13 +75,21 @@ public class EnderecoDaoImp implements EnderecoDao {
             pstm.setInt(8, p.getEndereco().getCodigo());
             pstm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro conexão alterar endereco " + e.getMessage());
+            System.out.println("Erro ao alterar o endereço: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm);
         }
         return flag;
     }
 
+    /**
+     * Este método é responsável por listar o endereço de acordo com o código
+     * informado
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @Override
     public Object pesquisar(int id) throws Exception {
         Endereco e = null;
@@ -88,13 +111,20 @@ public class EnderecoDaoImp implements EnderecoDao {
 
             }
         } catch (Exception ex) {
-            System.out.println("Erro conexao pesquisar endereço " + ex.getMessage());
+            System.out.println("Erro ao pesquisar endereço: " + ex.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return e;
     }
 
+    /**
+     * Este método é responsável por excluir o endereço pelo código informado
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean excluir(int id) throws Exception {
         boolean flag = true;
@@ -105,7 +135,7 @@ public class EnderecoDaoImp implements EnderecoDao {
             pstm.setInt(1, id);
             pstm.executeQuery();
         } catch (Exception e) {
-            System.out.println("Erro conexão excluir endereco " + e.getMessage());
+            System.out.println("Erro ao excluir endereço: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm);
         }

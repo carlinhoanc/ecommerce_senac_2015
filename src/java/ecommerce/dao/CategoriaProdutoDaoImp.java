@@ -17,6 +17,14 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
     private PreparedStatement pstm = null;
     private ResultSet rs = null;
 
+    /**
+     * Este método é responsável por inserir na tabela categoriaProduto,
+     * os dados da categoria do produto como: nome, descrição e ativo.
+     * 
+     * @param obj
+     * @return boolean
+     * @throws Exception 
+     */
     @Override
     public boolean salvar(Object obj) throws Exception {
         CategoriaProduto cp = (CategoriaProduto) obj;
@@ -31,13 +39,21 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
             pstm.executeUpdate();
             flag = true;
         } catch (Exception e) {
-            System.out.println("Erro conexão salvar Categoria MSN : " + e.getMessage());
+            System.out.println("Erro ao salvar a categoria do produto: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm);
         }
         return flag;
     }
 
+    /**
+     * Este método é responsável por alterar os dados da categoria do produto 
+     * de acordo com o id informado.
+     * 
+     * @param obj
+     * @return boolean
+     * @throws Exception 
+     */
     @Override
     public boolean alterar(Object obj) throws Exception {
         CategoriaProduto cp = (CategoriaProduto) obj;
@@ -53,7 +69,7 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
             pstm.executeUpdate();
             flag = true;
         } catch (Exception e) {
-            System.out.println("Erro conexão Alterar CTG, MSG :" + e.getMessage());
+            System.out.println("Erro ao alterar a categoria do produto: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm);
         }
@@ -70,6 +86,13 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Este método é responsável por listar todas as categorias de produtos
+     * cadastradas ativas no banco de dados.
+     * 
+     * @return List<CategoriaProduto>
+     * @throws Exception 
+     */
     @Override
     public List<CategoriaProduto> listar() throws Exception {
         List<CategoriaProduto> categorias = new ArrayList();
@@ -87,13 +110,20 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
                 categorias.add(cp);
             }
         } catch (Exception e) {
-            System.out.println("Erro conexão listar Categorias " + e.getMessage());
+            System.out.println("Erro ao listar as categorias de produtos ativas: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return categorias;
     }
 
+    /**
+     * Este método é responsável por listar todas as categorias cadastradas 
+     * no banco de dados.
+     * 
+     * @return List<CategoriaProduto>
+     * @throws Exception 
+     */
     @Override
     public List<CategoriaProduto> listarEdicao() throws Exception {
         List<CategoriaProduto> categorias = new ArrayList();
@@ -115,7 +145,7 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
                 categorias.add(cp);
             }
         } catch (Exception e) {
-            System.out.println("Erro conexão listar Categorias " + e.getMessage());
+            System.out.println("Erro ao listar todas as categorias de produtos: " + e.getMessage());
         } finally {
             Conexao.fechaConexao(conn, pstm, rs);
         }

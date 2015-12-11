@@ -105,11 +105,11 @@ public class VendaDaoImp implements VendaDao {
     @Override
     public List<Venda> listarVendaPendente() throws Exception {
         List<Venda> vendasPendentes = new ArrayList();
-        String query = "SELECT v.*, p.nome , p.cpfCnpj, s.nome FROM venda v JOIN status s ON v.idStatus = s.codigo WHERE s.nome = ?";
+        String query = "SELECT v.*, p.nome , p.cpfCnpj, s.nome FROM venda v JOIN status s ON v.idStatus = s.codigo JOIN pessoa p ON v.idPessoa = p.codigo WHERE s.nome = ?";
         try {
             conn = Conexao.abrirConexao();
             pstm = conn.prepareCall(query);
-            pstm.setString(1, "dependente");
+            pstm.setString(1, "Pendente");
             rs = pstm.executeQuery();
             if (rs.next()) {
                 Pessoa pessoa = new Pessoa();
@@ -118,6 +118,7 @@ public class VendaDaoImp implements VendaDao {
                 pessoa.setNome(rs.getString("p.nome"));
                 pessoa.setCpfCnpj(rs.getString("p.cpfCnpj"));
                 status.setNome(rs.getString("s.nome"));
+                venda.setCodigo(rs.getInt("v.codigo"));
                 venda.setProtocolo(rs.getString("v.protocolo"));
                 venda.setDataVenda(rs.getDate("v.dataVenda"));
                 venda.setValorTotal(rs.getDouble("v.valorTotal"));
@@ -135,12 +136,12 @@ public class VendaDaoImp implements VendaDao {
 
     @Override
     public List<Venda> listarVendaDespachar() throws Exception {
-       List<Venda> vendasDespachar = new ArrayList();
-        String query = "SELECT v.*, p.nome , p.cpfCnpj, s.nome FROM venda v JOIN status s ON v.idStatus = s.codigo WHERE s.nome = ?";
+        List<Venda> vendasDespachar = new ArrayList();
+        String query = "SELECT v.*, p.nome , p.cpfCnpj, s.nome FROM venda v JOIN status s ON v.idStatus = s.codigo JOIN pessoa p ON v.idPessoa = p.codigo WHERE s.nome = ?";
         try {
             conn = Conexao.abrirConexao();
             pstm = conn.prepareCall(query);
-            pstm.setString(1, "confirmado");
+            pstm.setString(1, "Aprovada");
             rs = pstm.executeQuery();
             if (rs.next()) {
                 Pessoa pessoa = new Pessoa();
@@ -149,6 +150,7 @@ public class VendaDaoImp implements VendaDao {
                 pessoa.setNome(rs.getString("p.nome"));
                 pessoa.setCpfCnpj(rs.getString("p.cpfCnpj"));
                 status.setNome(rs.getString("s.nome"));
+                venda.setCodigo(rs.getInt("v.codigo"));
                 venda.setProtocolo(rs.getString("v.protocolo"));
                 venda.setDataVenda(rs.getDate("v.dataVenda"));
                 venda.setValorTotal(rs.getDouble("v.valorTotal"));
@@ -162,6 +164,64 @@ public class VendaDaoImp implements VendaDao {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return vendasDespachar;
+    }
+
+    @Override
+    public boolean aprovarVenda(int idVenda) throws Exception {
+        boolean flag = true;
+        String query = "UPDATE venda SET idStatus = ? WHERE codigo = ?";
+        try {
+            conn = Conexao.abrirConexao();
+            pstm = conn.prepareCall(query);
+            pstm.setInt(1, 2);
+            pstm.setInt(2, idVenda);
+            pstm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Erro Dao aprovarVenda MSG : " + e.getMessage());
+            flag = false;
+        } finally {
+            Conexao.fechaConexao(conn, pstm);
+        }
+
+        return flag;
+    }
+
+    @Override
+    public boolean regeitarVenda(int idVenda) throws Exception {
+        boolean flag = true;
+        String query = "UPDATE venda SET idStatus = ? WHERE codigo = ?";
+        try {
+            conn = Conexao.abrirConexao();
+            pstm = conn.prepareCall(query);
+            pstm.setInt(1, 3);
+            pstm.setInt(2, idVenda);
+            pstm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Erro Dao aprovarVenda MSG : " + e.getMessage());
+            flag = false;
+        } finally {
+            Conexao.fechaConexao(conn, pstm);
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean despacharVenda(int idVenda) throws Exception {
+        boolean flag = true;
+        String query = "UPDATE venda SET idStatus = ? WHERE codigo = ?";
+        try {
+            conn = Conexao.abrirConexao();
+            pstm = conn.prepareCall(query);
+            pstm.setInt(1, 4);
+            pstm.setInt(2, idVenda);
+            pstm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Erro Dao aprovarVenda MSG : " + e.getMessage());
+            flag = false;
+        } finally {
+            Conexao.fechaConexao(conn, pstm);
+        }
+        return flag;
     }
 
 }

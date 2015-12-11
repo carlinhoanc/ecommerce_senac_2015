@@ -23,11 +23,11 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active">
-                        <a href="index.html">Home</a>
+                        <a href="#{request.contextPath}/index.html">Home</a>
                     </li>
                     <li>
                     <c:if var="log" test="#{controleUsuario.userLogado.nome !=null}">
-                        <a href="login.faces">Are usuario</a>
+                        <a href="#{request.contextPath}/login.faces">Are usuario</a>
                     </c:if>
                     <c:if var="log" test="#{controleUsuario.userLogado.nome ==null}">
                         <a href="login.faces">Logar</a>

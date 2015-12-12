@@ -62,7 +62,7 @@ public class EnderecoDaoImp implements EnderecoDao {
         boolean flag = true;
         Pessoa p = (Pessoa) obj;
         try {
-            String query = "UPDADE endereco SET rua =?, numero =?, complemento= ?, bairro = ?, cidade = ?, cep = ? WHERE idPessoa = ? AND codigo = ?";
+            String query = "UPDATE endereco SET rua =?, numero =?, complemento= ?, bairro = ?, cidade = ?, cep = ? WHERE idPessoa = ? AND codigo = ?";
             conn = Conexao.abrirConexao();
             pstm = conn.prepareCall(query);
             pstm.setString(1, p.getEndereco().getRua());

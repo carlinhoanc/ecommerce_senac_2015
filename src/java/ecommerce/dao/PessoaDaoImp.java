@@ -81,7 +81,7 @@ public class PessoaDaoImp implements PessoaDao {
         Pessoa p = (Pessoa) obj;
         EnderecoDao eDao = new EnderecoDaoImp();
         try {
-            String query = "UPDATE pessoa SET nome = ?, cpfCnpj = ?, sexo = ?, dataNascimento = ? , dddRes = ?, telRes = ?, dddCel = ?, telCel = ? WHERE idUsuario =? AND codigo = ?";
+            String query = "UPDATE pessoa SET nome = ?, cpfCnpj = ?, sexo = ?, dataNascimento = ? , dddRes = ?, telRes = ?, dddCel = ?, telCel = ? WHERE codigo = ?";
             conn = Conexao.abrirConexao();
             pstm = conn.prepareCall(query);
             pstm.setString(1, p.getNome());
@@ -92,8 +92,8 @@ public class PessoaDaoImp implements PessoaDao {
             pstm.setInt(6, p.getTelRes());
             pstm.setInt(7, p.getDddCel());
             pstm.setInt(8, p.getTelCel());
-            pstm.setInt(9, p.getUsuario().getCodigo());
-            pstm.setInt(10, p.getCodigo());
+         //   pstm.setInt(9, p.getUsuario().getCodigo());
+            pstm.setInt(9, p.getCodigo());
             pstm.executeUpdate();
 
             //altera endereço

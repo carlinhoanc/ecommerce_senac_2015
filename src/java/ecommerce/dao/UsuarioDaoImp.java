@@ -18,12 +18,12 @@ public class UsuarioDaoImp implements UsuarioDao {
     private ResultSet rs = null;
 
     /**
-     * Método responsável por salvar dados do usuário, como: email, senha e 
-     * o tipo do usuário.
-     * 
+     * Método responsável por salvar dados do usuário, como: email, senha e o
+     * tipo do usuário.
+     *
      * @param obj
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public boolean salvar(Object obj) throws Exception {
@@ -41,10 +41,12 @@ public class UsuarioDaoImp implements UsuarioDao {
     }
 
     /**
-     * Método responsável por desativar usuário de acordo com o código informado.
+     * Método responsável por desativar usuário de acordo com o código
+     * informado.
+     *
      * @param id
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public boolean excluir(int id) throws Exception {
@@ -65,16 +67,16 @@ public class UsuarioDaoImp implements UsuarioDao {
     }
 
     /**
-     * Método responsável por salvar dados do usuário, como: email, senha e 
-     * o tipo do usuário inserido. 
-     * 
+     * Método responsável por salvar dados do usuário, como: email, senha e o
+     * tipo do usuário inserido.
+     *
      * @param u
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public Usuario salvar(Usuario u) throws Exception {
-        
+
         try {
             String query = "INSERT INTO usuario (email,senha,tipoUsuario) VALUES(?,?,?)";
             conn = Conexao.abrirConexao();
@@ -97,15 +99,16 @@ public class UsuarioDaoImp implements UsuarioDao {
 
     /**
      * Método responsável por autenticar o login do usuário.
+     *
      * @param u
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public Pessoa autenticar(Usuario u) throws Exception {
         Pessoa p = null;
         try {
-            String query = "SELECT p.nome, p.codigo, u.email, u.tipoUsuario FROM usuario u JOIN pessoa p ON u.codigo = p.idUsuario WHERE u.email = ? AND u.senha = ?";
+            String query = "SELECT p.nome, p.codigo, u.email, u.codigo, u.tipoUsuario FROM usuario u JOIN pessoa p ON u.codigo = p.idUsuario WHERE u.email = ? AND u.senha = ?";
             conn = Conexao.abrirConexao();
             pstm = conn.prepareCall(query);
             pstm.setString(1, u.getEmail());
@@ -113,6 +116,7 @@ public class UsuarioDaoImp implements UsuarioDao {
             rs = pstm.executeQuery();
             if (rs.next()) {
                 p = new Pessoa();
+                u.setCodigo(rs.getInt("u.codigo"));
                 u.setEmail(rs.getString("u.email"));
                 u.setTpUsuario(rs.getString("u.tipoUsuario"));
                 p.setCodigo(rs.getInt("p.codigo"));
@@ -125,6 +129,35 @@ public class UsuarioDaoImp implements UsuarioDao {
             Conexao.fechaConexao(conn, pstm, rs);
         }
         return p;
+    }
+
+    @Override
+    public boolean alteraDadosUsuario(Usuario usuario) throws Exception {
+        boolean flag = true;
+        String queryTudo = "UPDATE usuario SET email = ?, senha = ? WHERE codigo = ?";
+        String querySenha = "UPDATE usuario SET senha = ? WHERE codigo = ?";
+        try {
+            conn = Conexao.abrirConexao();
+            if (usuario.getEmail().equals("")) {
+                pstm = conn.prepareCall(querySenha);
+                pstm.setString(1, usuario.getSenha());
+                pstm.setInt(2, usuario.getCodigo());
+                pstm.executeUpdate();
+            } else {
+                pstm = conn.prepareCall(queryTudo);
+                pstm.setString(1, usuario.getEmail());
+                pstm.setString(2, usuario.getSenha());
+                pstm.setInt(3, usuario.getCodigo());
+                pstm.executeUpdate();
+            }
+        } catch (Exception e) {
+            flag = false;
+            System.out.println("Erro ao alterar dados do usuario : " + e.getMessage());
+        } finally {
+            Conexao.fechaConexao(conn, pstm, rs);
+        }
+
+        return flag;
     }
 
 }

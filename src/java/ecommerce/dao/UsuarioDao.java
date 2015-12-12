@@ -12,4 +12,6 @@ public interface UsuarioDao extends BaseDao {
     Usuario salvar(Usuario u) throws Exception;
     
     Pessoa autenticar(Usuario u)throws Exception;
+    
+    boolean alteraDadosUsuario(Usuario usuario) throws Exception;
 }

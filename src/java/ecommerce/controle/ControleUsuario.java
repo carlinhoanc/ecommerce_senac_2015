@@ -19,7 +19,7 @@ public class ControleUsuario {
     private Usuario usuario;
 
     private UsuarioDao uDao;
-    
+
     private String novaSenha;
 
     public Usuario getUsuario() {
@@ -40,7 +40,7 @@ public class ControleUsuario {
     public void setNovaSenha(String novaSenha) {
         this.novaSenha = novaSenha;
     }
-    
+
     public String altenticarUsuario() {
         try {
             uDao = new UsuarioDaoImp();
@@ -77,7 +77,8 @@ public class ControleUsuario {
         SessionContext.getInstance().encerrarSessao();
         return "../../admin/index.faces?faces-redirect=true";
     }
-     public String logoutUsuario() {
+
+    public String logoutUsuario() {
         SessionContext.getInstance().encerrarSessao();
         return "/index.faces?faces-redirect=true";
     }
@@ -85,12 +86,30 @@ public class ControleUsuario {
     public Pessoa getUserLogado() {
         return (Pessoa) SessionContext.getInstance().getUsuarioLogado();
     }
-    public String pesqUsuarioAltera(){          
-      Pessoa p = getUserLogado();
-      usuario = p.getUsuario();
-     return "dados_conta_usuario.faces";
+
+    public String pesqUsuarioAltera() {
+        Pessoa p = getUserLogado();
+        usuario = p.getUsuario();
+        return "dados_conta_usuario.faces";
     }
-    public void salvar(){
-    
-    } 
+
+    public void salvar() {
+        Pessoa p = getUserLogado();
+        try {
+            if (p.getUsuario().getSenha().equals(usuario.getSenha())) {
+                if ((!usuario.getEmail().equals("")) || (!novaSenha.equals(""))) {
+                    uDao = new UsuarioDaoImp();
+                    usuario.setSenha(novaSenha);
+                    usuario.setCodigo(p.getUsuario().getCodigo());
+                    if (uDao.alteraDadosUsuario(usuario)) {
+                        System.out.println("deu bom");
+                    } else {
+                        System.out.println("deu rium");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao alterar dados do usuario : " + e.getMessage());
+        }
+    }
 }

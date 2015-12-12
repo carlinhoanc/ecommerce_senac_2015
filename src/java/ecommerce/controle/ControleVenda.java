@@ -156,4 +156,16 @@ public class ControleVenda {
             System.out.println("Erro ao despachar venda:" + e.getMessage());
         }
     }
+
+    public List<Venda> comprasUsuario() {
+        vDao = new VendaDaoImp();
+        try {
+            Pessoa p = SessionContext.getInstance().getUsuarioLogado();
+            List<Venda> compras = vDao.comprasUsuario(p.getCodigo());
+            return compras;
+        } catch (Exception e) {
+            System.out.println("Erro ao listar compras do usuario");
+        }
+        return null;
+    }
 }

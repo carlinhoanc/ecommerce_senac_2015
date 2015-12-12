@@ -85,8 +85,8 @@ public class ControleProdutos {
     public Produto getP() {
         if (produto == null) {
             produto = new Produto();
-            produto.setDataCadastro(new Date());
         }
+        produto.setDataCadastro(new Date());
         return produto;
     }
 
@@ -396,14 +396,17 @@ public class ControleProdutos {
             carrinhoCompra = new ArrayList();
         }
         try {
+            boolean primeiroProdCarrinho = false;
             Produto p = null;
             if (carrinhoCompra.size() != 0) {
                 for (Produto prod : carrinhoCompra) {
                     if (prod.getCodigo() == produto.getCodigo()) {
                         int qtd = produto.getQuantidade();
                         ++qtd;
+                        primeiroProdCarrinho = true;
                         if (pDao.verificaQuantidadeProduto(produto.getCodigo(), qtd)) {
                             // p = new Produto();
+                            p = new Produto();
                             p = prod;
                             p.setQuantidade(qtd);
                             carrinhoCompra.remove(prod);
@@ -413,7 +416,12 @@ public class ControleProdutos {
                         }
                     }
                 }
-                carrinhoCompra.add(p);
+                if (primeiroProdCarrinho) {
+                    carrinhoCompra.add(p);
+                } else {
+                    produto.setQuantidade(1);
+                    carrinhoCompra.add(produto);
+                }
             } else {
                 produto.setQuantidade(1);
                 carrinhoCompra.add(produto);

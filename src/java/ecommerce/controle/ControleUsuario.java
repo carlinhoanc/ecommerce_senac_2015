@@ -31,6 +31,22 @@ public class ControleUsuario {
         this.usuario = usuario;
     }
 
+    public String altenticarUsuario() {
+        try {
+            uDao = new UsuarioDaoImp();
+            Pessoa p = uDao.autenticar(usuario);
+            if (p == null) {
+                System.out.println("Usuario ao senha incorretos!");
+            } else {
+                SessionContext.getInstance().setAttribute("usuarioLogado", p);
+                return "index.faces?faces-redirect=true";
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao autenticar usuário: " + e.getMessage());
+        }
+        return null;
+    }
+
     public String altenticarAdmin() {
         try {
             uDao = new UsuarioDaoImp();
@@ -42,15 +58,21 @@ public class ControleUsuario {
                 return "/paginasAdmin/venda_pendente_despacho.faces?faces-redirect=true";
             }
         } catch (Exception e) {
-            System.out.println("Erro ao autenticar usuário : " + e.getMessage());
+            System.out.println("Erro ao autenticar usuário admin: " + e.getMessage());
         }
         return null;
     }
-    public String logoutAdmin(){
+
+    public String logoutAdmin() {
         SessionContext.getInstance().encerrarSessao();
-        return "../../admin/index.faces";
+        return "../../admin/index.faces?faces-redirect=true";
     }
-    public Pessoa getUserLogado(){
-      return (Pessoa) SessionContext.getInstance().getUsuarioLogado();
+     public String logoutUsuario() {
+        SessionContext.getInstance().encerrarSessao();
+        return "/index.faces?faces-redirect=true";
+    }
+
+    public Pessoa getUserLogado() {
+        return (Pessoa) SessionContext.getInstance().getUsuarioLogado();
     }
 }

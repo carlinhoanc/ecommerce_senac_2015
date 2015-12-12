@@ -1,6 +1,7 @@
 
 package ecommerce.controle;
 
+import ecommerce.entidade.Pessoa;
 import ecommerce.entidade.Usuario;
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -37,12 +38,12 @@ public class FiltroUsuario implements Filter {
         }
         HttpSession session = ((HttpServletRequest) request).getSession(false);
         RequestDispatcher rd;
-        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+        Pessoa usuario = (Pessoa) session.getAttribute("usuarioLogado");
         if (httpReq.getServletPath().equals("login.faces")) {
             chain.doFilter(request, response);
         } else if (usuario == null && cmd.equals("login")) {
             chain.doFilter(request, response);
-        } else if ((usuario != null) && (usuario.getTpUsuario().equals("usuarioLogado"))) {
+        } else if ((usuario != null) && (usuario.getUsuario().getTpUsuario().equals("usuario"))) {
             chain.doFilter(request, response);
         } else {            
           //  request.setAttribute("msg", "Você não esta logado no sistema!!!");

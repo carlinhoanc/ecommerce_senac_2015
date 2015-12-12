@@ -11,57 +11,59 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>TODO supply a title</title>
+        <title>Venda</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/bootstrap-min.css"/>
         <script type="text/javascript" src="#{request.contextPath}/js/bootstrap.js"></script>
-
-
-
         <h:outputStylesheet library="awesome" name="css/font-awesome.css" />
-
-
     </h:head>
     <h:body>
         <ui:include src="menu_principal.xhtml" />
-        <div class="container">
-            <h:form>
-                <p:dataTable id="gridCarrinho" value="#{controleProdutos.listarCarrinho()}" var="carrinho" paginator="true" rows="15">
-                    <p:column>
-                        <f:facet name="header">
-                            Codigo
-                        </f:facet>
-                        #{carrinho.codigo}
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            Nome
-                        </f:facet>
-                        #{carrinho.nome}
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            Quantidade
-                        </f:facet>
+        <div class="container-fluid">
+            <div class="container">
+                <h:form>
+                    <p:dataTable id="gridCarrinho" value="#{controleProdutos.listarCarrinho()}" var="carrinho" paginator="true" rows="15">
+                        <p:column>
+                            <f:facet name="header">
+                                Codigo
+                            </f:facet>
+                            #{carrinho.codigo}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                Nome
+                            </f:facet>
+                            #{carrinho.nome}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                Quantidade
+                            </f:facet>
 
-                        <p:commandButton title="Retirar produto" ajax="true" actionListener="#{controleProdutos.removeProdutoCarrinho(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-minus" update="gridCarrinho"/>
-                        <h:inputText value="#{carrinho.quantidade}" size="2" />
-                        <p:commandButton title="Adicionar Produto" ajax="true" actionListener="#{controleProdutos.addMiasProduto(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-plus" update="gridCarrinho"/>
+                            <p:commandButton title="Retirar produto" ajax="true" actionListener="#{controleProdutos.removeProdutoCarrinho(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-minus" update="gridCarrinho"/>
+                            <h:inputText value="#{carrinho.quantidade}" size="2" />
+                            <p:commandButton title="Adicionar Produto" ajax="true" actionListener="#{controleProdutos.addMiasProduto(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-plus" update="gridCarrinho"/>
 
-                    </p:column>                   
-                    <p:column>
-                        <f:facet name="header">
-                            Valor 
-                        </f:facet>
-                        #{carrinho.valorVenda}    
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            Marca
-                        </f:facet>
-                        #{carrinho.marca.nome}
-                    </p:column>
-                </p:dataTable>
+                        </p:column>                   
+                        <p:column>
+                            <f:facet name="header">
+                                Valor 
+                            </f:facet>
+                            #{carrinho.valorVenda}    
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                Marca
+                            </f:facet>
+                            #{carrinho.marca.nome}
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </div>
+            <h:form>              
+                <div class="addProd">
+                    <p:commandButton class="buttonProd btn btn-info" value="Comprar" icon="fa fa-credit-card" action="#"/>
+                </div>
             </h:form>
         </div>
         <ui:include src="footer.xhtml"/>

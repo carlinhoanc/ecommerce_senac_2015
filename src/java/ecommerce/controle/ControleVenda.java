@@ -164,7 +164,7 @@ public class ControleVenda {
             List<Venda> compras = vDao.comprasUsuario(p.getCodigo());
             return compras;
         } catch (Exception e) {
-            System.out.println("Erro ao listar compras do usuario");
+            System.out.println("Erro ao listar compras do usuario: " +e.getMessage());
         }
         return null;
     }

@@ -10,7 +10,6 @@ import ecommerce.util.WebServiceCep;
 import javax.faces.bean.ManagedBean;
 import java.util.Date;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 /**
  *
@@ -61,12 +60,12 @@ public class ControleCliente {
 
     public void salvar() {
         pDao = new PessoaDaoImp();
-        usuario.setTpUsuario("usuario");
-        pessoa.setUsuario(usuario);
         pessoa.setEndereco(endereco);
 
         try {
             if (pessoa.getCodigo() == 0) {
+                usuario.setTpUsuario("usuario");
+                pessoa.setUsuario(usuario);
                 pDao.salvar(pessoa);
             } else {
                 pDao.alterar(pessoa);
@@ -97,7 +96,7 @@ public class ControleCliente {
         try {
             pessoa = (Pessoa) pDao.pesquisar(p.getCodigo());
             endereco = pessoa.getEndereco();
-          return "dados_do_usuario.faces";
+            return "dados_do_usuario.faces";
         } catch (Exception e) {
             System.out.println("Erro ao pesquiar Dados do usuario logado : " + e.getMessage());
         }

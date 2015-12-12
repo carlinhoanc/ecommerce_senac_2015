@@ -8,6 +8,9 @@
     <h:head>
         <title>Area do usuario</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/bootstrap-min.css"/>
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
+        <script type="text/javascript" src="#{request.contextPath}/js/bootstrap.js"></script>
         <h:outputStylesheet library="awesome" name="css/font-awesome.css" />
     </h:head>
     <h:body>
@@ -21,13 +24,13 @@
                 </h:form>
             </p:layoutUnit>
             <p:layoutUnit position="west" size="150" header="Menu" resizable="true" closable="false" collapsible="false">
-                <!--                <h:form id="formPag">                       
-                                    <p:menu style="width: 127px;">
-                                        <p:menuitem value="Produto" action="#-{controleProdutos.paginaProduto()}" ajax="false"/>
-                                        <p:menuitem value="Marca" action="#-{controleMarca.paginaMarca()}" ajax="false" process="@this"/>
-                                        <p:menuitem value="Categoria" action="#-{controleCategoriaProduto.paginaCtg()}" ajax="false" process="@this"/>
-                                    </p:menu>
-                                </h:form>-->
+                <h:form id="formPag">                       
+                    <p:menu style="width: 140px;">
+                        <p:menuitem value="Dados usuario" action="#{controleCliente.pesquisaDadosUsuarioLogado()}" ajax="false"/>
+                        <p:menuitem value="Alterar senha" action="#" ajax="false" process="@this"/>
+                        <p:menuitem value="Lista compras" action="#" ajax="false" process="@this"/>
+                    </p:menu>
+                </h:form>
             </p:layoutUnit>
             <ui:insert name="centro">
                 <p:layoutUnit position="center" header="HOME" resizable="true" closable="false" collapsible="false">

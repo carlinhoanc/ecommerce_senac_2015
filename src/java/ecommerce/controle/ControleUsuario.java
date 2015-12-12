@@ -57,15 +57,20 @@ public class ControleUsuario {
         return null;
     }
 
-    public String altenticarAdmin() {
+    public String altenticarAdmin(String cmd) {
         try {
             uDao = new UsuarioDaoImp();
             Pessoa p = uDao.autenticar(usuario);
             if (p == null) {
                 System.out.println("Usuário ou senha incorretos!");
             } else {
-                SessionContext.getInstance().setAttribute("usuarioLogado", p);
-                return "/paginasAdmin/venda_pendente_despacho.faces?faces-redirect=true";
+                if (cmd.equals("")) {
+                    SessionContext.getInstance().setAttribute("usuarioLogado", p);
+                    return "/paginasAdmin/venda_pendente_despacho.faces?faces-redirect=true";
+                } else {
+                    SessionContext.getInstance().setAttribute("usuarioLogado", p);
+                    return "/paginasAdmin/venda_pendente_despacho.faces?faces-redirect=true";
+                }
             }
         } catch (Exception e) {
             System.out.println("Erro ao autenticar usuário admin: " + e.getMessage());

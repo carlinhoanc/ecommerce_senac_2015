@@ -19,7 +19,7 @@ import javax.faces.model.ListDataModel;
 @ManagedBean
 public class ControleVenda {
 
-    private List<Produto> listaProduto;
+    private List<Produto> carrinho;
     private Pessoa pessoa;
     private Venda venda;
     private DataModel modelVendaPendente;
@@ -85,6 +85,10 @@ public class ControleVenda {
 
     public void setVenda(Venda venda) {
         this.venda = venda;
+    }
+
+    public List<Produto> getCarrinho() {
+        return carrinho;
     }
 
     public void listarVendasPendentes() {
@@ -164,8 +168,26 @@ public class ControleVenda {
             List<Venda> compras = vDao.comprasUsuario(p.getCodigo());
             return compras;
         } catch (Exception e) {
-            System.out.println("Erro ao listar compras do usuario: " +e.getMessage());
+            System.out.println("Erro ao listar compras do usuario: " + e.getMessage());
         }
         return null;
+    }
+
+    /**
+     * Valida de o usuario esta ira verificar se o usuario esta logado para
+     * redirecionamento de pagina.
+     *
+     * @param carrinho
+     * @return 
+     */
+    public String validacoesParaCompra(List<Produto> carrinho) {
+        this.carrinho = carrinho;
+        Pessoa p = SessionContext.getInstance().getUsuarioLogado();
+        if (p == null) {
+            return "login.faces?cmd=compra"; // bloco de tela que ira pedir para o usuario logar ou se cadastrar;
+        } else {
+            return ""; // bloco de tela que finalizario a venda;
+        }
+        //return null;
     }
 }

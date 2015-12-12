@@ -107,8 +107,9 @@ public class VendaDaoImp implements VendaDao {
 
     /**
      * Método responsável por listar todas as vendas pendentes.
+     *
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public List<Venda> listarVendaPendente() throws Exception {
@@ -143,9 +144,11 @@ public class VendaDaoImp implements VendaDao {
     }
 
     /**
-     * Método responsável por listar todas as vendas que estão com o status: "despachar".
+     * Método responsável por listar todas as vendas que estão com o status:
+     * "despachar".
+     *
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public List<Venda> listarVendaDespachar() throws Exception {
@@ -180,12 +183,12 @@ public class VendaDaoImp implements VendaDao {
     }
 
     /**
-     * Método responsável por alterar o status da venda para "aprovada", 
-     * de acordo com o código informado.
-     * 
+     * Método responsável por alterar o status da venda para "aprovada", de
+     * acordo com o código informado.
+     *
      * @param idVenda
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public boolean aprovarVenda(int idVenda) throws Exception {
@@ -210,10 +213,10 @@ public class VendaDaoImp implements VendaDao {
     /**
      * Método responsável por alterar o status da venda para "rejeitada", ação
      * permitida apenas pelo admin do sistema.
-     * 
+     *
      * @param idVenda
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public boolean rejeitarVenda(int idVenda) throws Exception {
@@ -236,9 +239,10 @@ public class VendaDaoImp implements VendaDao {
 
     /**
      * Método responsável por alterar o status da venda para "despachada".
+     *
      * @param idVenda
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public boolean despacharVenda(int idVenda) throws Exception {
@@ -259,4 +263,31 @@ public class VendaDaoImp implements VendaDao {
         return flag;
     }
 
+    @Override
+    public List<Venda> comprasUsuario(int idUsuario) throws Exception {
+        List<Venda> compras = new ArrayList();
+        try {
+            String query = "SELECT v.*, s.nome,s.codigo FROM venda v JOIN pessoa p ON p.codigo = v.idPessoa JOIN status s ON s.codigo = v.idStatus WHERE p.codigo = ?";
+            conn = Conexao.abrirConexao();
+            pstm = conn.prepareCall(query);
+            pstm.setInt(1, idUsuario);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Venda v = new Venda();
+                Status s = new Status();
+                s.setCodigo(rs.getInt("s.codigo"));
+                s.setNome(rs.getString("s.nome"));
+                v.setCodigo(rs.getInt("v.codigo"));
+                v.setProtocolo(rs.getString("v.protocolo"));
+                v.setDataVenda(rs.getDate("v.dataVenda"));
+                v.setStatusVenda(s);
+                compras.add(v);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao listas compras do Usuario: " + e.getMessage());
+        } finally {
+            Conexao.fechaConexao(conn, pstm, rs);
+        }
+        return compras;
+    }
 }

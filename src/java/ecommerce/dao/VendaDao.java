@@ -53,5 +53,6 @@ public interface VendaDao extends BaseDao {
      */
     boolean despacharVenda(int idVenda) throws Exception;
 
-   
+    List<Venda> comprasUsuario(int idUsuario) throws Exception;
+
 }

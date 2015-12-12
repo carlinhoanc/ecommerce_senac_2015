@@ -5,9 +5,11 @@ import ecommerce.dao.PessoaDaoImp;
 import ecommerce.entidade.Endereco;
 import ecommerce.entidade.Pessoa;
 import ecommerce.entidade.Usuario;
+import ecommerce.util.SessionContext;
 import ecommerce.util.WebServiceCep;
 import javax.faces.bean.ManagedBean;
 import java.util.Date;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -15,20 +17,13 @@ import javax.faces.bean.ViewScoped;
  * @author Gustavo
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class ControleCliente {
 
     private Pessoa pessoa;
     private Endereco endereco;
     private Usuario usuario;
     private PessoaDao pDao;
-//    private String classShowHide;
-    
-//    @PostConstruct
-//    public void inicia() {
-//        System.out.println("Passu construtor");
-//        classShowHide = "show";
-//    }
 
     public Pessoa getPessoa() {
         if (pessoa == null) {
@@ -45,10 +40,6 @@ public class ControleCliente {
     public Endereco getEndereco() {
         if (endereco == null) {
             endereco = new Endereco();
-//            endereco.setRua("rua");
-//            endereco.setBairro("bairro");
-//            endereco.setCidade("cidade");
-//            endereco.setEstado("es");
         }
         return endereco;
     }
@@ -67,10 +58,6 @@ public class ControleCliente {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-//    public String getShow() {
-//        return classShowHide;
-//    }
 
     public void salvar() {
         pDao = new PessoaDaoImp();
@@ -104,11 +91,16 @@ public class ControleCliente {
         }
     }
 
-//    public void showHide(String clas) {
-//        if (clas.equals("show")) {
-//            classShowHide = "show";
-//        } else {
-//            classShowHide = "hide";
-//        }
-//    }
+    public String pesquisaDadosUsuarioLogado() {
+        Pessoa p = SessionContext.getInstance().getUsuarioLogado();
+        pDao = new PessoaDaoImp();
+        try {
+            pessoa = (Pessoa) pDao.pesquisar(p.getCodigo());
+            endereco = pessoa.getEndereco();
+          return "dados_do_usuario.faces";
+        } catch (Exception e) {
+            System.out.println("Erro ao pesquiar Dados do usuario logado : " + e.getMessage());
+        }
+        return null;
+    }
 }

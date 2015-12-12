@@ -12,8 +12,9 @@ import java.sql.ResultSet;
 public class Conexao {
 
     private static final String nomeDb = "ecommerce";
+//    private static final String nomeDb = "carlos_senac_ecommerce_trabalho";
     private static final String userDb = "root";
-    private static final String senhaDb = "";
+    private static final String senhaDb = "zaxs1425";
 
     public static Connection abrirConexao() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");

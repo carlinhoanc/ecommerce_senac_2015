@@ -172,3 +172,126 @@ body.painelUser {
     position: absolute;
     width: 100%;
 }
+
+body.painelUser .ui-layout-container {
+    height: 100%;
+    position: absolute;
+}
+.painelUser .menulateral {
+    border-radius: 0;
+    border: 0 !important;
+}
+.painelUser .ui-layout-unit.ui-widget.ui-widget-content.ui-corner-all.ui-layout-center.ui-layout-pane.ui-layout-pane-center {
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+.painelUser .ui-layout-unit-header.ui-widget-header.ui-corner-all {
+    background: #6A6C86;
+    border-color: #6A6C86;
+    border-radius: 0 !important;
+    color: #fff;
+    font-weight: 300;
+    text-shadow: 0 0 0 !important;
+}
+.painelUser .ui-layout-unit-content.ui-widget-content > form {
+    background: #6A6C86 !important;
+}
+.painelUser .ui-menu.ui-widget.ui-widget-content.ui-corner-all.ui-helper-clearfix {
+    background: #6A6C86;
+    border: transparent;
+    color: #fff;
+}
+.painelUser .ui-menu.ui-widget.ui-widget-content.ui-corner-all.ui-helper-clearfix a {
+    color: #fff;
+}
+.painelUser .ui-panelgrid-cell.ui-grid-col-12 {
+    background: transparent;
+    border: 0 !important;
+    padding: 0;
+    border-radius: 0 !important;
+}
+.painelUser .ui-panelgrid-cell.ui-grid-col-12 form {
+    border-radius:  0 !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+.paneGridHorus .ui-panelgrid-content.ui-grid-responsive {
+    border: 0 none;
+    border-radius: 0 !important;
+}
+.paneGridHorus .ui-datatable-header.ui-widget-header.ui-corner-top {
+    background-color: #6A6C86;
+    background-image: none;
+    border-color: #6A6C86;
+    border-radius: 0;
+    color: #fff;
+    font-weight: 300;
+    text-shadow: 0 0 0 !important;
+}
+.painelUser .ui-paginator.ui-paginator-bottom.ui-widget-header.ui-corner-bottom {
+    background-color: #6A6C86;
+    background-image: none;
+    border-color: #6A6C86;
+}
+.painelUser .dataTableHorus table thead tr th {
+    background-color: #6A6C86;
+    background-image: none;
+    border-color: #6A6C86;
+    color: #fff;
+    font-weight: 300;
+    text-shadow: 0 0 0;
+}
+.painelUser .ui-menu.ui-widget.ui-widget-content.ui-corner-all.ui-helper-clearfix a:hover,
+.painelUser .ui-menu.ui-widget.ui-widget-content.ui-corner-all.ui-helper-clearfix a.ui-state-hover{
+    background: #2F303E;
+    border-radius: 0;
+    box-shadow: 0 0 0 0;
+}
+
+.painelUser .container-fluid {
+    margin-top: 20px;
+    padding: 0;
+}
+.painelUser .container-fluid.dadosUser{margin-bottom: 50px;}
+.painelUser .container-fluid.dadosUser .container {max-width: 100%;box-sizing: border-box;}
+.painelUser .container-fluid.dadosUser .container form#primCad{
+
+}
+.painelUser .container-fluid.dadosUser .container form#primCad fieldset{
+
+}
+@media screen and (max-width:780px),(max-device-width:780px){
+    .ui-layout-container{width: 100% !important;}
+    .painelUser .menulateral + 
+    .ui-layout-unit.ui-widget.ui-widget-content.ui-corner-all.ui-layout-center.ui-layout-pane.ui-layout-pane-center{
+        width: calc(100% - 155px);
+        max-width: calc(100% - 155px);
+    }
+}
+@media screen and (max-width:500px),(max-device-width:500px){
+    .painelUser .menulateral .ui-layout-unit-content{
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+    .painelUser .menulateral {
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none;
+        height: 139px  !important;
+        position: static !important;
+        padding: 0;
+    }
+    .painelUser .menulateral + .ui-layout-unit.ui-widget.ui-widget-content.ui-corner-all.ui-layout-center.ui-layout-pane.ui-layout-pane-center{
+        width: 100% !important;
+        max-width: 98% !important;
+        position: relative !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        float: none !important;
+        clear: both;
+        left: 6px !important;
+        overflow: auto;
+    }
+}

@@ -9,13 +9,15 @@
 
     <ui:define name="centro">
         
-        <p:layoutUnit position="center" header="Situação Compras" resizable="true" closable="false" collapsible="false">
-            <p:panelGrid  columns="1" layout="grid">
+        <p:layoutUnit position="center" header="Situação Compras" styleClass="layoutUnitHorus" resizable="true" closable="false" collapsible="false">
+            <p:panelGrid  columns="1" layout="grid" styleClass="paneGridHorus" >
                 <h:form id="formGridProduto">
-                    <p:dataTable id="gridProduto"
+                    <p:dataTable id="gridProduto" 
                                  reflow="true"
+                                 value="#{controleVenda.comprasUsuario()}" var="compras"  
+                                 paginator="true" rows="6" 
                                  paginatorPosition="bottom" 
-                                 value="#" var="pendente"  paginator="true" rows="6"
+                                  styleClass="dataTableHorus"
                                  emptyMessage="Nenhum valor encontrado">
                         <f:facet name="header">
                             <h:outputText value="Listando Compra(s)"/>
@@ -29,18 +31,25 @@
                             <f:facet name="header">
                                 DATA
                             </f:facet>      
+                            <h:outputText value="#{compras.dataVenda}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>                                 
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 VALOR R$
                             </f:facet>   
+                            R$ <h:outputText value="#{compras.valorTotal}" >
+                                <f:convertNumber pattern="#0.00"/>
+                            </h:outputText>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
                                 STATUS
                             </f:facet>
-                        </p:column>
+                            <h:outputText value="#{compras.statusVenda.nome}"/>
+                        </p:column>                      
                     </p:dataTable>
                 </h:form>
             </p:panelGrid>

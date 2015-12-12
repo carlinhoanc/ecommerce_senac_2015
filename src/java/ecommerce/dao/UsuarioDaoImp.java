@@ -105,7 +105,7 @@ public class UsuarioDaoImp implements UsuarioDao {
     public Pessoa autenticar(Usuario u) throws Exception {
         Pessoa p = null;
         try {
-            String query = "SELECT p.nome, u.email, u.tipoUsuario FROM usuario u JOIN pessoa p ON u.codigo = p.idUsuario WHERE u.email = ? AND u.senha = ?";
+            String query = "SELECT p.nome, p.codigo, u.email, u.tipoUsuario FROM usuario u JOIN pessoa p ON u.codigo = p.idUsuario WHERE u.email = ? AND u.senha = ?";
             conn = Conexao.abrirConexao();
             pstm = conn.prepareCall(query);
             pstm.setString(1, u.getEmail());
@@ -115,6 +115,7 @@ public class UsuarioDaoImp implements UsuarioDao {
                 p = new Pessoa();
                 u.setEmail(rs.getString("u.email"));
                 u.setTpUsuario(rs.getString("u.tipoUsuario"));
+                p.setCodigo(rs.getInt("p.codigo"));
                 p.setNome(rs.getString("p.nome"));
                 p.setUsuario(u);
             }

@@ -29,16 +29,20 @@
                     <li class="active">
                         <a href="#{request.contextPath}">Home</a>
                     </li>
-                    <li>
-                    <c:if var="log" test="#{controleUsuario.userLogado.nome !=null}">
-                        <a href="#{request.contextPath}/login.faces">Área do usuário</a>
+                    <c:if var="log" test="#{controleUsuario.userLogado.nome !=null||controleUsuario.userLogado.usuario.tpUsuario != 'admin'}">
+                        <li class="dropdown">
+                            <a href="#{request.contextPath}/login.faces" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{controleUsuario.userLogado.usuario.email}</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#{request.contextPath}/usuario/situacao_produtos_comprados.faces">Painel do Usuário</a></li>
+                            </ul>
+                        </li>
                     </c:if>
-                    <c:if var="log" test="#{controleUsuario.userLogado.nome ==null ||controleUsuario.userLogado.usuario.tpUsuario != 'admin'}">
-                        <a href="#{request.contextPath}/login.faces">Logar</a>
+                    <c:if var="log" test="#{controleUsuario.userLogado.nome ==null }">
+                        <li>
+                            <a href="#{request.contextPath}/login.faces">Logar</a>
+                        </li>
                     </c:if>
-                    </li>
-                    <li >
-                      
+                    <li>                      
                     <p:commandLink id="btnCarrinho" class="buttonProd btn btn-warning" >Carrinho <span class="badge">#{controleProdutos.quantidadeItensCarrinho()}</span></p:commandLink>
                     </li>
                 </ul>

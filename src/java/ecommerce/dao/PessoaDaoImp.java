@@ -125,9 +125,11 @@ public class PessoaDaoImp implements PessoaDao {
             String query = "SELECT * FROM pessoa WHERE codigo = ?";
             conn = Conexao.abrirConexao();
             pstm = conn.prepareCall(query);
+            pstm.setInt(1, id);
             rs = pstm.executeQuery();
             while (rs.next()) {
                 p = new Pessoa();
+                p.setCodigo(rs.getInt("codigo"));
                 p.setNome(rs.getString("nome"));
                 p.setCpfCnpj(rs.getString("cpfCnpj"));
                 p.setSexo(rs.getString("sexo"));
@@ -136,6 +138,7 @@ public class PessoaDaoImp implements PessoaDao {
                 p.setTelRes(rs.getInt("telRes"));
                 p.setDddCel(rs.getInt("dddCel"));
                 p.setTelCel(rs.getInt("telCel"));
+                p.setDataCadastro(rs.getDate("dataCadastro"));
                 p.setEndereco((Endereco) eDao.pesquisar(p.getCodigo()));
             }
         } catch (Exception e) {

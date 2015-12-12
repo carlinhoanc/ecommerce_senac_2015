@@ -162,3 +162,13 @@ fieldset.cadastro legend {
 .remove_admin .collapse.navbar-collapse.navbar-ex1-collapse {
     display: none !important;
 }
+.painelUser footer.footer {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+}
+body.painelUser {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}

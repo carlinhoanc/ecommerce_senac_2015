@@ -9,17 +9,14 @@
         <title>Area do usuario</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <h:outputStylesheet library="awesome" name="css/font-awesome.css" />
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/bootstrap-min.css"/>
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
+        <script type="text/javascript" src="#{request.contextPath}/js/bootstrap.js"></script>
     </h:head>
-    <h:body>
-        <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="100" rendered="true" closable="false" collapsible="false">
-                <h:form>
-                    <h:panelGrid columns="2">
-                        <p>OLA :#{controleUsuario.userLogado.nome}</p>
-                        <p:commandButton title="SAIR" icon="fa fa-times-circle" action="#{controleUsuario.logoutUsuario()}" />
-                    </h:panelGrid>
-                </h:form>
-            </p:layoutUnit>
+
+    <h:body styleClass="painelUser">
+        <ui:include src="../menu_principal.xhtml" />
+        <p:layout fullPage="false"  >
             <p:layoutUnit position="west" size="150" header="Menu" resizable="true" closable="false" collapsible="false">
                 <!--                <h:form id="formPag">                       
                                     <p:menu style="width: 127px;">
@@ -34,6 +31,8 @@
 
                 </p:layoutUnit>
             </ui:insert>
+
         </p:layout>
+        <ui:include src="../footer.xhtml" />
     </h:body>
 </html>

@@ -31,7 +31,7 @@
                     </li>
                     <li>
                     <c:if var="log" test="#{controleUsuario.userLogado.nome !=null}">
-                        <a href="#{request.contextPath}/login.faces">Are usuario</a>
+                        <a href="#{request.contextPath}/login.faces">Área do usuário</a>
                     </c:if>
                     <c:if var="log" test="#{controleUsuario.userLogado.nome ==null ||controleUsuario.userLogado.usuario.tpUsuario != 'admin'}">
                         <a href="#{request.contextPath}/login.faces">Logar</a>

@@ -154,9 +154,11 @@ fieldset.cadastro legend {
     box-shadow: 0 0 0 0  !important;
     color: #fff !important;
 }
-.buttonProd.btn.btn-warning:hover,
-.buttonProd.btn.btn-warning:focus{
+.buttonProd.btn.btn-warning:hover,.buttonProd.btn.btn-warning:focus{
     background-color: #ec971f !important;
     border-color: #d58512 !important;
     color: #fff !important;
+}
+.remove_admin .collapse.navbar-collapse.navbar-ex1-collapse {
+    display: none !important;
 }

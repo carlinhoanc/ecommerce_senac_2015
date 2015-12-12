@@ -279,9 +279,12 @@ body.painelUser .ui-layout-container {
         width: 100% !important;
         max-width: 100% !important;
         float: none;
-        height: 139px  !important;
+        height: 190px  !important;
         position: static !important;
         padding: 0;
+    }
+    .painelUser .menulateral .ui-layout-unit-content.ui-widget-content{
+        height: 140px  !important;
     }
     .painelUser .menulateral + .ui-layout-unit.ui-widget.ui-widget-content.ui-corner-all.ui-layout-center.ui-layout-pane.ui-layout-pane-center{
         width: 100% !important;

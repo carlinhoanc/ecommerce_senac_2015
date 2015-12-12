@@ -94,7 +94,7 @@ public class EnderecoDaoImp implements EnderecoDao {
     public Object pesquisar(int id) throws Exception {
         Endereco e = null;
         try {
-            String query = "SELECT * FROM endereco WHERE codigo = ?";
+            String query = "SELECT * FROM endereco WHERE idPessoa = ?";
             conn = Conexao.abrirConexao();
             pstm = conn.prepareCall(query);
             pstm.setInt(1, id);
@@ -108,6 +108,7 @@ public class EnderecoDaoImp implements EnderecoDao {
                 e.setComplemento(rs.getString("complemento"));
                 e.setBairro(rs.getString("bairro"));
                 e.setCidade(rs.getString("cidade"));
+                e.setEstado(rs.getString("estado"));
 
             }
         } catch (Exception ex) {

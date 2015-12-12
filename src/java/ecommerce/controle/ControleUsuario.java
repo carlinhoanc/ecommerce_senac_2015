@@ -19,6 +19,8 @@ public class ControleUsuario {
     private Usuario usuario;
 
     private UsuarioDao uDao;
+    
+    private String novaSenha;
 
     public Usuario getUsuario() {
         if (usuario == null) {
@@ -31,6 +33,14 @@ public class ControleUsuario {
         this.usuario = usuario;
     }
 
+    public String getNovaSenha() {
+        return novaSenha;
+    }
+
+    public void setNovaSenha(String novaSenha) {
+        this.novaSenha = novaSenha;
+    }
+    
     public String altenticarUsuario() {
         try {
             uDao = new UsuarioDaoImp();
@@ -75,4 +85,12 @@ public class ControleUsuario {
     public Pessoa getUserLogado() {
         return (Pessoa) SessionContext.getInstance().getUsuarioLogado();
     }
+    public String pesqUsuarioAltera(){          
+      Pessoa p = getUserLogado();
+      usuario = p.getUsuario();
+     return "dados_conta_usuario.faces";
+    }
+    public void salvar(){
+    
+    } 
 }

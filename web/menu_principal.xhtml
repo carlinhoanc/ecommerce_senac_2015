@@ -55,7 +55,7 @@
 
                         <c:if var="log" test="#{controleUsuario.userLogado.nome ==null }">
                             <li>
-                                <a href="#{request.contextPath}/login.faces"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Logar</a>
+                                <h:commandLink action="#{controleUsuario.redirecionaPaginaLogin()}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Logar</h:commandLink >
                             </li>
                         </c:if>
                         <li>                      

@@ -18,6 +18,7 @@
     </h:head>
     <h:body>
         <ui:include src="menu_principal.xhtml" />
+        <p:growl id="messages"/> 
         <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
         <p:dialog modal="true" widgetVar="statusDialog" draggable="false" closable="false">
             <p:graphicImage value="#{request.contextPath}/imagensSistema/carregando.gif"/>

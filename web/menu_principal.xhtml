@@ -39,18 +39,18 @@
                                     <li role="separator" class="divider"></li>
                                     <li>
                                     <h:commandLink action="#{controleUsuario.logoutUsuario()}" ><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Sair</h:commandLink>
-                                    </li>
-                                </ul>
-                            </li>                           
-                        </c:if>
-                        <c:if var="log" test="#{controleUsuario.userLogado.nome ==null }">
-                            <li>
-                                <a href="#{request.contextPath}/login.faces"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Logar</a>
                             </li>
-                        </c:if>
-                        <li>                      
-                        <h:commandLink id="btnCarrinho" class="buttonProd btn btn-warning" ><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Carrinho <span class="badge">#{controleProdutos.quantidadeItensCarrinho()}</span></h:commandLink>
+                    </ul>
+                    </li>                           
+                    </c:if>
+                    <c:if var="log" test="#{controleUsuario.userLogado.nome ==null }">
+                        <li>
+                        <h:commandLink action="#{controleUsuario.redirecionaPaginaLogin()}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Logar</h:commandLink>
                         </li>
+                    </c:if>
+                    <li>                      
+                    <h:commandLink id="btnCarrinho" class="buttonProd btn btn-warning" action="venda.faces"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Carrinho <span class="badge">#{controleProdutos.quantidadeItensCarrinho()}</span></h:commandLink>
+                    </li>
                     </ul>
                 </div>
             </h:form>

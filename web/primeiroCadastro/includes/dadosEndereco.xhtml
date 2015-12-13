@@ -65,6 +65,7 @@
             </p:column>
         </p:panelGrid>
         <div class="radio form-group">
+            #{controleCliente.setCmd(param.cmd)}
             <p:commandButton value="Salvar" styleClass="btn btn-success" action="#{controleCliente.salvar()}" ajax="false" icon="fa fa-save"/>
         </div>
     </p:fieldset>

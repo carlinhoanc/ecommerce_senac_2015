@@ -58,7 +58,7 @@
                                 <p:commandButton class="buttonProd btn btn-warning" value="Adicionar ao carrinho" ajax="true" actionListener="#{controleProdutos.adicionarProdutoCarrinho()}" icon="fa fa-shopping-cart" update=":menuPrincipal:btnCarrinho"/>
                             </div>
                             <div class="addProd">
-                                <p:commandButton class="buttonProd btn btn-info" value="Comprar" icon="fa fa-credit-card" action="venda.faces"/>
+                                <p:commandButton class="buttonProd btn btn-info" value="Comprar" icon="fa fa-credit-card" ajax="true" actionListener="#{controleProdutos.adicionarProdutoCarrinho()}" oncomplete="javascript:window.location.href='venda.faces'"/>
                             </div>
                         </h:form>
                     </div>

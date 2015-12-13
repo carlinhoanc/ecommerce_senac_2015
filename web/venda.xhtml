@@ -14,62 +14,53 @@ and open the template in the editor.
         <title>Venda</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/bootstrap-min.css"/>
-        
-         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
-        
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
         <script type="text/javascript" src="#{request.contextPath}/js/bootstrap.js"></script>
         <h:outputStylesheet library="awesome" name="css/font-awesome.css" />
     </h:head>
     <h:body>
         <ui:include src="menu_principal.xhtml" />
-        <div class="container-fluid">
+        <div class="container-fluid painelUser">
             <div class="container">
                 <h:form>
-                    <p:dataTable id="gridCarrinho" value="#{controleProdutos.listarCarrinho()}" var="carrinho" paginator="true" rows="15">
+                    <p:dataTable id="gridCarrinho" value="#{controleProdutos.listarCarrinho()}" var="carrinho" 
+                                 paginatorPosition="bottom" 
+                                 styleClass="dataTableHorus"
+                                 paginator="true" rows="15">
                         <p:column>
-                            <f:facet name="header">
-                                Codigo
-                            </f:facet>
-                            #{carrinho.codigo}
+                            <f:facet name="header">Codigo</f:facet>
+                                #{carrinho.codigo}
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                Nome
-                            </f:facet>
-                            #{carrinho.nome}
+                            <f:facet name="header">Nome</f:facet>
+                                #{carrinho.nome}
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                Quantidade
-                            </f:facet>
-
+                            <f:facet name="header">Quantidade</f:facet>
                             <p:commandButton title="Retirar produto" ajax="true" actionListener="#{controleProdutos.removeProdutoCarrinho(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-minus" update="gridCarrinho"/>
                             <h:inputText value="#{carrinho.quantidade}" size="2" />
                             <p:commandButton title="Adicionar Produto" ajax="true" actionListener="#{controleProdutos.addMiasProduto(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-plus" update="gridCarrinho"/>
-
                         </p:column>                   
                         <p:column>
-                            <f:facet name="header">
-                                Valor 
-                            </f:facet>
-                            #{carrinho.valorVenda}    
+                            <f:facet name="header">Valor </f:facet>
+                                #{carrinho.valorVenda}    
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                Marca
-                            </f:facet>
-                            #{carrinho.marca.nome}
+                            <f:facet name="header">Marca</f:facet>
+                                #{carrinho.marca.nome}
                         </p:column>
                     </p:dataTable>
                 </h:form>
+                <ui:include rendered="#{controleVenda.renderiza == true}" src="finalizar_venda.xhtml"/>
+
+
+                <h:form>              
+                    <div class="addProd mb20">
+                        <p:commandButton class="buttonProd btn btn-info" value="Comprar" icon="fa fa-credit-card" ajax="false"  action="#{controleVenda.validacoesParaCompra()}"/>
+                    </div>
+                </h:form>          
             </div>
-            <ui:include rendered="#{controleVenda.renderiza == true}" src="finalizar_venda.xhtml"/>           
-            <h:form>              
-                <div class="addProd">
-                    <p:commandButton class="buttonProd btn btn-info" value="Comprar" icon="fa fa-credit-card" ajax="false"  action="#{controleVenda.validacoesParaCompra()}"/>
-                </div>
-            </h:form>          
-            <ui:include src="footer.xhtml"/>
         </div>
+        <ui:include src="footer.xhtml"/>
     </h:body>
 </html>

@@ -32,45 +32,31 @@
                 <h:panelGrid>
                     <p:dataTable id="gridProduto" value="#{controleProdutos.modelProduto}" var="prod" paginator="true" rows="15">
                         <p:column>
-                            <f:facet name="header">
-                                Codigo
-                            </f:facet>
+                            <f:facet name="header">Codigo</f:facet>
                             #{prod.codigo}
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                Nome
-                            </f:facet>
+                            <f:facet name="header">Nome</f:facet>
                             #{prod.nome}
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                Quantidade
-                            </f:facet>
+                            <f:facet name="header">Quantidade</f:facet>
                             #{prod.quantidade}
                         </p:column>                   
                         <p:column>
-                            <f:facet name="header">
-                                Valor venda
-                            </f:facet>
+                            <f:facet name="header">Valor venda</f:facet>
                             #{prod.valorVenda}
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                Marca
-                            </f:facet>
+                            <f:facet name="header">Marca</f:facet>
                             #{prod.marca.nome}
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                Ativo
-                            </f:facet>
+                            <f:facet name="header">Ativo</f:facet>
                             #{prod.ativoString}
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                Alterar
-                            </f:facet>
+                            <f:facet name="header">Alterar</f:facet>
                             <p:commandButton value="Alt" actionListener="#{controleProdutos.alterarProduto()}" oncomplete="PF('dlgProd').hide();" update=":formProduto" ajax="false"/>
                         </p:column>
                     </p:dataTable>

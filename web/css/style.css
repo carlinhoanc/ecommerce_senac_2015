@@ -154,7 +154,7 @@ fieldset.cadastro legend {
     box-shadow: 0 0 0 0  !important;
     color: #fff !important;
 }
-.buttonProd.btn.btn-warning:hover,.buttonProd.btn.btn-warning:focus{
+.buttonProd.btn-warning:hover,.buttonProd.btn-warning:focus{
     background-color: #ec971f !important;
     border-color: #d58512 !important;
     color: #fff !important;
@@ -255,12 +255,50 @@ body.painelUser .ui-layout-container {
 }
 .painelUser .container-fluid.dadosUser{margin-bottom: 50px;}
 .painelUser .container-fluid.dadosUser .container {max-width: 100%;box-sizing: border-box;}
-.painelUser .container-fluid.dadosUser .container form#primCad{
-
+.painelUser .container-fluid.dadosUser .container form#primCad{}
+.painelUser .container-fluid.dadosUser .container form#primCad fieldset{}
+.btn-block {
+    box-shadow: 0 0 0 0 !important;
 }
-.painelUser .container-fluid.dadosUser .container form#primCad fieldset{
-
+.btn span.ui-button-text {
+    text-shadow: 0 0 0 !important;
 }
+.painelUser .dataTableHorus thead tr th {
+    box-shadow: 0 0 0 0 !important;
+}
+.painelUser .dataTableHorus tbody tr td {
+    text-align: center;
+}
+.painelUser .dataTableHorus tbody tr td input {
+    text-align: center;
+    box-shadow: 0 0 0 0 !important;
+}
+.painelUser .dataTableHorus tbody tr td button {
+    background-color: rgb(54, 56, 78);
+    background-image: none;
+    border: 0 none;
+    border-radius: 0;
+    color: #fff;
+    font-weight: 300;
+    text-shadow: 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
+}
+.painelUser .dataTableHorus tbody tr td button span {
+    font-weight: 300;
+    text-shadow: 0 0 0 !important;
+}
+
+.ui-paginator-pages span.ui-corner-all.ui-paginator-page {
+    background: #232338;
+    border-color: #232338;
+    border-radius: 0;
+    box-shadow: 0 0 0 0;
+    color: #fff;
+    font-weight: 300;
+    text-shadow: 0 0 0;
+}
+
+
 @media screen and (max-width:780px),(max-device-width:780px){
     .ui-layout-container{width: 100% !important;}
     .painelUser .menulateral + 

@@ -2,8 +2,8 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
+        <param-value>Production</param-value>
+    </context-param>   
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -24,13 +24,13 @@
         <!--<welcome-file>primeiroCadastro/cadastro.faces</welcome-file>-->
     </welcome-file-list>
     <error-page>
-       <error-code>404</error-code>
-       <location>/erros/erro404.jsp</location>
-   </error-page>
-<!--   <error-page>
-       <error-code>500</error-code>
-       <location>/page404.jsp</location>
-   </error-page>-->
+        <error-code>404</error-code>
+        <location>/erros/erro404.jsp</location>
+    </error-page>
+    <!--   <error-page>
+        <error-code>500</error-code>
+        <location>/page404.jsp</location>
+    </error-page>-->
     <!--Mapea a biblioteca que realiza o download das imagens-->
     <filter>  
         <filter-name>PrimeFaces FileUpload Filter</filter-name>  
@@ -41,7 +41,7 @@
         <servlet-name>Faces Servlet</servlet-name>  
     </filter-mapping>
     
-<!--    <security-constraint>
+    <!--    <security-constraint>
         <web-resource-collection>
             <web-resource-name>securedapp</web-resource-name>
             <url-pattern>*.faces</url-pattern>

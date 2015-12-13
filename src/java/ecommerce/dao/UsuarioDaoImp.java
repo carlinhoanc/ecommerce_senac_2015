@@ -37,7 +37,23 @@ public class UsuarioDaoImp implements UsuarioDao {
 
     @Override
     public Object pesquisar(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Usuario user = null;
+        String query = "SELECT email FROM usuario WHERE codigo = ?";
+        try {
+            conn = Conexao.abrirConexao();
+            pstm = conn.prepareCall(query);
+            pstm.setInt(1, id);
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                user = new Usuario();
+                user.setCodigo(rs.getInt("codigo"));
+                user.setEmail(rs.getString("email"));
+                user.setSenha(rs.getString("senha"));
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao pesquisar usuario: " + e.getMessage());
+        }
+        return user;
     }
 
     /**

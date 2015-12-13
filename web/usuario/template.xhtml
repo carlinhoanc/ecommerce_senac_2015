@@ -11,10 +11,7 @@
         <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/bootstrap-min.css"/>
         <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
         <script type="text/javascript" src="#{request.contextPath}/js/bootstrap.js"></script>
-        <h:outputStylesheet library="awesome" name="css/font-awesome.css" />
-        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/bootstrap-min.css"/>
-        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
-        <script type="text/javascript" src="#{request.contextPath}/js/bootstrap.js"></script>
+        <h:outputStylesheet library="awesome" name="css/font-awesome.css" />        
     </h:head>
 
     <h:body styleClass="painelUser">
@@ -22,14 +19,17 @@
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
-
                     <p:layout fullPage="false"  >
+                        <p:growl id="messages"/> 
+                        <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+                        <p:dialog modal="true" widgetVar="statusDialog" draggable="false" closable="false">
+                            <p:graphicImage value="#{request.contextPath}/imagensSistema/carregando.gif"/>
+                        </p:dialog>
                         <p:layoutUnit position="west" size="150" styleClass="menulateral" header="Menu" resizable="true" closable="false" collapsible="false">
                             <h:form id="formPag">                       
                                 <p:menu style="width: 140px;">
                                     <p:menuitem icon="fa fa-user" value="Dados Pessoais" action="#{controleCliente.pesquisaDadosUsuarioLogado()}" ajax="false"/>
                                     <p:menuitem value="Dados usuario" action="#{controleUsuario.pesqUsuarioAltera()}"  ajax="false" icon="fa fa-cogs"/>
-                                   
                                     <p:menuitem icon="fa fa-th-list" value="Lista compras" action="#" ajax="false" />
                                 </p:menu>
                             </h:form>

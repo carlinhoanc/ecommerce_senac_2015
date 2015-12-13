@@ -8,7 +8,9 @@ import ecommerce.entidade.Venda;
 import ecommerce.util.SessionContext;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -25,7 +27,9 @@ public class ControleVenda {
     private DataModel modelVendaPendente;
     private DataModel modelVendaDespachar;
     private VendaDao vDao;
+    private boolean renderiza = false;
 
+    private FacesContext contexto;
 //    public static void main(String[] args) throws Exception {
 //        List<Produto> listaProduto = new ArrayList();
 //        Produto p = new Produto();
@@ -54,12 +58,15 @@ public class ControleVenda {
 //       VendaDao vDao = new VendaDaoImp();
 //       vDao.salvar(venda);
 //    }
+
     @PostConstruct
     public void inicia() {
         Pessoa p = (Pessoa) SessionContext.getInstance().getUsuarioLogado();
-        if (p.getUsuario().getTpUsuario().equals("admin")) {
-            listarVendasDespache();
-            listarVendasPendentes();
+        if (p != null) {
+            if (p.getUsuario().getTpUsuario().equals("admin")) {
+                listarVendasDespache();
+                listarVendasPendentes();
+            }
         }
     }
 
@@ -91,6 +98,10 @@ public class ControleVenda {
         return carrinho;
     }
 
+    public boolean isRenderiza() {
+        return renderiza;
+    }
+
     public void listarVendasPendentes() {
         vDao = new VendaDaoImp();
         try {
@@ -120,15 +131,18 @@ public class ControleVenda {
         vDao = new VendaDaoImp();
         Venda v = carregaModalVenda(modelVendaPendente);
         try {
+            contexto = FacesContext.getCurrentInstance();
             if (vDao.aprovarVenda(v.getCodigo())) {
-                System.out.println("BOA CACHOEIRA!!");
+                contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operação realizada com secesso!!", null));
             } else {
                 System.out.println("DEU RUIM CACHOEIRA!!");
+                contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao  realizada operação!!", null));
             }
             listarVendasDespache();
             listarVendasPendentes();
         } catch (Exception e) {
             System.out.println("Erro ao aprovar a venda: " + e.getMessage());
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
         }
     }
 
@@ -136,13 +150,17 @@ public class ControleVenda {
         vDao = new VendaDaoImp();
         Venda v = carregaModalVenda(modelVendaPendente);
         try {
+            contexto = FacesContext.getCurrentInstance();
             if (vDao.rejeitarVenda(v.getCodigo())) {
                 System.out.println("BOA CACHOEIRA!!");
+                contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operação realizada com secesso!!", null));
             } else {
                 System.out.println("DEU RUIM CACHOEIRA!!");
+                contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao  realizada operação!!", null));
             }
         } catch (Exception e) {
             System.out.println("Erro ao rejeitar a venda: " + e.getMessage());
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
         }
     }
 
@@ -150,14 +168,18 @@ public class ControleVenda {
         vDao = new VendaDaoImp();
         Venda v = carregaModalVenda(modelVendaDespachar);
         try {
+            contexto = FacesContext.getCurrentInstance();
             if (vDao.despacharVenda(v.getCodigo())) {
                 System.out.println("BOA CACHOEIRA!!");
+                contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operação realizada com secesso!!", null));
             } else {
                 System.out.println("DEU RUIM CACHOEIRA!!");
+                contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao  realizada operação!!", null));
             }
             listarVendasDespache();
         } catch (Exception e) {
             System.out.println("Erro ao despachar venda:" + e.getMessage());
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
         }
     }
 
@@ -177,17 +199,22 @@ public class ControleVenda {
      * Valida de o usuario esta ira verificar se o usuario esta logado para
      * redirecionamento de pagina.
      *
-     * @param carrinho
-     * @return 
+     * @return
      */
-    public String validacoesParaCompra(List<Produto> carrinho) {
-        this.carrinho = carrinho;
+    public String validacoesParaCompra() {
+        // this.carrinho = carrinho;
         Pessoa p = SessionContext.getInstance().getUsuarioLogado();
         if (p == null) {
-            return "login.faces?cmd=compra"; // bloco de tela que ira pedir para o usuario logar ou se cadastrar;
+            return "/login.xhtml?faces-redirect=true&cmd=compra"; // bloco de tela que ira pedir para o usuario logar ou se cadastrar;
         } else {
-            return ""; // bloco de tela que finalizario a venda;
+            renderiza = true;
+            return "venda.faces"; // bloco de tela que finalizario a venda;
         }
         //return null;
     }
+
+//    public boolean ativaFinalizarCompra() {
+//       
+//        return renderiza;
+//    }
 }

@@ -22,6 +22,7 @@ import javax.faces.model.SelectItem;
 import java.util.List;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -62,6 +63,7 @@ public class ControleProdutos {
     private DataModel modelProduto;
     private DataModel modelMarca;
 
+    private FacesContext contexto;
     private static final long serialVersionUID = 1L;
 
     @PostConstruct
@@ -194,13 +196,16 @@ public class ControleProdutos {
             produto.setAtivo(false);
         }
         try {
+            contexto = FacesContext.getCurrentInstance();
             if (produto.getCodigo() == 0) {
                 produto = pDao.salvarProduto(produto);
             } else {
                 pDao.alterar(produto);
             }
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com secesso!!", null));
         } catch (Exception e) {
             System.out.println("Erro salvar Produto \nMetodo salvar() \nMSG :" + e.getMessage());
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
         }
     }
 
@@ -298,6 +303,8 @@ public class ControleProdutos {
             List<FotosProduto> imgs = fpDao.pesquisaImgProduto(produto.getCodigo());
             modelImgProd = new ListDataModel(imgs);
         } catch (Exception e) {
+            contexto = FacesContext.getCurrentInstance();
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
             System.out.println("Erro pesquisar imagen do produto \npesquisarImagensPriduto() \nMSG :" + e.getMessage());
         }
     }
@@ -308,6 +315,8 @@ public class ControleProdutos {
             List<Produto> produtos = pDao.listarProdutos();
             modelProduto = new ListDataModel(produtos);
         } catch (Exception e) {
+            contexto = FacesContext.getCurrentInstance();
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
             System.out.println("Erro controle listar Produtos MSN" + e.getMessage());
         }
     }
@@ -340,6 +349,8 @@ public class ControleProdutos {
             produtosSite = null;
             produtosSite = pDao.listarProdutosAtivosSiteAcessos();
         } catch (Exception e) {
+            contexto = FacesContext.getCurrentInstance();
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
             System.out.println("Erro ao listar produto site : " + e.getMessage());
         }
         return produtosSite;
@@ -351,6 +362,8 @@ public class ControleProdutos {
             produtosSite = null;
             produtosSite = pDao.listarProdutosAtivosSiteRecentes();
         } catch (Exception e) {
+            contexto = FacesContext.getCurrentInstance();
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
             System.out.println("Erro ao listar produto site : " + e.getMessage());
         }
         return produtosSite;
@@ -363,6 +376,8 @@ public class ControleProdutos {
             fpDao.ativarImgPrincipal(produto.getCodigo(), fotoProd.getCodigo());
             pesquisarImagensPriduto();
         } catch (Exception e) {
+            contexto = FacesContext.getCurrentInstance();
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
             System.out.println("Erro ativar a imagem " + e.getMessage());
         }
     }
@@ -372,6 +387,8 @@ public class ControleProdutos {
             pDao = new ProdutoDaoImp();
             produto = pDao.pesqProdutoSelectSite(idProduto);
         } catch (Exception e) {
+            contexto = FacesContext.getCurrentInstance();
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
             System.out.println("Erro controle produtoSelecionado() MSN :" + e.getMessage());
         }
         return "produto_selecionado.faces";
@@ -396,6 +413,7 @@ public class ControleProdutos {
             carrinhoCompra = new ArrayList();
         }
         try {
+            contexto = FacesContext.getCurrentInstance();
             boolean primeiroProdCarrinho = false;
             Produto p = null;
             if (carrinhoCompra.size() != 0) {
@@ -413,21 +431,27 @@ public class ControleProdutos {
                             break;
                         } else {
                             System.out.println("Ultrapassou o estoque porra");
+                            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "ultrapassou o limite do estoque", null));
                         }
                     }
                 }
                 if (primeiroProdCarrinho) {
                     carrinhoCompra.add(p);
+                    contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Produto adicionado", null));
                 } else {
                     produto.setQuantidade(1);
                     carrinhoCompra.add(produto);
+                    contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Produto adicionado", null));
                 }
             } else {
                 produto.setQuantidade(1);
                 carrinhoCompra.add(produto);
+                contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Produto adicionado", null));
             }
             quantidadeItensCarrinho();
+
         } catch (Exception ex) {
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
             System.out.println("DEU erro nesta merda MSG :" + ex.getMessage());
         }
     }
@@ -440,6 +464,7 @@ public class ControleProdutos {
         pDao = new ProdutoDaoImp();
         ++quantidade;
         try {
+            contexto = FacesContext.getCurrentInstance();
             Produto p;
             if (pDao.verificaQuantidadeProduto(idProduto, quantidade)) {
                 p = new Produto();
@@ -452,17 +477,21 @@ public class ControleProdutos {
                 }
                 p.setQuantidade(quantidade);
                 carrinhoCompra.add(p);
+                contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Produto adicionado", null));
             } else {
                 System.out.println("Ultrapassa o estoque porra");
+                contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "ultrapassou o limite do estoque", null));
             }
         } catch (Exception e) {
             System.out.println("FUDEU DEU ERRO MSG : " + e.getMessage());
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
         }
         listarCarrinho();
     }
 
     public void removeProdutoCarrinho(int idProduto, int quantidade) {
         --quantidade;
+        contexto = FacesContext.getCurrentInstance();
         if (quantidade > 0) {
             Produto p;
             p = new Produto();
@@ -484,6 +513,7 @@ public class ControleProdutos {
                 }
             }
         }
+        contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Produto removido", null));
         listarCarrinho();
     }
 

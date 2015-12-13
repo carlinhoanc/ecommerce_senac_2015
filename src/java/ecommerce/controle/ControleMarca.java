@@ -6,7 +6,9 @@ import ecommerce.entidade.Marca;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.DataModel;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import javax.faces.model.ListDataModel;
 
@@ -23,6 +25,8 @@ public class ControleMarca {
     private MarcaDao mDao;
 
     private DataModel modelMarca;
+
+    private FacesContext contexto;
 
     public Marca getMarca() {
         if (marca == null) {
@@ -47,7 +51,9 @@ public class ControleMarca {
             marca = new Marca();
             marca.setAtivoString("sim");
         }
+        contexto = FacesContext.getCurrentInstance();
         try {
+
             if (marca.getAtivoString().equals("sim")) {
                 marca.setAtivo(true);
             } else {
@@ -58,8 +64,10 @@ public class ControleMarca {
             } else {
                 mDao.alterar(marca);
             }
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!!", null));
         } catch (Exception e) {
             System.out.println("Erro ao salvar/Alterar Marca " + e.getMessage());
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
         }
         marca = null;
         pesquiarMarcas();

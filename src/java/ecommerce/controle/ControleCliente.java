@@ -5,6 +5,7 @@ import ecommerce.dao.PessoaDaoImp;
 import ecommerce.entidade.Endereco;
 import ecommerce.entidade.Pessoa;
 import ecommerce.entidade.Usuario;
+import ecommerce.util.MD5;
 import ecommerce.util.SessionContext;
 import ecommerce.util.WebServiceCep;
 import javax.faces.bean.ManagedBean;
@@ -64,6 +65,7 @@ public class ControleCliente {
 
         try {
             if (pessoa.getCodigo() == 0) {
+                usuario.setSenha(MD5.criptografia(usuario.getSenha()));
                 usuario.setTpUsuario("usuario");
                 pessoa.setUsuario(usuario);
                 pDao.salvar(pessoa);

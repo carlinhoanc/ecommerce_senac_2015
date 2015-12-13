@@ -6,7 +6,9 @@ import ecommerce.entidade.CategoriaProduto;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.DataModel;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 
 /**
@@ -22,6 +24,8 @@ public class ControleCategoriaProduto {
     private CategoriaProdutoDao cpDao;
 
     private DataModel modelCategoriaProd;
+
+    private FacesContext contexto;
 
     public CategoriaProduto getCp() {
         if (cp == null) {
@@ -42,6 +46,7 @@ public class ControleCategoriaProduto {
     public void salvar() {
         cpDao = new CategoriaProdutoDaoImp();
         try {
+            contexto = FacesContext.getCurrentInstance();
             if (cp.getAtivoString().equals("sim")) {
                 cp.setAtivo(true);
             } else {
@@ -52,8 +57,10 @@ public class ControleCategoriaProduto {
             } else {
                 cpDao.alterar(cp);
             }
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!!", null));
         } catch (Exception e) {
             System.out.println("Erro ao salvar Categorias MSN : " + e.getMessage());
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
         }
         listaCtgEdicao();
     }

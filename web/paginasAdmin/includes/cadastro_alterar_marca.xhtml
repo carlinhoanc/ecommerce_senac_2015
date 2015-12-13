@@ -18,7 +18,7 @@
                 <p:outputLabel for="descricaoMarca" value="Descrição : "/>
                 <p:inputTextarea id="descricaoMarca" value="#{controleMarca.marca.descricao}" rows="6" cols="23" />
                 <h:outputText/>
-                <p:commandButton  value="salvar" actionListener="#{controleMarca.salvar()}" ajax="true" />
+                <p:commandButton  value="salvar" actionListener="#{controleMarca.salvar()}" ajax="true" update=":messages"/>
             </h:panelGrid>  
         </h:panelGrid>
     </h:form>  

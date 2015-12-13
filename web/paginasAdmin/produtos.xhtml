@@ -47,7 +47,7 @@
                         <p:outputLabel for="descricaoProd" value="Descrição"/>
                         <p:inputTextarea id="descricaoProd" value="#{controleProdutos.p.descricao}" cols="23" rows="5"/>
                         <h:outputText/>
-                        <p:commandButton value="Salvar" action="#{controleProdutos.salvar()}" ajax="false"/>
+                        <p:commandButton value="Salvar" action="#{controleProdutos.salvar()}" ajax="false" update=":messages"/>
                     </h:panelGrid>
                 </h:form>
                 <h:form enctype="multipart/form-data">  

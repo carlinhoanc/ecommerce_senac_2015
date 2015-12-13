@@ -17,7 +17,7 @@
                 <p:outputLabel for="descricaoCtg" value="Descrição : "/>
                 <p:inputTextarea id="descricaoCtg" value="#{controleCategoriaProduto.cp.descricao}" rows="6" cols="23" />
                 <h:outputText/>
-                <p:commandButton  value="salvar" actionListener="#{controleCategoriaProduto.salvar()}" ajax="true" update=":formGridCtg:gridCtg"/>
+                <p:commandButton  value="salvar" actionListener="#{controleCategoriaProduto.salvar()}" ajax="true" update=":formGridCtg:gridCtg :messages"/>
             </h:panelGrid> 
         </h:form>
     </h:panelGrid>

@@ -12,8 +12,12 @@
     </h:head>
     <h:body>
         <p:layout fullPage="true">
+            <p:growl id="messages"/> 
+            <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+            <p:dialog modal="true" widgetVar="statusDialog" draggable="false" closable="false">
+                <p:graphicImage value="#{request.contextPath}/imagensSistema/carregando.gif"/>
+            </p:dialog>
             <p:layoutUnit position="north" size="100" rendered="true" closable="false" collapsible="false">
-
                 <h:form>
                     <h:panelGrid columns="2">
                         <p>OLA :#{controleUsuario.userLogado.nome}</p>

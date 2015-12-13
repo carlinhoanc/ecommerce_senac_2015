@@ -49,8 +49,12 @@
                     </div>
                 </div>
             </h:form>
-
-            <a  class="btn btn-primary" href="primeiroCadastro/cadastro.faces">Criar Usuario</a>
+            <c:if test="#{param.cmd == null}">                
+                <a  class="btn btn-primary" href="primeiroCadastro/cadastro.faces?cmd=primeiroCadastro">Criar Usuario</a>
+            </c:if>
+            <c:if test="#{param.cmd !=null}">
+                <a  class="btn btn-primary" href="primeiroCadastro/cadastro.faces?cmd=#{param.cmd}">Criar Usuario</a>
+            </c:if>
         </div>
 
         <ui:include src="footer.xhtml" />

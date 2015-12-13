@@ -10,7 +10,9 @@ import ecommerce.util.SessionContext;
 import ecommerce.util.WebServiceCep;
 import javax.faces.bean.ManagedBean;
 import java.util.Date;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -24,6 +26,8 @@ public class ControleCliente {
     private Endereco endereco;
     private Usuario usuario;
     private PessoaDao pDao;
+    private String cmd;
+    private FacesContext contexto;
 
     public Pessoa getPessoa() {
         if (pessoa == null) {
@@ -59,23 +63,44 @@ public class ControleCliente {
         this.usuario = usuario;
     }
 
-    public void salvar() {
+    public String getCmd() {
+        return cmd;
+    }
+
+    public void setCmd(String cmd) {
+        this.cmd = cmd;
+    }
+
+    public String salvar() {
         pDao = new PessoaDaoImp();
         pessoa.setEndereco(endereco);
 
         try {
+            contexto = FacesContext.getCurrentInstance();
             if (pessoa.getCodigo() == 0) {
                 usuario.setSenha(MD5.criptografia(usuario.getSenha()));
                 usuario.setTpUsuario("usuario");
                 pessoa.setUsuario(usuario);
                 pDao.salvar(pessoa);
+                contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastro criado com sucesso!!", null));
+                SessionContext.getInstance().setAttribute("usuarioLogado", pessoa);
+                if (cmd.equals(MD5.criptografia("primeiroCadastro"))) {
+                    return "/index.faces?faces-redirect=true";
+                } else {
+                    return "/venda.faces?faces-redirect=true";
+                }
             } else {
                 pDao.alterar(pessoa);
+                contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastro Alterado com sucesso!!", null));
             }
+            pessoa = null;
+            usuario = null;
+            endereco = null;
         } catch (Exception e) {
             System.out.println("Erro ao salvar Pessoa " + e.getMessage());
+            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
         }
-
+        return null;
     }
 
     public void pesquisaCep() {

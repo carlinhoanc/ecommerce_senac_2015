@@ -5,6 +5,7 @@ import ecommerce.dao.VendaDaoImp;
 import ecommerce.entidade.Pessoa;
 import ecommerce.entidade.Produto;
 import ecommerce.entidade.Venda;
+import ecommerce.util.MD5;
 import ecommerce.util.SessionContext;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -20,7 +21,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 public class ControleVenda {
-
+    
     private List<Produto> carrinho;
     private Pessoa pessoa;
     private Venda venda;
@@ -28,7 +29,7 @@ public class ControleVenda {
     private DataModel modelVendaDespachar;
     private VendaDao vDao;
     private boolean renderiza = false;
-
+    
     private FacesContext contexto;
 //    public static void main(String[] args) throws Exception {
 //        List<Produto> listaProduto = new ArrayList();
@@ -69,39 +70,39 @@ public class ControleVenda {
             }
         }
     }
-
+    
     public DataModel getModelVendaPendente() {
         return modelVendaPendente;
     }
-
+    
     public DataModel getModelVendaDespachar() {
         return modelVendaDespachar;
     }
-
+    
     public Pessoa getPessoa() {
         return pessoa;
     }
-
+    
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
-
+    
     public Venda getVenda() {
         return venda;
     }
-
+    
     public void setVenda(Venda venda) {
         this.venda = venda;
     }
-
+    
     public List<Produto> getCarrinho() {
         return carrinho;
     }
-
+    
     public boolean isRenderiza() {
         return renderiza;
     }
-
+    
     public void listarVendasPendentes() {
         vDao = new VendaDaoImp();
         try {
@@ -111,7 +112,7 @@ public class ControleVenda {
             System.out.println("Erro controle MSG : " + e.getMessage());
         }
     }
-
+    
     public void listarVendasDespache() {
         vDao = new VendaDaoImp();
         try {
@@ -121,12 +122,12 @@ public class ControleVenda {
             System.out.println("Erro ao listar despache: " + e.getMessage());
         }
     }
-
+    
     private Venda carregaModalVenda(DataModel model) {
         Venda v = (Venda) model.getRowData();
         return v;
     }
-
+    
     public void aprovarVanda() {
         vDao = new VendaDaoImp();
         Venda v = carregaModalVenda(modelVendaPendente);
@@ -145,7 +146,7 @@ public class ControleVenda {
             contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
         }
     }
-
+    
     public void rejeitarVenda() {
         vDao = new VendaDaoImp();
         Venda v = carregaModalVenda(modelVendaPendente);
@@ -163,7 +164,7 @@ public class ControleVenda {
             contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
         }
     }
-
+    
     public void despacharVenda() {
         vDao = new VendaDaoImp();
         Venda v = carregaModalVenda(modelVendaDespachar);
@@ -182,7 +183,7 @@ public class ControleVenda {
             contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro critico!!!\nContate o administrador do sitema!!", null));
         }
     }
-
+    
     public List<Venda> comprasUsuario() {
         vDao = new VendaDaoImp();
         try {
@@ -205,7 +206,7 @@ public class ControleVenda {
         // this.carrinho = carrinho;
         Pessoa p = SessionContext.getInstance().getUsuarioLogado();
         if (p == null) {
-            return "/login.xhtml?faces-redirect=true&cmd=compra"; // bloco de tela que ira pedir para o usuario logar ou se cadastrar;
+            return "/login.faces?faces-redirect=true&cmd=" + MD5.criptografia("compra"); // bloco de tela que ira pedir para o usuario logar ou se cadastrar;
         } else {
             renderiza = true;
             return "venda.faces"; // bloco de tela que finalizario a venda;

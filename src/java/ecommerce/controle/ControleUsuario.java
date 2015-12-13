@@ -54,6 +54,10 @@ public class ControleUsuario {
         this.cmd = cmd;
     }
 
+    public String redirecionaPaginaLogin() {
+        return "login.faces?faces-redirect=true&cmd=" + MD5.criptografia("primeiroCadastro");
+    }
+
     public String altenticarUsuario() {
         try {
             contexto = FacesContext.getCurrentInstance();
@@ -64,10 +68,10 @@ public class ControleUsuario {
                 contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Usuário ou senha incorreto", null));
                 System.out.println("Usuário ou senha incorretos!");
             } else {
-                if (cmd.equals("")) {
+                if (cmd.equals(MD5.criptografia("primeiroCadastro"))) {
                     SessionContext.getInstance().setAttribute("usuarioLogado", p);
                     return "index.faces?faces-redirect=true";
-                } else if (cmd.equals("compra")) {
+                } else{
                     SessionContext.getInstance().setAttribute("usuarioLogado", p);
                     return "venda.faces?faces-redirect=true";
                 }

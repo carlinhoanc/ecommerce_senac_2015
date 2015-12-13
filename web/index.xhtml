@@ -4,19 +4,26 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>E-commerce</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/bootstrap-min.css"/>
         <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
+
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+
         <script type="text/javascript" src="#{request.contextPath}/js/bootstrap.js"></script>
     </h:head>
     <h:body>
         <ui:include src="menu_principal.xhtml" />
+        <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+        <p:dialog modal="true" widgetVar="statusDialog" draggable="false" closable="false">
+            <p:graphicImage value="#{request.contextPath}/imagensSistema/carregando.gif"/>
+        </p:dialog>
         <div class="container-fluid">
             <div class="container">
-
                 <div class="row">
                     <h:form class="listaProdutoHome">
                         <fieldset>
@@ -33,16 +40,16 @@
                                         </div>
                                         <div class="descricao">
                                             <div class="idProduto">
-                                               Cód.: #{produto.codigo} 
+                                                Cód.: #{produto.codigo} 
                                             </div>
                                             <div class="nomeProduto">
                                                 #{produto.nome} 
                                             </div>
                                             <div class="precoProduto">
                                                 R$ <h:outputText value="#{produto.valorVenda}" >
-                                                  <f:convertNumber pattern="#0.00"/>
+                                                    <f:convertNumber pattern="#0.00"/>
                                                 </h:outputText>
-                                             <!--   R$ #-{produto.valorVenda}!-->
+                                                <!--   R$ #-{produto.valorVenda}!-->
                                             </div>
 
                                             <div class="vejamais">
@@ -69,7 +76,7 @@
                                         </div>
                                         <div class="descricao">
                                             <div class="idProduto">
-                                             Cód.: #{produto.codigo} 
+                                                Cód.: #{produto.codigo} 
                                             </div>
                                             <div class="nomeProduto">
                                                 #{produto.nome} 
@@ -91,7 +98,7 @@
                 </div>            
             </div>
         </div>
-        
+
         <ui:include src="footer.xhtml" />
     </h:body>
 </html>

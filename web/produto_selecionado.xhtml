@@ -55,10 +55,10 @@
                         </div>
                         <h:form>
                             <div class="addProd">
-                                <p:commandButton class="buttonProd btn btn-warning" value="Adicionar ao carrinho" ajax="true" actionListener="#{controleProdutos.adicionarProdutoCarrinho()}" icon="fa fa-shopping-cart" update=":btnCarrinho"/>
+                                <p:commandButton class="buttonProd btn btn-warning" value="Adicionar ao carrinho" ajax="true" actionListener="#{controleProdutos.adicionarProdutoCarrinho()}" icon="fa fa-shopping-cart" update=":menuPrincipal:btnCarrinho"/>
                             </div>
                             <div class="addProd">
-                                <p:commandButton class="buttonProd btn btn-info" value="Comprar" icon="fa fa-credit-card" action="#"/>
+                                <p:commandButton class="buttonProd btn btn-info" value="Comprar" icon="fa fa-credit-card" action="venda.faces"/>
                             </div>
                         </h:form>
                     </div>

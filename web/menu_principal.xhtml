@@ -11,42 +11,49 @@
             .body{padding-top:70px}
         </style>
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand navbar-left" href="#{request.contextPath}">
-                    E-commerce 
-                    <img src="#{request.contextPath}/imagensSistema/taz.jpg" class="center-block img-responsive"
-                         style="width:50px;height:50px; margin:-35px 0px 0px 180px;"/>
-                </a>
-            </div>
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active">
-                        <a href="#{request.contextPath}">Home</a>
-                    </li>
-                    <c:if var="log" test="#{controleUsuario.userLogado.nome !=null||controleUsuario.userLogado.usuario.tpUsuario != 'admin'}">
-                        <li class="dropdown">
-                            <a href="#{request.contextPath}/login.faces" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{controleUsuario.userLogado.usuario.email}</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#{request.contextPath}/usuario/situacao_produtos_comprados.faces">Painel do Usuário</a></li>
-                            </ul>
+            <h:form id="menuPrincipal">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand navbar-left" href="#{request.contextPath}">
+                        E-commerce 
+                        <img src="#{request.contextPath}/imagensSistema/taz.jpg" class="center-block img-responsive"
+                             style="width:50px;height:50px; margin:-35px 0px 0px 180px;"/>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--class="active"-->
+                        <li >
+                            <a href="#{request.contextPath}">Home</a>
                         </li>
-                    </c:if>
-                    <c:if var="log" test="#{controleUsuario.userLogado.nome ==null }">
-                        <li>
-                            <a href="#{request.contextPath}/login.faces">Logar</a>
+                        <c:if var="log" test="#{controleUsuario.userLogado.nome != null || controleUsuario.userLogado.usuario.tpUsuario != 'admin'}">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{controleUsuario.userLogado.usuario.email} <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li> <a href="#{request.contextPath}/usuario/situacao_produtos_comprados.faces"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Painel do Usuário</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                    <h:commandLink action="#{controleUsuario.logoutUsuario()}" ><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Sair</h:commandLink>
+                                    </li>
+                                </ul>
+                            </li>                           
+                        </c:if>
+                        <c:if var="log" test="#{controleUsuario.userLogado.nome ==null }">
+                            <li>
+                                <a href="#{request.contextPath}/login.faces"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Logar</a>
+                            </li>
+                        </c:if>
+                        <li>                      
+                        <h:commandLink id="btnCarrinho" class="buttonProd btn btn-warning" ><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Carrinho <span class="badge">#{controleProdutos.quantidadeItensCarrinho()}</span></h:commandLink>
                         </li>
-                    </c:if>
-                    <li>                      
-                    <p:commandLink id="btnCarrinho" class="buttonProd btn btn-warning" >Carrinho <span class="badge">#{controleProdutos.quantidadeItensCarrinho()}</span></p:commandLink>
-                    </li>
-                </ul>
-            </div>
+                    </ul>
+                </div>
+            </h:form>
         </div>
     </div>   
 </ui:composition>

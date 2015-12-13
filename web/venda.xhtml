@@ -14,6 +14,9 @@ and open the template in the editor.
         <title>Venda</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/bootstrap-min.css"/>
+        
+         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+        
         <script type="text/javascript" src="#{request.contextPath}/js/bootstrap.js"></script>
         <h:outputStylesheet library="awesome" name="css/font-awesome.css" />
     </h:head>
@@ -60,12 +63,13 @@ and open the template in the editor.
                     </p:dataTable>
                 </h:form>
             </div>
+            <ui:include rendered="#{controleVenda.renderiza == true}" src="finalizar_venda.xhtml"/>           
             <h:form>              
                 <div class="addProd">
-                    <p:commandButton class="buttonProd btn btn-info" value="Comprar" icon="fa fa-credit-card" action="#"/>
+                    <p:commandButton class="buttonProd btn btn-info" value="Comprar" icon="fa fa-credit-card" ajax="false"  action="#{controleVenda.validacoesParaCompra()}"/>
                 </div>
-            </h:form>
+            </h:form>          
+            <ui:include src="footer.xhtml"/>
         </div>
-        <ui:include src="footer.xhtml"/>
     </h:body>
 </html>

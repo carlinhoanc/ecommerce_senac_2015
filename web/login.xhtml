@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Área de login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -43,7 +44,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <h:commandButton  class="btn btn-block btn-lg btn-success"  value="Entrar" action="#{controleUsuario.altenticarUsuario()}"/>
+                        #{controleUsuario.setCmd(param.cmd)}
+                        <p:commandButton  class="btn btn-block btn-lg btn-success"  value="Entrar" action="#{controleUsuario.altenticarUsuario()}"/>
                     </div>
                 </div>
             </h:form>

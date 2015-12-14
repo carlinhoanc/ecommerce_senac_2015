@@ -36,19 +36,21 @@ public class VendaDaoImp implements VendaDao {
         Venda v = (Venda) obj;
         //soma valor de todos os produtos
         for (Produto p : v.getProdutos()) {
-            somaValor = somaValor + p.getValorVenda();
+            somaValor = somaValor + (p.getValorVenda() * p.getQuantidade());
         }
         //seta valor total da venda
         v.setValorTotal(somaValor);
         try {
             conn = Conexao.abrirConexao();
-            String query = "insert into venda (protocolo, dataVenda, valorTotal, idPessoa, idStatus) values (?,?,?,?,?)";
+            String query = "insert into venda (protocolo, dataVenda, valorTotal, idPessoa, idStatus, boletoCartao, numeroBoletoCartao) values (?,?,?,?,?,?,?)";
             pstm = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, v.getProtocolo());
             pstm.setDate(2, new java.sql.Date(v.getDataVenda().getTime()));
             pstm.setDouble(3, v.getValorTotal());
             pstm.setInt(4, v.getPessoa().getCodigo());
             pstm.setDouble(5, v.getStatusVenda().getCodigo());
+            pstm.setString(6, v.getBoletoCartao());
+            pstm.setString(7, v.getNumeroBoletoCartao());
             pstm.executeUpdate();
             rs = pstm.getGeneratedKeys();
             rs.next();

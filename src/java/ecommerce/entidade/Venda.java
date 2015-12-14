@@ -16,6 +16,8 @@ public class Venda {
     private Status statusVenda;
     private List<Produto> produtos;
     private Pessoa pessoa;
+    private String boletoCartao;
+    private String numeroBoletoCartao;
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -71,6 +73,22 @@ public class Venda {
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
+    }
+
+    public String getBoletoCartao() {
+        return boletoCartao;
+    }
+
+    public void setBoletoCartao(String boletoCartao) {
+        this.boletoCartao = boletoCartao;
+    }
+
+    public String getNumeroBoletoCartao() {
+        return numeroBoletoCartao;
+    }
+
+    public void setNumeroBoletoCartao(String numeroBoletoCartao) {
+        this.numeroBoletoCartao = numeroBoletoCartao;
     }
 
 }

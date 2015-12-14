@@ -1,13 +1,14 @@
 package ecommerce.controle;
 
-//import br.com.caelum.stella.boleto.Banco;
-//import br.com.caelum.stella.boleto.Beneficiario;
-//import br.com.caelum.stella.boleto.Boleto;
-//import br.com.caelum.stella.boleto.Datas;
-//import br.com.caelum.stella.boleto.Endereco;
-//import br.com.caelum.stella.boleto.Pagador;
-//import br.com.caelum.stella.boleto.bancos.BancoDoBrasil;
-//import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
+import br.com.caelum.stella.boleto.Banco;
+import br.com.caelum.stella.boleto.Beneficiario;
+import br.com.caelum.stella.boleto.Boleto;
+import br.com.caelum.stella.boleto.Datas;
+import br.com.caelum.stella.boleto.Endereco;
+import br.com.caelum.stella.boleto.Pagador;
+import br.com.caelum.stella.boleto.bancos.BancoDoBrasil;
+import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
+import br.com.caelum.stella.boleto.transformer.GeradorDeBoletoHTML;
 import ecommerce.dao.VendaDao;
 import ecommerce.dao.VendaDaoImp;
 import ecommerce.entidade.Pessoa;
@@ -17,8 +18,8 @@ import ecommerce.entidade.Venda;
 import ecommerce.util.MD5;
 import ecommerce.util.Protocolo;
 import ecommerce.util.SessionContext;
-//import java.io.FileOutputStream;
-//import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -119,178 +120,93 @@ public class ControleVenda {
        * Metodo que gera o boleto AVISO! ainda nao esta funcionado quando o comendo de geração vem da tela de venda
        * Mais funciona quando eu uso a public static void main para execultar
        */
-//    public void salvarVendaBoleto(Pessoa p, List<Produto> carrinho) {
-//        vDao = new VendaDaoImp();
-//        System.out.println("Entrou");
-//        try {
-//            venda = new Venda();
-//            venda.setPessoa(p);
-//            venda.setProdutos(carrinho);
-//            venda.setDataVenda(new Date());
-//            Status s = new Status();
-//            s.setCodigo(1);
-//            venda.setStatusVenda(s);
-//            venda.setProtocolo(Protocolo.getNumeroProtocolo());
-//            venda.setBoletoCartao("Boleto");
-//            venda.setNumeroBoletoCartao("33444556667730000888");
-//            vDao.salvar(venda);
-//            //gerarBoleto();
-//        } catch (Exception e) {
-//            System.out.println("Erro ao salvar " + e.getMessage());
-//        }
-//    }
-//
-//    private void gerarBoleto() {
-//        Datas datas = Datas.novasDatas()
-//                .comDocumento(1, 5, 2008)
-//                .comProcessamento(1, 5, 2008)
-//                .comVencimento(2, 5, 2008);
-//
-//        Endereco enderecoBeneficiario = Endereco.novoEndereco()
-//                .comLogradouro("Av das Empresas, 555")
-//                .comBairro("Bairro Grande")
-//                .comCep("01234-555")
-//                .comCidade("São Paulo")
-//                .comUf("SP");
-//
-//        //Quem emite o boleto
-//        Beneficiario beneficiario = Beneficiario.novoBeneficiario()
-//                .comNomeBeneficiario("Fulano de Tal")
-//                .comAgencia("1824").comDigitoAgencia("4")
-//                .comCodigoBeneficiario("76000")
-//                .comDigitoCodigoBeneficiario("5")
-//                .comNumeroConvenio("1207113")
-//                .comCarteira("18")
-//                .comEndereco(enderecoBeneficiario)
-//                .comNossoNumero("9000206");
-//
-//        Endereco enderecoPagador = Endereco.novoEndereco()
-//                .comLogradouro("Av dos testes, 111 apto 333")
-//                .comBairro("Bairro Teste")
-//                .comCep("01234-111")
-//                .comCidade("São Paulo")
-//                .comUf("SP");
-//
-//        //Quem paga o boleto
-//        Pagador pagador = Pagador.novoPagador()
-//                .comNome("Fulano da Silva")
-//                .comDocumento("111.222.333-12")
-//                .comEndereco(enderecoPagador);
-//
-//        Banco banco = new BancoDoBrasil();
-//
-//        Boleto boleto = Boleto.novoBoleto()
-//                .comBanco(banco)
-//                .comDatas(datas)
-//                .comBeneficiario(beneficiario)
-//                .comPagador(pagador)
-//                .comValorBoleto("200.00")
-//                .comNumeroDoDocumento("1234")
-//                .comInstrucoes("instrucao 1", "instrucao 2", "instrucao 3", "instrucao 4", "instrucao 5")
-//                .comLocaisDePagamento("local 1", "local 2");
-//
-//        GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);
-//
-//        // Para gerar um boleto em PDF  
-//        gerador.geraPDF("BancoDoBrasil.pdf");
-//
-//        // Para gerar um boleto em PNG  
-//        gerador.geraPNG("BancoDoBrasil.png");
-//
-//        // Para gerar um array de bytes a partir de um PDF  
-//        byte[] bPDF = gerador.geraPDF();
-//
-//        // Para gerar um array de bytes a partir de um PNG  
-//        byte[] bPNG = gerador.geraPNG();
-//
-//        try {
-//            // File f = new File();
-//            FileOutputStream fos = new FileOutputStream("C:\\Users\\Gustavo\\Desktop\\arq\\BancoDoBrasil.pdf");
-//            fos.write(bPDF);
-//            fos.close();
-////            out.write(bPDF);
-////            out.close();
-//        } catch (IOException ex) {
-////            Logger.getLogger(C.class.getName()).log(Level.SEVERE, null, ex);
-//            System.out.println("Erro ao gravar Boleto MSG " + ex.getMessage());
-//        }
-//
-////        Datas datas = Datas.novasDatas()
-////                .comDocumento(1, 5, 2008)
-////                .comProcessamento(1, 5, 2008)
-////                .comVencimento(2, 5, 2008);
-////
-////        Endereco enderecoBeneficiario = Endereco.novoEndereco()
-////                .comLogradouro("Servidão Julia Alexandre Florindo, 90")
-////                .comBairro("Barra da Lagoa")
-////                .comCep("88061-423")
-////                .comCidade("Florianópolis")
-////                .comUf("SC");
-////
-////        //Quem emite o boleto
-////        Beneficiario beneficiario = Beneficiario.novoBeneficiario()
-////                .comNomeBeneficiario("Gustavo Humberto Agostinho")
-////                .comAgencia("1824").comDigitoAgencia("4")
-////                .comCodigoBeneficiario("76000")
-////                .comDigitoCodigoBeneficiario("5")
-////                .comNumeroConvenio("1207113")
-////                .comCarteira("18")
-////                .comEndereco(enderecoBeneficiario)
-////                .comNossoNumero("9000206");
-////
-////        Endereco enderecoPagador = Endereco.novoEndereco()
-////                .comLogradouro(venda.getPessoa().getEndereco().getRua() + "," + venda.getPessoa().getEndereco().getNumero())
-////                .comBairro(venda.getPessoa().getEndereco().getBairro())
-////                .comCep(venda.getPessoa().getEndereco().getCep())
-////                .comCidade(venda.getPessoa().getEndereco().getCidade())
-////                .comUf(venda.getPessoa().getEndereco().getEstado());
-////
-////        //Quem paga o boleto
-////        Pagador pagador = Pagador.novoPagador()
-////                .comNome(venda.getPessoa().getNome())
-////                .comDocumento(venda.getPessoa().getCpfCnpj())
-////                .comEndereco(enderecoPagador);
-////
-////        Banco banco = new BancoDoBrasil();
-////        String[] prod = new String[venda.getProdutos().size()];
-////        int i = 0;
-////        for (Produto p : venda.getProdutos()) {
-////            prod[i] = "Produto : " + p.getNome() + " Quantidade : " + p.getQuantidade() + " Valor Unidade : R$" + p.getValorVenda();
-////            i++;
-////        }
-////        Boleto boleto = Boleto.novoBoleto()
-////                .comBanco(banco)
-////                .comDatas(datas)
-////                .comBeneficiario(beneficiario)
-////                .comPagador(pagador)
-////                .comValorBoleto(venda.getValorTotal())
-////                .comNumeroDoDocumento("1234")
-////                .comInstrucoes("gg")
-////                .comLocaisDePagamento("Caixa Econômica Federal", "Banco do Brasil");
-////
-////        GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);
-////
-////        // Para gerar um boleto em PDF  
-////        //gerador.geraPDF("BancoDoBrasil.pdf");
-////
-////        // Para gerar um boleto em PNG  
-////        gerador.geraPNG("BancoDoBrasil.png");
-////
-////        // Para gerar um array de bytes a partir de um PDF  
-////        //byte[] bPDF = gerador.geraPDF();
-////
-////        // Para gerar um array de bytes a partir de um PNG  
-////        byte[] bPNG = gerador.geraPNG();
-////
-////        try {
-////            FileOutputStream fos = new FileOutputStream("C:\\Users\\Gustavo\\Desktop\\arq\\BancoDoBrasil.png");
-////            fos.write(bPNG);
-////            fos.close();
-////        } catch (IOException ex) {
-////            //Logger.getLogger(Boletoto.class.getName()).log(Level.SEVERE, null, ex);
-////            System.out.println("Erro ao gravar Boleto MSG " + ex.getMessage());
-////        }
-//    }
+    public void salvarVendaBoleto(Pessoa p, List<Produto> carrinho) {
+        vDao = new VendaDaoImp();
+        System.out.println("Entrou");
+        try {
+            venda = new Venda();
+            venda.setPessoa(p);
+            venda.setProdutos(carrinho);
+            venda.setDataVenda(new Date());
+            Status s = new Status();
+            s.setCodigo(1);
+            venda.setStatusVenda(s);
+            venda.setProtocolo(Protocolo.getNumeroProtocolo());
+            venda.setBoletoCartao("Boleto");
+            venda.setNumeroBoletoCartao("33444556667730000888");
+            vDao.salvar(venda);
+            gerarBoleto();
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar " + e.getMessage());
+        }
+    }
+
+    private void gerarBoleto() {
+        Datas datas = Datas.novasDatas()
+                .comDocumento(1, 5, 2008)
+                .comProcessamento(1, 5, 2008)
+                .comVencimento(2, 5, 2008);
+
+        Endereco enderecoBeneficiario = Endereco.novoEndereco()
+                .comLogradouro("Servidão Julia Alexandre Florindo, 90")
+                .comBairro("Barra da Lagoa")
+                .comCep("88061-423")
+                .comCidade("Florianópolis")
+                .comUf("SC");
+
+        //Quem emite o boleto
+        Beneficiario beneficiario = Beneficiario.novoBeneficiario()
+                .comNomeBeneficiario("Gustavo Humberto Agostinho")
+                .comAgencia("1824").comDigitoAgencia("4")
+                .comCodigoBeneficiario("76000")
+                .comDigitoCodigoBeneficiario("5")
+                .comNumeroConvenio("1207113")
+                .comCarteira("18")
+                .comEndereco(enderecoBeneficiario)
+                .comNossoNumero("9000206");
+
+        Endereco enderecoPagador = Endereco.novoEndereco()
+                .comLogradouro(venda.getPessoa().getEndereco().getRua() + "," + venda.getPessoa().getEndereco().getNumero())
+                .comBairro(venda.getPessoa().getEndereco().getBairro())
+                .comCep(venda.getPessoa().getEndereco().getCep())
+                .comCidade(venda.getPessoa().getEndereco().getCidade())
+                .comUf(venda.getPessoa().getEndereco().getEstado());
+
+        //Quem paga o boleto
+        Pagador pagador = Pagador.novoPagador()
+                .comNome(venda.getPessoa().getNome())
+                .comDocumento(venda.getPessoa().getCpfCnpj())
+                .comEndereco(enderecoPagador);
+
+        Banco banco = new BancoDoBrasil();
+        String[] prod = new String[venda.getProdutos().size()];
+        int i = 0;
+        for (Produto p : venda.getProdutos()) {
+            prod[i] = "Produto : " + p.getNome() + " Quantidade : " + p.getQuantidade() + " Valor Unidade : R$" + p.getValorVenda();
+            i++;
+        }
+        Boleto boleto = Boleto.novoBoleto()
+                .comBanco(banco)
+                .comDatas(datas)
+                .comBeneficiario(beneficiario)
+                .comPagador(pagador)
+                .comValorBoleto(venda.getValorTotal())
+                .comNumeroDoDocumento(Protocolo.getNumeroProtocolo())
+                .comInstrucoes(prod)
+                .comLocaisDePagamento("Caixa Econômica Federal", "Banco do Brasil");
+
+       GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);      
+        // Para gerar um array de bytes a partir de um PDF  
+        byte[] bPDF = gerador.geraPDF();
+        try {
+            FileOutputStream fos = new FileOutputStream("C:\\Users\\Gustavo\\Desktop\\arq\\BancoDoBrasil.pdf");
+            fos.write(bPDF);
+            fos.close();
+        } catch (Exception ex) {
+            //Logger.getLogger(Boletoto.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro ao gravar Boleto MSG " + ex.getMessage());
+        }
+    }
 
     public void listarVendasPendentes() {
         vDao = new VendaDaoImp();
@@ -435,7 +351,7 @@ public class ControleVenda {
 //
 //        //Quem paga o boleto
 //        Pagador pagador = Pagador.novoPagador()
-//                .comNome("Fulano da Silva")
+//                .comNome("PORRAAAAAAAAA")
 //                .comDocumento("111.222.333-12")
 //                .comEndereco(enderecoPagador);
 //

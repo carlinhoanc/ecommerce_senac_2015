@@ -62,6 +62,7 @@ and open the template in the editor.
                         <ui:include src="finalizar_venda.xhtml"/>
                     </c:if>
                     <p:commandButton styleClass="buttonProd btn btn-info" value="Cartão ffffff" icon="fa fa-credit-card" action="#{controleVenda.salvarVendaCartao(controleCliente.pesquisaDadosPessoaisFenalizaVenda(),controleProdutos.listarCarrinho())}" ajax="false" process="@this"/>
+                    <p:commandButton  styleClass="buttonProd btn btn-info" icon="fa fa-barcode" value="Boleto fffff"  action="#{controleVenda.salvarVendaBoleto(controleCliente.pesquisaDadosPessoaisFenalizaVenda(),controleProdutos.listarCarrinho())}" ajax="false" />
                     <div class="addProd mb20">
                         <p:commandButton class="buttonProd btn btn-info" rendered="#{param.cmd != '6974f237ed3f06b22c850d2673a5d477'}" value="Comprar" icon="fa fa-credit-card" ajax="false"  action="#{controleVenda.validacoesParaCompra()}" update="valorTotalCarrinho"/>
                     </div>

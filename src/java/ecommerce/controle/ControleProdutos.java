@@ -524,6 +524,13 @@ public class ControleProdutos {
         } else {
             return carrinhoCompra.size();
         }
+    }
 
+    public double somaValorCarrinho() {
+        double valorCarrinho = 0;
+        for (Produto p : carrinhoCompra) {
+              valorCarrinho = valorCarrinho + (p.getQuantidade()* p.getValorVenda());
+        }
+        return valorCarrinho;
     }
 }

@@ -74,7 +74,6 @@ public class ControleCliente {
     public String salvar() {
         pDao = new PessoaDaoImp();
         pessoa.setEndereco(endereco);
-
         try {
             contexto = FacesContext.getCurrentInstance();
             if (pessoa.getCodigo() == 0) {
@@ -87,7 +86,7 @@ public class ControleCliente {
                 if (cmd.equals(MD5.criptografia("primeiroCadastro"))) {
                     return "/index.faces?faces-redirect=true";
                 } else {
-                    return "/venda.faces?faces-redirect=true";
+                    return "/venda.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra");
                 }
             } else {
                 pDao.alterar(pessoa);
@@ -115,6 +114,18 @@ public class ControleCliente {
                 System.out.println("Erro ao pesquisar Cep : " + e.getMessage());
             }
         }
+    }
+
+    public Pessoa pesquisaDadosPessoaisFenalizaVenda() {
+        Pessoa p = SessionContext.getInstance().getUsuarioLogado();
+        pDao = new PessoaDaoImp();
+        Pessoa pp = null;
+        try {
+            pp = (Pessoa) pDao.pesquisar(p.getCodigo());
+        } catch (Exception e) {
+            System.out.println("Erro ao pesquiar Dados do usuario logado : " + e.getMessage());
+        }
+        return pp;
     }
 
     public String pesquisaDadosUsuarioLogado() {

@@ -73,7 +73,7 @@ public class ControleUsuario {
                     return "index.faces?faces-redirect=true";
                 } else{
                     SessionContext.getInstance().setAttribute("usuarioLogado", p);
-                    return "venda.faces?faces-redirect=true";
+                    return "venda.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra");
                 }
             }
         } catch (Exception e) {

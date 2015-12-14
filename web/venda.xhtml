@@ -9,7 +9,8 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Venda</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -20,6 +21,11 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <ui:include src="menu_principal.xhtml" />
+        <p:growl id="messages"/> 
+        <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+        <p:dialog modal="true" widgetVar="statusDialog" draggable="false" closable="false">
+            <p:graphicImage value="#{request.contextPath}/imagensSistema/carregando.gif"/>
+        </p:dialog>
         <div class="container-fluid painelUser">
             <div class="container">
                 <h:form>
@@ -37,9 +43,9 @@ and open the template in the editor.
                         </p:column>
                         <p:column>
                             <f:facet name="header">Quantidade</f:facet>
-                            <p:commandButton title="Retirar produto" ajax="true" actionListener="#{controleProdutos.removeProdutoCarrinho(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-minus" update="gridCarrinho"/>
+                            <p:commandButton title="Retirar produto" ajax="true" actionListener="#{controleProdutos.removeProdutoCarrinho(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-minus" update="gridCarrinho :messages"/>
                             <h:inputText value="#{carrinho.quantidade}" size="2" />
-                            <p:commandButton title="Adicionar Produto" ajax="true" actionListener="#{controleProdutos.addMiasProduto(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-plus" update="gridCarrinho"/>
+                            <p:commandButton title="Adicionar Produto" ajax="true" actionListener="#{controleProdutos.addMiasProduto(carrinho.codigo, carrinho.quantidade)}" icon="fa fa-plus" update="gridCarrinho :messages"/>
                         </p:column>                   
                         <p:column>
                             <f:facet name="header">Valor </f:facet>
@@ -52,15 +58,14 @@ and open the template in the editor.
                                 #{carrinho.marca.nome}
                         </p:column>
                     </p:dataTable>
-                </h:form>
-                <ui:include rendered="#{controleVenda.renderiza == true}" src="finalizar_venda.xhtml"/>
-
-
-                <h:form>              
+                    <c:if test="#{param.cmd == '6974f237ed3f06b22c850d2673a5d477'}">                   
+                        <ui:include src="finalizar_venda.xhtml"/>
+                    </c:if>
+                    <p:commandButton styleClass="buttonProd btn btn-info" value="Cartão ffffff" icon="fa fa-credit-card" action="#{controleVenda.salvarVendaCartao(controleCliente.pesquisaDadosPessoaisFenalizaVenda(),controleProdutos.listarCarrinho())}" ajax="false" process="@this"/>
                     <div class="addProd mb20">
-                        <p:commandButton class="buttonProd btn btn-info" value="Comprar" icon="fa fa-credit-card" ajax="false"  action="#{controleVenda.validacoesParaCompra()}"/>
+                        <p:commandButton class="buttonProd btn btn-info" rendered="#{param.cmd != '6974f237ed3f06b22c850d2673a5d477'}" value="Comprar" icon="fa fa-credit-card" ajax="false"  action="#{controleVenda.validacoesParaCompra()}" update="valorTotalCarrinho"/>
                     </div>
-                </h:form>          
+                </h:form>
             </div>
         </div>
         <ui:include src="footer.xhtml"/>

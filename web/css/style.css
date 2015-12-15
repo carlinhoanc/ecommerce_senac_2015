@@ -176,11 +176,17 @@ body.painelUser {
 body.painelUser .ui-layout-container {
     height: 100%;
     position: absolute;
+    width: 1180px;
 }
 .painelUser .menulateral {
     border-radius: 0;
     border: 0 !important;
 }
+.painelUser .menulateral + .layoutUnitHorus {
+    max-width: calc(100% - 150px) !important;
+    width: calc(100% - 150px) !important;
+}
+
 .painelUser .ui-layout-unit.ui-widget.ui-widget-content.ui-corner-all.ui-layout-center.ui-layout-pane.ui-layout-pane-center {
     border: 0 !important;
     border-radius: 0 !important;

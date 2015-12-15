@@ -4,23 +4,35 @@
     Author     : Gustavo
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+            <title>Erro 404</title>
+            <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-min.css"/>
+            <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
+            <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+            <h:outputStylesheet library="awesome" name="css/font-awesome.css" />        
     </head>
-    <div style="width: 300px;float: left;">
-        <image src="imagensSistema/taz.jpg" style="width: 100px" />
-    </div>
-    <div style="width: 300px;float: left;">
-        <p>
-            Erro 404
-            ¡UÁH BA DA, UÁH UÁH BA BA DA!<br/>
-            Tradução
-            Ele quis dizer:
-            Página não encontrada!
-        </p>
-    </div>
+
+    <body>
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div>
+                        <p>
+                            Erro 404
+                            <br/>
+                            P�gina n�o encontrada!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
 </html>

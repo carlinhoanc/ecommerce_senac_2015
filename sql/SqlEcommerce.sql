@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `curriculo` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `curriculo`;
+CREATE DATABASE  IF NOT EXISTS `ecommerce` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `ecommerce`;
 -- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
--- Host: localhost    Database: curriculo
+-- Host: localhost    Database: ecommerce
 -- ------------------------------------------------------
 -- Server version	5.6.23-log
 
@@ -18,84 +18,106 @@ USE `curriculo`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `areasinteresse`
+-- Table structure for table `carrinho`
 --
 
-DROP TABLE IF EXISTS `areasinteresse`;
+DROP TABLE IF EXISTS `carrinho`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `areasinteresse` (
+CREATE TABLE `carrinho` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(45) DEFAULT NULL,
-  `descricao` varchar(45) DEFAULT NULL,
+  `data_carrinho` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `areasinteresse`
---
-
-LOCK TABLES `areasinteresse` WRITE;
-/*!40000 ALTER TABLE `areasinteresse` DISABLE KEYS */;
-INSERT INTO `areasinteresse` VALUES (1,'Administrativa','Administrativa'),(2,'Artes / Música / Teatro / Cultural','Artes / Música / Teatro / Cultural'),(3,'Comercial / Vendas','Comercial / Vendas'),(4,'Comunicação / Publicidade','Comunicação / Publicidade'),(5,'Financeira','Financeira'),(6,'Educação / Ensino','Educação / Ensino'),(7,'Engenharia de Alimentos','Engenharia de Alimentos'),(8,'Engenharia Civil','Engenharia Civil'),(9,'Engenharia Eletrônica / Computação','Engenharia Eletrônica / Computação'),(10,'Engenharia Mecânica / Mecatrônica','Engenharia Mecânica / Mecatrônica'),(11,'Engenharia de Produção','Engenharia de Produção'),(12,'Engenharia de Materiais / Química','Engenharia de Materiais / Química'),(13,'Informática / Internet / T.I.','Informática / Internet / T.I.'),(14,'Jurídica','Jurídica'),(15,'Logística','Logística'),(16,'Marketing','Marketing'),(17,'Recursos Humanos','Recursos Humanos'),(18,'Segurança do Trabalho','Segurança do Trabalho'),(19,'Saúde','Saúde'),(20,'MedicinaOdontologia','MedicinaOdontologia'),(21,'Fisioterapia','Fisioterapia'),(22,'Fonoaudiologia','Fonoaudiologia'),(23,'Enfermagem','Enfermagem'),(24,'Farmácia','Farmácia'),(25,'Psicologia','Psicologia'),(26,'Veterinária','Veterinária'),(27,'Terapia Ocupacional','Terapia Ocupacional'),(28,'Seguros','Seguros'),(29,'Turismo','Turismo'),(30,'Telecomunicações','Telecomunicações'),(31,'Comércio Exterior / Relações Internacionais','Comércio Exterior / Relações Internacionais'),(32,'Telemarketing / Call Center','Telemarketing / Call Center'),(33,'Controle e Sistema de Qualidade','Controle e Sistema de Qualidade'),(34,'Atendimento','Atendimento'),(35,'Química','Química'),(36,'Suprimentos / Compras','Suprimentos / Compras'),(37,'Ciências Agrárias / Agribusiness','Ciências Agrárias / Agribusiness'),(38,'Auditoria','Auditoria'),(39,'Beleza / Estética','Beleza / Estética'),(40,'Meio Ambiente / Biologia','Meio Ambiente / Biologia'),(41,'Hotelaria','Hotelaria'),(42,'Idiomas','Idiomas'),(43,'Assistência Técnica','Assistência Técnica'),(44,'Jornalismo','Jornalismo'),(45,'Moda','Moda'),(46,'Nutrição','Nutrição'),(47,'Segurança Pessoal / Patrimonia','Segurança Pessoal / Patrimonia'),(48,'Esportes','Esportes'),(49,'Bancária / Mercado Financeiro','Bancária / Mercado Financeiro'),(50,'Transportes','Transportes'),(51,'Arquitetura','Arquitetura'),(52,'Gráfica','Gráfica'),(53,'Serviço Social','Serviço Social'),(54,'ConstruçãoCivil','ConstruçãoCivil'),(55,'ONGs / Terceiro Setor','ONGs / Terceiro Setor'),(56,'Biblioteconomia','Biblioteconomia');
-/*!40000 ALTER TABLE `areasinteresse` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `areasinteressecurriculo`
---
-
-DROP TABLE IF EXISTS `areasinteressecurriculo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `areasinteressecurriculo` (
-  `idAreasInteresse` int(11) NOT NULL,
-  `idCurriculo` int(11) NOT NULL,
-  PRIMARY KEY (`idAreasInteresse`,`idCurriculo`),
-  KEY `fk_areasInteresse_has_Curriculo_Curriculo1_idx` (`idCurriculo`),
-  KEY `fk_areasInteresse_has_Curriculo_areasInteresse1_idx` (`idAreasInteresse`),
-  CONSTRAINT `fk_areasInteresse_has_Curriculo_Curriculo1` FOREIGN KEY (`idCurriculo`) REFERENCES `curriculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_areasInteresse_has_Curriculo_areasInteresse1` FOREIGN KEY (`idAreasInteresse`) REFERENCES `areasinteresse` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `areasinteressecurriculo`
+-- Dumping data for table `carrinho`
 --
 
-LOCK TABLES `areasinteressecurriculo` WRITE;
-/*!40000 ALTER TABLE `areasinteressecurriculo` DISABLE KEYS */;
-INSERT INTO `areasinteressecurriculo` VALUES (1,5),(4,5),(8,5),(4,10),(4,11),(7,11);
-/*!40000 ALTER TABLE `areasinteressecurriculo` ENABLE KEYS */;
+LOCK TABLES `carrinho` WRITE;
+/*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
+/*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `curriculo`
+-- Table structure for table `categoriaproduto`
 --
 
-DROP TABLE IF EXISTS `curriculo`;
+DROP TABLE IF EXISTS `categoriaproduto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `curriculo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `resumo` text,
-  `expProfissional` text,
-  `idPessoa` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_Curriculo_Pessoa1_idx` (`idPessoa`),
-  CONSTRAINT `fk_Curriculo_Pessoa1` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+CREATE TABLE `categoriaproduto` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `descricao` varchar(45) DEFAULT NULL,
+  `ativo` bit(1) NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `curriculo`
+-- Dumping data for table `categoriaproduto`
 --
 
-LOCK TABLES `curriculo` WRITE;
-/*!40000 ALTER TABLE `curriculo` DISABLE KEYS */;
-INSERT INTO `curriculo` VALUES (5,NULL,'Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.\r\n',10),(10,NULL,'dsdasdasdasdasd',15),(11,NULL,'wdaweqweqwe',16);
-/*!40000 ALTER TABLE `curriculo` ENABLE KEYS */;
+LOCK TABLES `categoriaproduto` WRITE;
+/*!40000 ALTER TABLE `categoriaproduto` DISABLE KEYS */;
+INSERT INTO `categoriaproduto` VALUES (1,'ctg1 alera','categoria',''),(2,'ctg2','categoria 2',''),(3,'eweqwe','weqweqwe','\0'),(4,'Alterado','sdasdasd','');
+/*!40000 ALTER TABLE `categoriaproduto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contato`
+--
+
+DROP TABLE IF EXISTS `contato`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contato` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `assunto` varchar(45) DEFAULT NULL,
+  `cidade` varchar(45) DEFAULT NULL,
+  `estado` varchar(45) DEFAULT NULL,
+  `descricao` text,
+  `protocolo_venda` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contato`
+--
+
+LOCK TABLES `contato` WRITE;
+/*!40000 ALTER TABLE `contato` DISABLE KEYS */;
+/*!40000 ALTER TABLE `contato` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `desconto`
+--
+
+DROP TABLE IF EXISTS `desconto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `desconto` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(45) DEFAULT NULL,
+  `faixa_valor` float DEFAULT NULL,
+  `desconto` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `desconto`
+--
+
+LOCK TABLES `desconto` WRITE;
+/*!40000 ALTER TABLE `desconto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `desconto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -106,20 +128,18 @@ DROP TABLE IF EXISTS `endereco`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `endereco` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nomeRua` varchar(100) DEFAULT NULL,
-  `numero` varchar(10) DEFAULT NULL,
-  `complemento` varchar(205) DEFAULT NULL,
-  `cep` varchar(10) NOT NULL,
-  `estado` varchar(10) NOT NULL,
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `rua` varchar(45) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `complemento` varchar(100) NOT NULL,
+  `bairro` varchar(45) NOT NULL,
+  `cidade` varchar(45) NOT NULL,
+  `cep` varchar(9) NOT NULL,
   `idPessoa` int(11) NOT NULL,
-  `bairro` varchar(45) DEFAULT NULL,
-  `municipio` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_Endereço_Estado1_idx` (`estado`),
-  KEY `fk_Endereco_Pessoa1_idx` (`idPessoa`),
-  CONSTRAINT `fk_Endereco_Pessoa1` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  `estado` varchar(2) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `fk_endereco_pessoa1_idx` (`idPessoa`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,93 +148,93 @@ CREATE TABLE `endereco` (
 
 LOCK TABLES `endereco` WRITE;
 /*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
-INSERT INTO `endereco` VALUES (7,'Rua Júlia Alexandrina Florindo','31','dasdasdasdasd','88061-423','SC',10,'Barra da Lagoa','Florianópolis'),(11,'Rua Marina Reboa Zanella','20',NULL,'99712-206','RS',15,'Paiol Grande','Erechim'),(12,'Rua Criciúma','12',NULL,'88168-712','SC',16,'Areias de Cima (Guapora','Biguaçu');
+INSERT INTO `endereco` VALUES (1,'rua',22,'123123eawawdasdasd','bairro','cidade','12312-312',8,'es'),(2,'Rua Júlia Alexandrina Florindo',33,'2222222222','Barra da Lagoa','Florianópolis','88061-423',9,'SC'),(3,' dawdaw',2231,'123123123123','awdawdaw','Biguaçu','88160-000',10,'SC'),(5,'Rua Elesbão Ramos',88,'Pousada','Barra da Lagoa','Florianópolis','88061-360',13,'SC');
 /*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `estado`
+-- Table structure for table `fotosproduto`
 --
 
-DROP TABLE IF EXISTS `estado`;
+DROP TABLE IF EXISTS `fotosproduto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `estado` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_pais` int(11) NOT NULL,
-  `sigla` varchar(4) NOT NULL,
-  `nome` varchar(45) DEFAULT NULL,
-  `codigo_ibge` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+CREATE TABLE `fotosproduto` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `caminho` varchar(150) NOT NULL,
+  `tipo` varchar(10) NOT NULL,
+  `tamanho` int(11) NOT NULL,
+  `idProduto` int(11) NOT NULL,
+  `principal` bit(1) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `fotoProduto_produtp_idx` (`idProduto`),
+  CONSTRAINT `fotoProduto_produtp` FOREIGN KEY (`idProduto`) REFERENCES `produto` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `estado`
+-- Dumping data for table `fotosproduto`
 --
 
-LOCK TABLES `estado` WRITE;
-/*!40000 ALTER TABLE `estado` DISABLE KEYS */;
-INSERT INTO `estado` VALUES (1,31,'AC','ACRE',12),(2,31,'AL','ALAGOAS',27),(3,31,'AM','AMAZONAS',13),(4,31,'AP','AMAPÁ',16),(5,31,'BA','BAHIA',29),(6,31,'CE','CEARÁ',23),(7,31,'DF','DISTRITO FEDERAL',53),(8,31,'ES','ESPÍRITO SANTO',32),(9,31,'GO','GOIÁS',52),(10,31,'MA','MARANHÃO',21),(11,31,'MG','MINAS GERAIS',31),(12,31,'MS','MATO GROSSO DO SUL',50),(13,31,'MT','MATO GROSSO',51),(14,31,'PA','PARÁ',15),(15,31,'PB','PARAÍBA',25),(16,31,'PE','PERNAMBUCO',26),(17,31,'PI','PIAUÍ',22),(18,31,'PR','PARANÁ',41),(19,31,'RJ','RIO DE JANEIRO',33),(20,31,'RN','RIO GRANDE DO NORTE',24),(21,31,'RO','RONDÔNIA',11),(22,31,'RR','RORAIMA',14),(23,31,'RS','RIO GRANDE DO SUL',43),(24,31,'SC','SANTA CATARINA',42),(25,31,'SE','SERGIPE',28),(26,31,'SP','SÃO PAULO',35),(27,31,'TO','TOCANTINS',17);
-/*!40000 ALTER TABLE `estado` ENABLE KEYS */;
+LOCK TABLES `fotosproduto` WRITE;
+/*!40000 ALTER TABLE `fotosproduto` DISABLE KEYS */;
+INSERT INTO `fotosproduto` VALUES (20,'1332437623_Save.png','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\1332437623_Save.png','.png',8529,18,''),(21,'cash_register_91371.jpg','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\cash_register_91371.jpg','.jpg',12194,19,''),(22,'custom_reports_98549.jpg','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\custom_reports_98549.jpg','.jpg',8198,20,''),(23,'edit.png','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\edit.png','.png',66081,21,''),(24,'misc_edit_98007.jpg','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\build\\web\\imagensProdutos\\misc_edit_98007.jpg','.jpg',23147,22,''),(25,'new-titles.png','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-SVN\\ecommerce\\build\\web\\imagensProdutos\\new-titles.png','.png',5071,18,'\0'),(26,'Sem tÃ­tulo-4.png','C:\\Users\\Gustavo\\Documents\\Programação\\JAVA\\JAVA_WEB\\E-commerce-GIT\\trunk\\build\\web\\imagensProdutos\\Sem tÃ­tulo-4.png','.png',83190,24,'');
+/*!40000 ALTER TABLE `fotosproduto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `formacao`
+-- Table structure for table `marca`
 --
 
-DROP TABLE IF EXISTS `formacao`;
+DROP TABLE IF EXISTS `marca`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `formacao` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nomeInstituicao` varchar(45) DEFAULT NULL,
-  `dataInicio` date DEFAULT NULL,
-  `dataTermino` date DEFAULT NULL,
-  `idTipo` int(11) NOT NULL,
-  `idCurriculo` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_Formacao_TipoFormacao_idx` (`idTipo`),
-  KEY `fk_Formacao_Curriculo1_idx` (`idCurriculo`),
-  CONSTRAINT `fk_Formacao_Curriculo1` FOREIGN KEY (`idCurriculo`) REFERENCES `curriculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Formacao_TipoFormacao` FOREIGN KEY (`idTipo`) REFERENCES `tipoformacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+CREATE TABLE `marca` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `descricao` varchar(45) DEFAULT NULL,
+  `ativo` tinyint(1) NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `formacao`
+-- Dumping data for table `marca`
 --
 
-LOCK TABLES `formacao` WRITE;
-/*!40000 ALTER TABLE `formacao` DISABLE KEYS */;
-INSERT INTO `formacao` VALUES (2,'sdasdasda','2015-10-21','2015-10-28',1,5),(3,'sdasdasda 3','2015-10-21','2015-10-28',1,5),(4,'dasdasdasdas','2015-11-16','2015-11-24',1,10),(5,'weqweqweqwe','2015-11-05','2015-11-11',1,11);
-/*!40000 ALTER TABLE `formacao` ENABLE KEYS */;
+LOCK TABLES `marca` WRITE;
+/*!40000 ALTER TABLE `marca` DISABLE KEYS */;
+INSERT INTO `marca` VALUES (1,'marca 1','marca 1',1),(2,'marca 2','marca 2',1),(3,'marca teste Cad','marca teste Cad',1),(4,'tesndo','adasdasd',0),(5,'dasdas','asdasd',1),(6,'sdawdad','asdasd',1),(7,'Aletrado','dasdasd',1),(8,'Aletrado','dasdasd',0),(9,'Aletrado','dasdasd',0);
+/*!40000 ALTER TABLE `marca` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `paises`
+-- Table structure for table `pedido`
 --
 
-DROP TABLE IF EXISTS `paises`;
+DROP TABLE IF EXISTS `pedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `paises` (
-  `iso` char(2) NOT NULL,
-  `iso3` char(3) NOT NULL,
-  `numcode` smallint(6) DEFAULT NULL,
-  `nome` varchar(255) NOT NULL,
-  PRIMARY KEY (`iso`)
+CREATE TABLE `pedido` (
+  `idProduto` int(11) NOT NULL,
+  `idVenda` int(11) NOT NULL,
+  PRIMARY KEY (`idProduto`,`idVenda`),
+  KEY `fk_produto_has_venda_venda1_idx` (`idVenda`),
+  KEY `fk_produto_has_venda_produto1_idx` (`idProduto`),
+  CONSTRAINT `fk_produto_has_venda_produto` FOREIGN KEY (`idProduto`) REFERENCES `produto` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_produto_has_venda_venda` FOREIGN KEY (`idVenda`) REFERENCES `venda` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `paises`
+-- Dumping data for table `pedido`
 --
 
-LOCK TABLES `paises` WRITE;
-/*!40000 ALTER TABLE `paises` DISABLE KEYS */;
-INSERT INTO `paises` VALUES ('AD','AND',20,'Andorra'),('AE','ARE',784,'Emiratos Árabes Unidos'),('AF','AFG',4,'Afeganistão'),('AG','ATG',28,'Antigua e Barbuda'),('AI','AIA',660,'Anguilla'),('AL','ALB',8,'Albânia'),('AM','ARM',51,'Arménia'),('AN','ANT',530,'Antilhas Holandesas'),('AO','AGO',24,'Angola'),('AQ','ATA',10,'Antárctida'),('AR','ARG',32,'Argentina'),('AS','ASM',16,'Samoa Americana'),('AT','AUT',40,'Áustria'),('AU','AUS',36,'Austrália'),('AW','ABW',533,'Aruba'),('AX','ALA',248,'Åland, Ilhas'),('AZ','AZE',31,'Azerbeijão'),('BA','BIH',70,'Bósnia-Herzegovina'),('BB','BRB',52,'Barbados'),('BD','BGD',50,'Bangladesh'),('BE','BEL',56,'Bélgica'),('BF','BFA',854,'Burkina Faso'),('BG','BGR',100,'Bulgária'),('BH','BHR',48,'Bahrain'),('BI','BDI',108,'Burundi'),('BJ','BEN',204,'Benin'),('BM','BMU',60,'Bermuda'),('BN','BRN',96,'Brunei'),('BO','BOL',68,'Bolívia'),('BR','BRA',76,'Brasil'),('BS','BHS',44,'Bahamas'),('BT','BTN',64,'Butão'),('BV','BVT',74,'Bouvet, Ilha'),('BW','BWA',72,'Botswana'),('BY','BLR',112,'Bielo-Rússia'),('BZ','BLE',84,'Belize'),('c*','CUB',192,'Cuba'),('CA','CAN',124,'Canadá'),('CC','CCK',166,'Cocos, Ilhas'),('CD','COD',180,'Congo, República Democrática do (antigo Zaire)'),('CF','CAF',140,'Centro-africana, República'),('CG','COG',178,'Congo, República do'),('CH','CHE',756,'Suíça'),('CI','CIV',384,'Costa do Marfim'),('CK','COK',184,'Cook, Ilhas'),('CL','CHL',152,'Chile'),('CM','CMR',120,'Camarões'),('CN','CHN',156,'China'),('CO','COL',170,'Colômbia'),('CR','CRI',188,'Costa Rica'),('CV','CPV',132,'Cabo Verde'),('CX','CXR',162,'Christmas, Ilha'),('CY','CYP',196,'Chipre'),('CZ','CZE',203,'Checa, República'),('DE','DEU',276,'Alemanha'),('DJ','DJI',262,'Djibouti'),('DK','DNK',208,'Dinamarca'),('DM','DMA',212,'Dominica'),('DO','DOM',214,'Dominicana, República'),('DZ','DZA',12,'Argélia'),('EC','ECU',218,'Equador'),('EE','EST',233,'Estónia'),('EG','EGY',818,'Egipto'),('EH','ESH',732,'Saara Ocidental'),('ER','ERI',232,'Eritreia'),('ES','ESP',724,'Espanha'),('ET','ETH',231,'Etiópia'),('FI','FIN',246,'Finlândia'),('FJ','FJI',242,'Fiji'),('FK','FLK',238,'Malvinas, Ilhas (Falkland)'),('FM','FSM',583,'Micronésia, Estados Federados da'),('FO','FRO',234,'Faroe, Ilhas'),('FR','FRA',250,'França'),('GA','GAB',266,'Gabão'),('GB','GBR',826,'Reino Unido da Grã-Bretanha e Irlanda do Norte'),('GD','GRD',308,'Grenada'),('GE','GEO',268,'Geórgia'),('GF','GUF',254,'Guiana Francesa'),('GG','GGY',831,'Guernsey'),('GH','GHA',288,'Gana'),('GI','GIB',292,'Gibraltar'),('GL','GRL',304,'Gronelândia'),('GM','GMB',270,'Gâmbia'),('GN','GIN',324,'Guiné-Conacri'),('GP','GLP',312,'Guadeloupe'),('GQ','GNQ',226,'Guiné Equatorial'),('GR','GRC',300,'Grécia'),('GS','SGS',239,'Geórgia do Sul e Sandwich do Sul, Ilhas'),('GT','GTM',320,'Guatemala'),('GU','GUM',316,'Guam'),('GW','GNB',624,'Guiné-Bissau'),('GY','GUY',328,'Guiana'),('HK','HKG',344,'Hong Kong'),('HM','HMD',334,'Heard e Ilhas McDonald, Ilha'),('HN','HND',340,'Honduras'),('HR','HRV',191,'Croácia'),('HT','HTI',332,'Haiti'),('HU','HUN',348,'Hungria'),('ID','IDN',360,'Indonésia'),('IE','IRL',372,'Irlanda'),('IL','ISR',376,'Israel'),('IM','IMN',833,'Man, Ilha de'),('IN','IND',356,'Índia'),('IO','IOT',86,'Território Britânico do Oceano Índico'),('IQ','IRQ',368,'Iraque'),('IR','IRN',364,'Irão'),('IS','ISL',352,'Islândia'),('IT','ITA',380,'Itália'),('JE','JEY',832,'Jersey'),('JM','JAM',388,'Jamaica'),('JO','JOR',400,'Jordânia'),('JP','JPN',392,'Japão'),('KE','KEN',404,'Quénia'),('KG','KGZ',417,'Quirguistão'),('KH','KHM',116,'Cambodja'),('KI','KIR',296,'Kiribati'),('KM','COM',174,'Comores'),('KN','KNA',659,'São Cristóvão e Névis (Saint Kitts e Nevis)'),('KP','PRK',408,'Coreia, República Democrática da (Coreia do Norte)'),('KR','KOR',410,'Coreia do Sul'),('KW','KWT',414,'Kuwait'),('KY','CYM',136,'Cayman, Ilhas'),('KZ','KAZ',398,'Cazaquistão'),('LA','LAO',418,'Laos'),('LB','LBN',422,'Líbano'),('LC','LCA',662,'Santa Lúcia'),('LI','LIE',438,'Liechtenstein'),('LK','LKA',144,'Sri Lanka'),('LR','LBR',430,'Libéria'),('LS','LSO',426,'Lesoto'),('LT','LTU',440,'Lituânia'),('LU','LUX',442,'Luxemburgo'),('LV','LVA',428,'Letónia'),('LY','LBY',434,'Líbia'),('MA','MAR',504,'Marrocos'),('MC','MCO',492,'Mónaco'),('MD','MDA',498,'Moldávia'),('ME','MNE',499,'Montenegro'),('MG','MDG',450,'Madagáscar'),('MH','MHL',584,'Marshall, Ilhas'),('MK','MKD',807,'Macedónia, República da'),('ML','MLI',466,'Mali'),('MM','MMR',104,'Myanmar (antiga Birmânia)'),('MN','MNG',496,'Mongólia'),('MO','MAC',446,'Macau'),('MP','MNP',580,'Marianas Setentrionais'),('MQ','MTQ',474,'Martinica'),('MR','MRT',478,'Mauritânia'),('MS','MSR',500,'Montserrat'),('MT','MLT',470,'Malta'),('MU','MUS',480,'Maurícia'),('MV','MDV',462,'Maldivas'),('MW','MWI',454,'Malawi'),('MX','MEX',484,'México'),('MY','MYS',458,'Malásia'),('MZ','MOZ',508,'Moçambique'),('NA','NAM',516,'Namíbia'),('NC','NCL',540,'Nova Caledónia'),('NE','NER',562,'Níger'),('NF','NFK',574,'Norfolk, Ilha'),('NG','NGA',566,'Nigéria'),('NI','NIC',558,'Nicarágua'),('NL','NLD',528,'Países Baixos (Holanda)'),('NO','NOR',578,'Noruega'),('NP','NPL',524,'Nepal'),('NR','NRU',520,'Nauru'),('NU','NIU',570,'Niue'),('NZ','NZL',554,'Nova Zelândia (Aotearoa)'),('OM','OMN',512,'Oman'),('PA','PAN',591,'Panamá'),('PE','PER',604,'Peru'),('PF','PYF',258,'Polinésia Francesa'),('PG','PNG',598,'Papua-Nova Guiné'),('PH','PHL',608,'Filipinas'),('PK','PAK',586,'Paquistão'),('PL','POL',616,'Polónia'),('PM','SPM',666,'Saint Pierre et Miquelon'),('PN','PCN',612,'Pitcairn'),('PR','PRI',630,'Porto Rico'),('PS','PSE',275,'Palestina'),('PT','PRT',620,'Portugal'),('PW','PLW',585,'Palau'),('PY','PRY',600,'Paraguai'),('QA','QAT',634,'Qatar'),('RE','REU',638,'Reunião'),('RO','ROU',642,'Roménia'),('RS','SRB',688,'Sérvia'),('RU','RUS',643,'Rússia'),('RW','RWA',646,'Ruanda'),('SA','SAU',682,'Arábia Saudita'),('SB','SLB',90,'Salomão, Ilhas'),('SC','SYC',690,'Seychelles'),('SD','SDN',736,'Sudão'),('SE','SWE',752,'Suécia'),('SG','SGP',702,'Singapura'),('SH','SHN',654,'Santa Helena'),('SI','SVN',705,'Eslovénia'),('SJ','SJM',744,'Svalbard e Jan Mayen'),('SK','SVK',703,'Eslováquia'),('SL','SLE',694,'Serra Leoa'),('SM','SMR',674,'San Marino'),('SN','SEN',686,'Senegal'),('SO','SOM',706,'Somália'),('SR','SUR',740,'Suriname'),('ST','STP',678,'São Tomé e Príncipe'),('SV','SLV',222,'El Salvador'),('SY','SYR',760,'Síria'),('SZ','SWZ',748,'Suazilândia'),('TC','TCA',796,'Turks e Caicos'),('TD','TCD',148,'Chade'),('TF','ATF',260,'Terras Austrais e Antárticas Francesas (TAAF)'),('TG','TGO',768,'Togo'),('TH','THA',764,'Tailândia'),('TJ','TJK',762,'Tajiquistão'),('TK','TKL',772,'Toquelau'),('TL','TLS',626,'Timor-Leste'),('TM','TKM',795,'Turquemenistão'),('TN','TUN',788,'Tunísia'),('TO','TON',776,'Tonga'),('TR','TUR',792,'Turquia'),('TT','TTO',780,'Trindade e Tobago'),('TV','TUV',798,'Tuvalu'),('TW','TWN',158,'Taiwan'),('TZ','TZA',834,'Tanzânia'),('UA','UKR',804,'Ucrânia'),('UG','UGA',800,'Uganda'),('UM','UMI',581,'Menores Distantes dos Estados Unidos, Ilhas'),('US','USA',840,'Estados Unidos da América'),('UY','URY',858,'Uruguai'),('UZ','UZB',860,'Usbequistão'),('VA','VAT',336,'Vaticano'),('VC','VCT',670,'São Vicente e Granadinas'),('VE','VEN',862,'Venezuela'),('VG','VGB',92,'Virgens Britânicas, Ilhas'),('VI','VIR',850,'Virgens Americanas, Ilhas'),('VN','VNM',704,'Vietname'),('VU','VUT',548,'Vanuatu'),('WF','WLF',876,'Wallis e Futuna'),('WS','WSM',882,'Samoa (Samoa Ocidental)'),('YE','YEM',887,'Iémen'),('YT','MYT',175,'Mayotte'),('ZA','ZAF',710,'África do Sul'),('ZM','ZMB',894,'Zâmbia'),('ZW','ZWE',716,'Zimbabwe');
-/*!40000 ALTER TABLE `paises` ENABLE KEYS */;
+LOCK TABLES `pedido` WRITE;
+/*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+INSERT INTO `pedido` VALUES (6,1),(7,1),(21,14),(22,14),(20,15),(19,16),(24,16),(22,17),(20,18),(19,19),(19,20),(19,21),(19,22),(19,23),(21,24),(21,25),(20,26),(20,27),(20,28),(20,29),(20,30),(19,31);
+/*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -225,17 +245,21 @@ DROP TABLE IF EXISTS `pessoa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pessoa` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(20) NOT NULL,
-  `sobreNome` varchar(30) DEFAULT NULL,
-  `idade` int(11) NOT NULL,
-  `sexo` varchar(10) DEFAULT NULL,
-  `cpf` varchar(45) NOT NULL,
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `cpfCnpj` varchar(14) NOT NULL,
+  `sexo` char(1) NOT NULL,
+  `dataNascimento` date DEFAULT NULL,
+  `dddRes` int(2) NOT NULL,
+  `telRes` int(9) NOT NULL,
+  `dddCel` int(2) DEFAULT NULL,
+  `telCel` int(9) DEFAULT NULL,
+  `dataCadastro` datetime DEFAULT NULL,
   `idUsuario` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`codigo`),
   KEY `fk_pessoa_usuario1_idx` (`idUsuario`),
-  CONSTRAINT `fk_pessoa_usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_pessoa_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,88 +268,96 @@ CREATE TABLE `pessoa` (
 
 LOCK TABLES `pessoa` WRITE;
 /*!40000 ALTER TABLE `pessoa` DISABLE KEYS */;
-INSERT INTO `pessoa` VALUES (1,'Gustavo Alterado','Agostinho',22,'M','000.000.000-00',0),(10,'Gustavo ','Agostinho ',21,'masculino','asdasd',1),(11,'carralho','ficho da put',4454,'masculino','5454',2),(12,'barra 2','barra3',10,'masculino','123123',2),(14,'dasdas','asdasd',11,'masculino','3232',2),(15,'asdasd','asdasda',3,'masculino','454',2),(16,'Sandoval','Junior',12,'masculino','222.222.222-44',4);
+INSERT INTO `pessoa` VALUES (8,'sdasdasdas','231.231.231-23','M','2015-11-20',22,23232323,0,0,'2015-11-28 00:00:00',11),(9,'Gustavo Humberto Agostinho','222.222.222-22','M','2015-12-22',22,22222222,33,33333333,'2015-12-12 00:00:00',12),(10,'dasdasd','222.222.222-22','M','2015-12-28',22,22222222,22,22222222,'2015-12-13 00:00:00',13),(13,'pousada flamboyant','000.000.000-00','M','2015-12-21',48,32323319,48,99659764,'2015-12-13 00:00:00',16);
 /*!40000 ALTER TABLE `pessoa` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tipoformacao`
+-- Table structure for table `produto`
 --
 
-DROP TABLE IF EXISTS `tipoformacao`;
+DROP TABLE IF EXISTS `produto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tipoformacao` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `produto` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
   `descricao` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  `quantidade` int(11) NOT NULL,
+  `valorCompra` float DEFAULT NULL,
+  `valorVenda` float NOT NULL,
+  `acessos` int(11) DEFAULT NULL,
+  `dataCadastro` datetime DEFAULT NULL,
+  `idCategoriaProduto` int(11) NOT NULL,
+  `idMarca` int(11) NOT NULL,
+  `ativo` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`codigo`),
+  KEY `fk_produto_categoria_produto1_idx` (`idCategoriaProduto`),
+  KEY `fk_produto_marca1_idx` (`idMarca`),
+  CONSTRAINT `fk_produto_categoria_produto` FOREIGN KEY (`idCategoriaProduto`) REFERENCES `categoriaproduto` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_produto_marca` FOREIGN KEY (`idMarca`) REFERENCES `marca` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tipoformacao`
+-- Dumping data for table `produto`
 --
 
-LOCK TABLES `tipoformacao` WRITE;
-/*!40000 ALTER TABLE `tipoformacao` DISABLE KEYS */;
-INSERT INTO `tipoformacao` VALUES (1,'Doutorado Completo'),(2,'Doutorado Incompleto'),(3,'Mestrado Completo'),(4,'Mestrado Incompleto'),(5,'Pós-graduação Completa'),(6,'Pós-graduação Incompleta'),(7,'Superior Completo'),(8,'Superior Incompleto'),(9,'Ensino Médio Técnico (2º Grau) Completo'),(10,'Ensino Médio (2º Grau) Completo'),(11,'Ensino Médio Técnico (2º Grau) Incompleto'),(12,'Ensino Fundamental (1º Grau) Completo'),(13,'Ensino Fundamental (1º Grau) Incompleto'),(14,'Não Alfabetizado');
-/*!40000 ALTER TABLE `tipoformacao` ENABLE KEYS */;
+LOCK TABLES `produto` WRITE;
+/*!40000 ALTER TABLE `produto` DISABLE KEYS */;
+INSERT INTO `produto` VALUES (6,'produto1','produto 1',1,12,14,0,'2015-11-24 00:00:00',2,1,'\0'),(7,'produto 2','produto2',1,12,14,0,'2015-11-24 00:00:00',2,3,''),(18,'prod teste img 1','ewweqewq',3,60,80,6,'2015-11-24 00:00:00',1,1,''),(19,'prod teste img 2','ewweqewq',3,1000,1200,42,'2015-11-24 00:00:00',1,1,''),(20,'prod teste img 3','ewweqewq',3,33,33,38,'2015-11-24 00:00:00',1,1,''),(21,'prod teste img 4','ewweqewq',3,33,33,21,'2015-11-24 00:00:00',1,2,''),(22,'adasd','wqweqwe',12312,2,3,38,'2015-11-26 00:00:00',1,1,''),(23,'Aletrado dinovo','wqweqwe',12312,2,3,0,'2015-11-26 00:00:00',1,1,'\0'),(24,'Produto novo','sdasdasdasdasd',10,500,560,5,'2015-12-09 00:00:00',1,3,'');
+/*!40000 ALTER TABLE `produto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tipopublicados`
+-- Table structure for table `status`
 --
 
-DROP TABLE IF EXISTS `tipopublicados`;
+DROP TABLE IF EXISTS `status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tipopublicados` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+CREATE TABLE `status` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `descricao` varchar(50) DEFAULT NULL,
+  `ativo` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tipopublicados`
+-- Dumping data for table `status`
 --
 
-LOCK TABLES `tipopublicados` WRITE;
-/*!40000 ALTER TABLE `tipopublicados` DISABLE KEYS */;
-INSERT INTO `tipopublicados` VALUES (1,'Artigo'),(2,'Fichamento'),(3,'Paper ou Short Paper'),(4,'Monografia'),(5,'Resenha'),(6,'Resumo');
-/*!40000 ALTER TABLE `tipopublicados` ENABLE KEYS */;
+LOCK TABLES `status` WRITE;
+/*!40000 ALTER TABLE `status` DISABLE KEYS */;
+INSERT INTO `status` VALUES (1,'Pendente','pendente',''),(2,'Aprovada','aprovada',''),(3,'Reprovada','reprovada',''),(4,'Enviada','enviada','');
+/*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `titulopublicados`
+-- Table structure for table `tipousuario`
 --
 
-DROP TABLE IF EXISTS `titulopublicados`;
+DROP TABLE IF EXISTS `tipousuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `titulopublicados` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(45) DEFAULT NULL,
-  `ano` int(11) DEFAULT NULL,
-  `pais` varchar(45) DEFAULT NULL,
-  `idTipoPublicados` int(11) NOT NULL,
-  `idCurriculo` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_tbPublicados_TipoPublicados1_idx` (`idTipoPublicados`),
-  KEY `fk_tbPublicados_Curriculo1_idx` (`idCurriculo`),
-  CONSTRAINT `fk_tbPublicados_Curriculo1` FOREIGN KEY (`idCurriculo`) REFERENCES `curriculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tbPublicados_TipoPublicados1` FOREIGN KEY (`idTipoPublicados`) REFERENCES `tipopublicados` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+CREATE TABLE `tipousuario` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `descricao` text,
+  `ativo` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `titulopublicados`
+-- Dumping data for table `tipousuario`
 --
 
-LOCK TABLES `titulopublicados` WRITE;
-/*!40000 ALTER TABLE `titulopublicados` DISABLE KEYS */;
-INSERT INTO `titulopublicados` VALUES (4,'dasdasdasd',21,'Antigua e Barbuda',1,5),(5,'dasdasdasd 33',21,'Arménia',1,5),(9,'dasdasd',555,'Antigua e Barbuda',1,10),(10,'qweqweqwe',222,'Anguilla',1,11);
-/*!40000 ALTER TABLE `titulopublicados` ENABLE KEYS */;
+LOCK TABLES `tipousuario` WRITE;
+/*!40000 ALTER TABLE `tipousuario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipousuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -336,15 +368,16 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(30) NOT NULL,
-  `senha` varchar(100) NOT NULL,
-  `nome` varchar(45) NOT NULL,
-  `enable` tinyint(1) DEFAULT '1',
-  `perfil` varchar(15) DEFAULT 'ROLE_USER',
-  `email` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(150) NOT NULL,
+  `senha` varchar(45) NOT NULL,
+  `ultimoAcesso` date DEFAULT NULL,
+  `tipoUsuario` varchar(30) NOT NULL,
+  `ativo` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`codigo`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  KEY `fk_usuario_tipo_user_idx` (`tipoUsuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -353,8 +386,42 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'admin','202cb962ac59075b964b07152d234b70','Gustavo Agostinho',1,'ROLE_USER','gustavo.agostinho0@gmail.com'),(2,'barra','97c1fad8d8d23747d6184693dffab860','gustavo2',1,'ROLE_USER','gustavo@gmail.com'),(3,'gustavo','4c96f8324e3ba54a99e78249b95daa30','userTeste',1,'ROLE_USER','gustavo.agostinho0@gmail.com'),(4,'123','202cb962ac59075b964b07152d234b70','Sandoval',1,'ROLE_USER','sansa@gmail.com'),(5,'novo','42323e3211ed4478b2b8ba87d4185a03','novo',1,'ROLE_USER','gustabo@gma.comm');
+INSERT INTO `usuario` VALUES (11,'email','21232f297a57a5a743894a0e4a801fc3',NULL,'admin',''),(12,'gustavo.agostinho0@gmail.com','21232f297a57a5a743894a0e4a801fc3',NULL,'usuario',''),(13,'novo@novo.com','21232f297a57a5a743894a0e4a801fc3',NULL,'usuario',''),(16,'contato@pousadaflamboyant.net','e684f932e8c1bf8b8c2680176a2d53a8',NULL,'usuario','');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `venda`
+--
+
+DROP TABLE IF EXISTS `venda`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `venda` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `protocolo` varchar(45) NOT NULL,
+  `dataVenda` datetime NOT NULL,
+  `valorTotal` double NOT NULL,
+  `idPessoa` int(11) NOT NULL,
+  `idStatus` int(11) NOT NULL,
+  `boletoCartao` varchar(45) DEFAULT NULL,
+  `numeroBoletoCartao` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `fk_venda_pessoa1_idx` (`idPessoa`),
+  KEY `fk_venda_status` (`idStatus`),
+  CONSTRAINT `fk_venda_pessoa` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_venda_status` FOREIGN KEY (`idStatus`) REFERENCES `status` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `venda`
+--
+
+LOCK TABLES `venda` WRITE;
+/*!40000 ALTER TABLE `venda` DISABLE KEYS */;
+INSERT INTO `venda` VALUES (1,'0123456','2015-12-10 00:00:00',30,8,4,NULL,NULL),(14,'200054466111','2015-12-14 00:00:00',36,9,1,'Cartão','33444556667730000888'),(15,'35712','2015-12-14 00:00:00',33,9,1,'Cartão','33444556667730000888'),(16,'1450094384323','2015-12-14 00:00:00',1760,9,1,'Cartão','33444556667730000888'),(17,'1450095817409','2015-12-14 00:00:00',3,9,1,'Boleto','33444556667730000888'),(18,'1450095870660','2015-12-14 00:00:00',33,9,1,'Boleto','33444556667730000888'),(19,'1450096110751','2015-12-14 00:00:00',1200,9,1,'Boleto','33444556667730000888'),(20,'1450096164261','2015-12-14 00:00:00',1200,9,1,'Boleto','33444556667730000888'),(21,'1450096826193','2015-12-14 00:00:00',1200,9,1,'Boleto','33444556667730000888'),(22,'1450097862351','2015-12-14 00:00:00',1200,9,1,'Boleto','33444556667730000888'),(23,'1450098011320','2015-12-14 00:00:00',1200,9,1,'Boleto','33444556667730000888'),(24,'1450098317568','2015-12-14 00:00:00',33,9,1,'Boleto','33444556667730000888'),(25,'1450098802583','2015-12-14 00:00:00',33,9,1,'Boleto','33444556667730000888'),(26,'1450138411591','2015-12-14 00:00:00',33,9,1,'Boleto','1450138411591'),(27,'1450138526672','2015-12-14 00:00:00',33,9,1,'Boleto','1450138526672'),(28,'1450138597545','2015-12-14 00:00:00',33,9,1,'Boleto','1450138597545'),(29,'1450138647391','2015-12-14 00:00:00',33,9,1,'Boleto','1450138647391'),(30,'1450138760770','2015-12-14 00:00:00',33,9,1,'Boleto','1450138760770'),(31,'1450139048576','2015-12-14 00:00:00',1200,9,1,'Boleto','1450139048576');
+/*!40000 ALTER TABLE `venda` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -366,4 +433,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-14 10:08:12
+-- Dump completed on 2015-12-14 22:46:10

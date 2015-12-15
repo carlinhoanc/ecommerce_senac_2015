@@ -17,7 +17,7 @@
     </h:head>
     <h:body>
         <ui:include src="menu_principal.xhtml" />
-
+        <p:growl id="messages"/> 
         <c:if test="#{param.msg != null}">
             <script type="text/javascript">
                 alert('#{param.msg}');

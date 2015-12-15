@@ -18,11 +18,11 @@
                 <p:outputLabel for="descricaoMarca" value="Descrição : "/>
                 <p:inputTextarea id="descricaoMarca" value="#{controleMarca.marca.descricao}" rows="6" cols="23" />
                 <h:outputText/>
-                <p:commandButton styleClass="btn btn-success" value="salvar" actionListener="#{controleMarca.salvar()}" ajax="true" update=":messages"/>
+                <p:commandButton styleClass="btn btn-success" icon="fa fa-save" value="salvar" actionListener="#{controleMarca.salvar()}" ajax="true" update=":messages"/>
             </h:panelGrid>  
         </h:panelGrid>
     </h:form>
-    
+
     <p:dialog header="Lista de Marcas" widgetVar="dlgMarca" modal="true" appendTo="@(body)">
         <h:form id="formGridMarca">
             <p:dataTable id="gridMarca" value="#{controleMarca.modelMarca}"
@@ -31,21 +31,21 @@
                          styleClass="dataTableHorus marcas"
                          reflow="true"
                          emptyMessage="Nenhum valor encontrado" >
-                <p:column>
+                <p:column width="100">
                     <f:facet name="header">Codigo</f:facet>
-                    #{marca.codigo}
+                        #{marca.codigo}
                 </p:column>
                 <p:column>
                     <f:facet name="header">Nome</f:facet>
-                    #{marca.nome}
+                        #{marca.nome}
                 </p:column>
-                <p:column>
+                <p:column width="100">
                     <f:facet name="header">Ativo</f:facet>
-                    #{marca.ativoString}
+                        #{marca.ativoString}
                 </p:column>
-                <p:column> 
-                    <p:commandButton value="Altdd" styleClass="btn btn-success" actionListener="#{controleMarca.alterarMarca()}" ajax="false" update=":formCadMarca:pcadmarca" oncomplete="PF('dlgMarca').hide();"/>      
-                    <!--update=":formCadMarca:pcadmarca" Listener ajax="true" process="@this"-->
+                <p:column width="100"> 
+                    <f:facet name="header">Editar</f:facet>
+                    <p:commandButton title="Editar marcas selecionada" icon="fa fa-edit" styleClass="btn btn-success" actionListener="#{controleMarca.alterarMarca()}" ajax="false" update=":formCadMarca:pcadmarca" oncomplete="PF('dlgMarca').hide();"/>      
                 </p:column>
             </p:dataTable>
         </h:form>

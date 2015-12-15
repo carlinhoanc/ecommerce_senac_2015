@@ -17,11 +17,11 @@
                 <p:outputLabel for="descricaoCtg" value="Descrição : "/>
                 <p:inputTextarea id="descricaoCtg" value="#{controleCategoriaProduto.cp.descricao}" rows="6" cols="23" />
                 <h:outputText/>
-                <p:commandButton styleClass="btn btn-success" value="salvar" actionListener="#{controleCategoriaProduto.salvar()}" ajax="true" update=":formGridCtg:gridCtg :messages"/>
+                <p:commandButton styleClass="btn btn-success" icon="fa fa-save" value="salvar" actionListener="#{controleCategoriaProduto.salvar()}" ajax="true" update=":formGridCtg:gridCtg :messages"/>
             </h:panelGrid> 
         </h:form>
     </h:panelGrid>
-    <p:dialog header="Lista de Produtos" widgetVar="dlgCtg" modal="true" appendTo="@(body)">
+    <p:dialog header="Lista de Categorias" widgetVar="dlgCtg" modal="true" appendTo="@(body)">
         <h:form id="formGridCtg">
             <h:panelGrid columns="1">
                 <p:dataTable id="gridCtg" value="#{controleCategoriaProduto.modelCategoriaProd}"
@@ -29,20 +29,21 @@
                              styleClass="dataTableHorus"
                              reflow="true"
                              var="ctg" paginator="true" rows="7" >
-                    <p:column>
+                    <p:column width="100">
                         <f:facet name="header">Codigo</f:facet>
-                        #{ctg.codigo}
+                            #{ctg.codigo}
                     </p:column>
                     <p:column>
                         <f:facet name="header">Nome</f:facet>
-                        #{ctg.nome}
+                            #{ctg.nome}
                     </p:column>
-                    <p:column>
+                    <p:column width="100">
                         <f:facet name="header">Ativo</f:facet>
-                        #{ctg.ativoString}
+                            #{ctg.ativoString}
                     </p:column>
-                    <p:column>
-                        <p:commandButton styleClass="btn btn-success" value="alt" actionListener="#{controleCategoriaProduto.alteraCtg()}" ajax="false"  oncomplete="PF('dlgCtg').hide();"  update=":formCadCtg:pcadCtg"/>
+                    <p:column width="100">
+                        <f:facet name="header">Editar</f:facet>
+                        <p:commandButton styleClass="btn btn-success" title="Editar categoria selecionada" icon="fa fa-edit" actionListener="#{controleCategoriaProduto.alteraCtg()}" ajax="false"  oncomplete="PF('dlgCtg').hide();"  update=":formCadCtg:pcadCtg"/>
                     </p:column>
                 </p:dataTable>
             </h:panelGrid>

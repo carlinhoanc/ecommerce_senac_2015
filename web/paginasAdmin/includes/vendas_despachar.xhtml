@@ -15,17 +15,17 @@
                 <f:facet name="header">
                     <h:outputText value="Listando vendas a despachar"/>
                 </f:facet>
-                <p:column>
+                <p:column width="180">
                     <f:facet name="header">PROTOCOLO</f:facet>   
                     <h:outputText value="#{despachar.protocolo}"/>
                 </p:column>
-                <p:column>
+                <p:column width="100">
                     <f:facet name="header">DATA</f:facet>
                     <h:outputText value="#{despachar.dataVenda}">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>  
                     </h:outputText>
                 </p:column>
-                <p:column>
+                <p:column width="150">
                     <f:facet name="header">VALOR R$</f:facet>
                     R$ <h:outputText value="#{despachar.valorTotal}" >
                         <f:convertNumber pattern="#0.00"/>
@@ -35,17 +35,16 @@
                     <f:facet name="header">NOME</f:facet>
                     <h:outputText value="#{despachar.pessoa.nome}"/>
                 </p:column>
-                <p:column>
+                <p:column width="140">
                     <f:facet name="header">CPF</f:facet>
                     <h:outputText value="#{despachar.pessoa.cpfCnpj}"/>
                 </p:column>
-                <p:column>
+                <p:column  width="100">
                     <f:facet name="header">STATUS</f:facet> 
                     <h:outputText value="#{despachar.statusVenda.nome}"/>
                 </p:column>
-                <p:column>
-                    <f:facet name="header">DESPACHAR</f:facet>
-                    <p:commandButton styleClass="btn btn-info" title="Despachar Produto" ajax="true" actionListener="#{controleVenda.despacharVenda()}" icon="fa fa-truck"/>
+                <p:column width="80">                   
+                    <p:commandButton styleClass="btn btn-info" title="Despachar Produto para entrega" ajax="true" actionListener="#{controleVenda.despacharVenda()}" icon="fa fa-truck"/>
                 </p:column>
             </p:dataTable>
         </h:form>

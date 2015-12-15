@@ -36,7 +36,7 @@
                                  styleClass="dataTableHorus"
                                  reflow="true" 
                                  paginator="true" rows="15">
-                        <p:column>
+                        <p:column width="100">
                             <f:facet name="header">Codigo</f:facet>
                             #{prod.codigo}
                         </p:column>
@@ -44,25 +44,27 @@
                             <f:facet name="header">Nome</f:facet>
                             #{prod.nome}
                         </p:column>
-                        <p:column>
+                        <p:column width="100">
                             <f:facet name="header">Quantidade</f:facet>
                             #{prod.quantidade}
                         </p:column>                   
-                        <p:column>
+                        <p:column width="150">
                             <f:facet name="header">Valor venda</f:facet>
-                            #{prod.valorVenda}
+                            R$ <h:outputText value="#{prod.valorVenda}" >
+                                <f:convertNumber pattern="#0.00"/>
+                            </h:outputText>                            
                         </p:column>
                         <p:column>
                             <f:facet name="header">Marca</f:facet>
                             #{prod.marca.nome}
                         </p:column>
-                        <p:column>
+                        <p:column width="100">
                             <f:facet name="header">Ativo</f:facet>
                             #{prod.ativoString}
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">Alterar</f:facet>
-                            <p:commandButton value="Alt" actionListener="#{controleProdutos.alterarProduto()}" oncomplete="PF('dlgProd').hide();" update=":formProduto" ajax="false"/>
+                        <p:column width="100">
+                            <f:facet name="header">Editar</f:facet>
+                            <p:commandButton title="Editar produto selecionado" icon="fa fa-edit" actionListener="#{controleProdutos.alterarProduto()}" oncomplete="PF('dlgProd').hide();" update=":formProduto" ajax="false"/>
                         </p:column>
                     </p:dataTable>
                 </h:panelGrid>

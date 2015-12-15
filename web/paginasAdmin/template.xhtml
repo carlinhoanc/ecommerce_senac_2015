@@ -38,6 +38,7 @@
                                       resizable="true" closable="false" collapsible="false">
                             <h:form id="formPag">                       
                                 <p:menu style="width: 127px;">
+                                    <p:menuitem value="Home" url="/paginasAdmin/venda_pendente_despacho.faces"  ajax="false"/>
                                     <p:menuitem value="Produto" action="#{controleProdutos.paginaProduto()}" ajax="false"/>
                                     <p:menuitem value="Marca" action="#{controleMarca.paginaMarca()}" ajax="false" process="@this"/>
                                     <p:menuitem value="Categoria" action="#{controleCategoriaProduto.paginaCtg()}" ajax="false" process="@this"/>

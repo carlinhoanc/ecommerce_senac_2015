@@ -81,6 +81,9 @@ public class ControleVenda {
     }
 
     public Venda getVenda() {
+        if (venda == null) {
+            venda = new Venda();
+        }
         return venda;
     }
 

@@ -73,7 +73,8 @@ public class ControleUsuario {
                     return "index.faces?faces-redirect=true";
                 } else{
                     SessionContext.getInstance().setAttribute("usuarioLogado", p);
-                    return "venda.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra");
+//                    return "venda.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra");
+                    return "finaliza.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra");
                 }
             }
         } catch (Exception e) {
@@ -103,7 +104,7 @@ public class ControleUsuario {
 
     public String logoutAdmin() {
         SessionContext.getInstance().encerrarSessao();
-        return "../../admin/index.faces?faces-redirect=true";
+        return "admin/index.faces?faces-redirect=true";
     }
 
     public String logoutUsuario() {

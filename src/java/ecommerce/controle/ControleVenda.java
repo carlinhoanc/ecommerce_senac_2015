@@ -8,7 +8,6 @@ import br.com.caelum.stella.boleto.Endereco;
 import br.com.caelum.stella.boleto.Pagador;
 import br.com.caelum.stella.boleto.bancos.BancoDoBrasil;
 import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
-import br.com.caelum.stella.boleto.transformer.GeradorDeBoletoHTML;
 import ecommerce.dao.VendaDao;
 import ecommerce.dao.VendaDaoImp;
 import ecommerce.entidade.Pessoa;
@@ -20,8 +19,6 @@ import ecommerce.util.Protocolo;
 import ecommerce.util.SessionContext;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -33,7 +30,6 @@ import java.util.Date;
 import javax.faces.context.ExternalContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
-import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
@@ -52,6 +48,7 @@ public class ControleVenda {
     private FacesContext contexto;
     private StreamedContent file;
     private String caminhoBoleto;
+    private boolean vendaCartao = false;
 
     @PostConstruct
     public void inicia() {
@@ -103,11 +100,19 @@ public class ControleVenda {
         this.caminhoBoleto = caminhoBoleto;
     }
 
+    public boolean isVendaCartao() {
+        return vendaCartao;
+    }
+
+    public void setVendaCartao(boolean vendaCartao) {
+        this.vendaCartao = vendaCartao;
+    }
+
     public String redirecionaPaginaVenda() {
         Pessoa p = SessionContext.getInstance().getUsuarioLogado();
         String url;
         if (p != null) {
-            url = "venda.faces?cmd=" + MD5.criptografia("finalizarCompra");
+            url = "finaliza.faces?cmd=" + MD5.criptografia("finalizarCompra");
         } else {
             url = "venda.faces";
 
@@ -119,7 +124,7 @@ public class ControleVenda {
         vDao = new VendaDaoImp();
         System.out.println("Entrou");
         try {
-            venda = new Venda();
+            // venda = new Venda();
             venda.setPessoa(p);
             venda.setProdutos(carrinho);
             venda.setDataVenda(new Date());
@@ -128,13 +133,17 @@ public class ControleVenda {
             venda.setStatusVenda(s);
             venda.setProtocolo(Protocolo.getNumeroProtocolo());
             venda.setBoletoCartao("Cartão");
-            venda.setNumeroBoletoCartao("33444556667730000888");
+            //  venda.setNumeroBoletoCartao("33444556667730000888");
             vDao.salvar(venda);
-
+            vendaCartao = true;
         } catch (Exception e) {
             System.out.println("Erro ao salvar " + e.getMessage());
         }
 
+    }
+
+    public void ativaCampoNumCartao() {
+        vendaCartao = true;
     }
 
     /**
@@ -347,7 +356,8 @@ public class ControleVenda {
         if (p == null) {
             return "/login.faces?faces-redirect=true&cmd=" + MD5.criptografia("compra"); // bloco de tela que ira pedir para o usuario logar ou se cadastrar;
         } else {
-            return "/venda.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra"); // bloco de tela que finalizario a venda;
+//            return "/venda.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra"); // bloco de tela que finalizario a venda;
+            return "/finaliza.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra"); // bloco de tela que finalizario a venda;
         }
         //return null;
     }

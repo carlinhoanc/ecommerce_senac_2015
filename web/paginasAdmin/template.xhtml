@@ -13,7 +13,7 @@
         <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
         <script type="text/javascript" src="#{request.contextPath}/js/bootstrap.js"></script>
     </h:head>
-    <h:body styleClass="painelUser">>
+    <h:body styleClass="painelUser" >
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
@@ -25,10 +25,10 @@
                         </p:dialog>
 
                         <p:layoutUnit position="north" size="100" rendered="true" closable="false" collapsible="false">
-                            <h:form>
+                            <h:form styleClass="olaUser">
                                 <h:panelGrid columns="2">
                                     <p>OLA :#{controleUsuario.userLogado.nome}</p>
-                                    <p:commandButton title="SAIR" icon="fa fa-times-circle" action="#{controleUsuario.logoutAdmin()}" />
+                                    <p:commandButton styleClass="btn btn-danger" title="SAIR" icon="fa fa-times-circle" action="#{controleUsuario.logoutAdmin()}" />
                                 </h:panelGrid>
                             </h:form>
                         </p:layoutUnit>

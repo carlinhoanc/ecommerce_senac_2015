@@ -363,7 +363,23 @@ body.painelUser .ui-layout-container {
     border-color: #398439;
 }
 
-
+.olaUser p {
+    color: #fff;
+    padding: 10px 10px 0;
+}
+.olaUser button.btn.btn-danger:hover{
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+.olaUser button.btn.btn-danger {
+    background: #d9534f;
+    border-color: #d43f3a;
+    box-shadow: 0 0 0 0;
+    color: #fff;
+    height: 30px;
+    padding: 5px !important;
+    width: 35px;
+}
 
 
 @media screen and (max-width:780px),(max-device-width:780px){

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Área de login</title>
+        <title>ï¿½rea de login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link type="text/css" rel="stylesheet" href="../css/bootstrap-min.css"/>
         <link type="text/css" rel="stylesheet" href="../css/style.css"/>
@@ -18,7 +18,7 @@
                         <p>
                             Erro 404
                             <br/>
-                            Página não encontrada!
+                            Pï¿½gina nï¿½o encontrada!
                         </p>
                     </div>
                 </div>

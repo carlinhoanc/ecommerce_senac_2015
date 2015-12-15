@@ -241,8 +241,8 @@ public class ControleProdutos {
             conteudo = IOUtils.toByteArray(file.getInputstream());
             String caminho = getRealPath() + "\\imagensProdutos\\" + fotoProd.getNome();
             System.out.println("CAMINHO :" + caminho);
-            ///  File e = new File(getRealPath() + "web\\imagensProdutos\\");
-            // e.mkdirs();
+            File e = new File(getRealPath() + "\\imagensProdutos\\");
+            e.mkdirs();
             criaArquivo(conteudo, caminho);
             fotoProd.setCaminho(caminho);
             fotoProd.setTamanho(conteudo.length);
@@ -529,7 +529,7 @@ public class ControleProdutos {
     public double somaValorCarrinho() {
         double valorCarrinho = 0;
         for (Produto p : carrinhoCompra) {
-              valorCarrinho = valorCarrinho + (p.getQuantidade()* p.getValorVenda());
+            valorCarrinho = valorCarrinho + (p.getQuantidade() * p.getValorVenda());
         }
         return valorCarrinho;
     }

@@ -282,6 +282,7 @@ public class VendaDaoImp implements VendaDao {
                 v.setCodigo(rs.getInt("v.codigo"));
                 v.setProtocolo(rs.getString("v.protocolo"));
                 v.setDataVenda(rs.getDate("v.dataVenda"));
+                v.setValorTotal(rs.getDouble("v.valorTotal"));
                 v.setStatusVenda(s);
                 compras.add(v);
             }

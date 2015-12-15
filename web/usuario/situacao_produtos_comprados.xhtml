@@ -5,17 +5,18 @@
                 template="./template.xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="centro">
-        
+
         <p:layoutUnit position="center" header="Situação Compras" styleClass="layoutUnitHorus" resizable="true" closable="false" collapsible="false">
             <p:panelGrid  columns="1" layout="grid" styleClass="paneGridHorus" >
                 <h:form id="formGridProduto">
                     <p:dataTable id="gridProduto" 
                                  reflow="true"
                                  value="#{controleVenda.comprasUsuario()}" var="compras"  
-                                 paginator="true" rows="6" 
+                                 paginator="true" rows="10" 
                                  paginatorPosition="bottom" 
                                  styleClass="dataTableHorus"
                                  emptyMessage="Nenhum valor encontrado">
@@ -49,7 +50,7 @@
                             <f:facet name="header">
                                 STATUS
                             </f:facet>
-                            <h:outputText value="#{compras.statusVenda.nome}"/>
+                                <h:outputText value="#{compras.statusVenda.nome}"/>                            
                         </p:column>                      
                     </p:dataTable>
                 </h:form>

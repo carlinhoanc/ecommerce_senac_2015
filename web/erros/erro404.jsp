@@ -1,24 +1,15 @@
-<%-- 
-    Document   : erro404
-    Created on : 29/11/2015, 01:55:48
-    Author     : Gustavo
---%>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
+<html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Erro 404</title>
-            <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-min.css"/>
-            <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
-            <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-            <h:outputStylesheet library="awesome" name="css/font-awesome.css" />        
+        <title>Área de login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link type="text/css" rel="stylesheet" href="../css/bootstrap-min.css"/>
+        <link type="text/css" rel="stylesheet" href="../css/style.css"/>
+        <script type="text/javascript" src="../js/bootstrap.js"></script>
     </head>
-
+    
     <body>
         <div class="container-fluid">
             <div class="container">
@@ -33,6 +24,5 @@
                 </div>
             </div>
         </div>
-
     </body>
 </html>

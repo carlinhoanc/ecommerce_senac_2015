@@ -30,7 +30,12 @@
         <h:panelGrid>
             <h:form id="formTabelaProd">
                 <h:panelGrid>
-                    <p:dataTable id="gridProduto" value="#{controleProdutos.modelProduto}" var="prod" paginator="true" rows="15">
+                    <p:dataTable id="gridProduto" value="#{controleProdutos.modelProduto}" 
+                                 var="prod" 
+                                 paginatorPosition="bottom" 
+                                 styleClass="dataTableHorus"
+                                 reflow="true" 
+                                 paginator="true" rows="15">
                         <p:column>
                             <f:facet name="header">Codigo</f:facet>
                             #{prod.codigo}

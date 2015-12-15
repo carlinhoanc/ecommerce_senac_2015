@@ -8,7 +8,7 @@
     <ui:define name="centro">
         <p:layoutUnit position="center" header="Cadastro de Marca" resizable="true" closable="false" collapsible="false">
             <p:separator style="width: 98%; height: 0px; margin-top: 5px;" />             
-            <h:form prependId="false" id="fomMenu"> 
+            <h:form prependId="false" id="fomMenu" > 
                 <p:menubar>  
                     <p:menuitem value="Pesquisar"  actionListener="#{controleMarca.pesquiarMarcas()}" ajax="true" oncomplete="PF('dlgMarca').show();" update=":formGridMarca:gridMarca" />    
                 </p:menubar>   

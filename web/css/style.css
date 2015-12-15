@@ -305,6 +305,67 @@ body.painelUser .ui-layout-container {
 }
 
 
+.painelUser .dataTableHorus button.btn.btn-success,
+.painelUser .dataTableHorus tbody tr td button.btn.btn-success {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.painelUser .dataTableHorus tbody tr td button.btn.btn-success:hover {
+    background-color: #449d44;
+    border-color: #398439;
+}
+.painelUser .dataTableHorus tbody tr td button.btn.btn-danger {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.painelUser .dataTableHorus tbody tr td button.btn.btn-danger:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+.painelUser .dataTableHorus tbody tr td button.btn.btn-info {
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+.painelUser .dataTableHorus tbody tr td button.btn.btn-info:hover {
+    background-color: #31b0d5;
+    border-color: #269abc;
+}
+.painelUser .dataTableHorus .ui-datatable-header.ui-widget-header.ui-corner-top {
+    background: #040748;
+    border: 0;
+    border-radius: 0;
+    color: #fff;
+    font-weight: 300;
+    text-shadow: 0 0 0;
+}
+.painelUser form.fomHorus,.painelUser .ui-layout-unit-content.ui-widget-content > form.fomHorus {
+    background: transparent none repeat scroll 0 0 !important;
+}
+.painelUser form.fomHorus label,.painelUser .ui-layout-unit-content.ui-widget-content > form.fomHorus label {
+    font-weight: 300;
+    padding-right: 20px;
+}
+.painelUser form.fomHorus textarea,.painelUser .ui-layout-unit-content.ui-widget-content > form.fomHorus textarea {
+    box-shadow: 0 0 0 0;
+}
+.painelUser form.fomHorus table tbody tr,.painelUser .ui-layout-unit-content.ui-widget-content > form.fomHorus table tbody tr {
+    border-bottom: 4px solid transparent;
+}
+.fomHorus table tbody tr td button.btn.btn-success {
+    background: #5cb85c;
+    border-color: #4cae4c;
+    box-shadow: 0 0 0 0;
+    color: #fff;
+    font-weight: 300;
+}
+.fomHorus table tbody tr td button.btn.btn-success:hover {
+    background: #449d44;
+    border-color: #398439;
+}
+
+
+
+
 @media screen and (max-width:780px),(max-device-width:780px){
     .ui-layout-container{width: 100% !important;}
     .painelUser .menulateral + 

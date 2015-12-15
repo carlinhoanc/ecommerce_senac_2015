@@ -24,32 +24,24 @@
                             <h:outputText value="Listando Compra(s)"/>
                         </f:facet>
                         <p:column>
-                            <f:facet name="header">
-                                PROTOCOLO
-                            </f:facet> 
+                            <f:facet name="header">PROTOCOLO</f:facet> 
                             #{compras.protocolo}
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                DATA
-                            </f:facet>      
+                            <f:facet name="header">DATA</f:facet>
                             <h:outputText value="#{compras.dataVenda}">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>                                 
                             </h:outputText>
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                VALOR R$
-                            </f:facet>   
+                            <f:facet name="header">VALOR R$</f:facet>
                             R$ <h:outputText value="#{compras.valorTotal}" >
                                 <f:convertNumber pattern="#0.00"/>
                             </h:outputText>
                         </p:column>
 
                         <p:column>
-                            <f:facet name="header">
-                                STATUS
-                            </f:facet>
+                            <f:facet name="header">STATUS</f:facet>
                                 <h:outputText value="#{compras.statusVenda.nome}"/>                            
                         </p:column>                      
                     </p:dataTable>

@@ -122,7 +122,7 @@ public class VendaDaoImp implements VendaDao {
             pstm = conn.prepareCall(query);
             pstm.setString(1, "Pendente");
             rs = pstm.executeQuery();
-            if (rs.next()) {
+           while(rs.next()) {
                 Pessoa pessoa = new Pessoa();
                 Venda venda = new Venda();
                 Status status = new Status();

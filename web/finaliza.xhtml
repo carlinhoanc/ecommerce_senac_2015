@@ -66,24 +66,26 @@
                     </h:panelGrid>
                     <h:panelGrid columns="2">  
                         <p:commandButton styleClass="buttonProd btn btn-info" value="Cartão" icon="fa fa-credit-card"  oncomplete="ativaCampoCartao();" actionListener="#{controleVenda.ativaCampoNumCartao()}" ajax="true"/>
-                        <p:commandButton  styleClass="buttonProd btn btn-info" icon="fa fa-barcode" value="Boleto" actionListener="#{controleVenda.salvarVendaBoleto(controleCliente.pesquisaDadosPessoaisFenalizaVenda(),controleProdutos.listarCarrinho())}" ajax="true" update="pdf" />
+                        <p:commandButton  styleClass="buttonProd btn btn-info" icon="fa fa-barcode" value="Boleto" actionListener="#{controleVenda.salvarVendaBoleto(controleCliente.pesquisaDadosPessoaisFenalizaVenda(),controleProdutos.listarCarrinho())}" ajax="false"  >
+                            <p:fileDownload value="#{controleVenda.file}" />
+                        </p:commandButton>
                         <!--<a styleClass="buttonProd btn btn-info" onclick="ativaCampoCartao();" href="#" >activa</a>-->
                         <script type="text/javascript">
-                            function ativaCampoCartao(){
-                                $('#campoCartao').css('display','block');
+                            function ativaCampoCartao() {
+                                $('#campoCartao').css('display', 'block');
                             }
                         </script>
                     </h:panelGrid>
                     <div id="campoCartao" style="display: none" > 
                         <h:outputText value="Numero do cartão"/>
                         <p:inputMask  value="#{controleVenda.venda.numeroBoletoCartao}" mask="9999 9999 9999 9999"/>
-                        <p:commandButton id="vai" styleClass="buttonProd btn btn-info" value="Concluir ffffff" icon="fa fa-credit-card" action="#{controleVenda.salvarVendaCartao(controleCliente.pesquisaDadosPessoaisFenalizaVenda(),controleProdutos.listarCarrinho())}" ajax="false" update="pdf"/>
+                        <p:commandButton id="vai" styleClass="buttonProd btn btn-info" value="Concluir Compra" icon="fa fa-credit-card" action="#{controleVenda.salvarVendaCartao(controleCliente.pesquisaDadosPessoaisFenalizaVenda(),controleProdutos.listarCarrinho())}" ajax="false" update="pdf"/>
                     </div>
-                    <h:panelGrid id="pdf" columns="1">
-                        <object  type="application/pdf" data="tempBoleto/#{controleVenda.caminhoBoleto}" height="500px" width="700px" internalinstanceid="4">
-                            Your browser can't display pdf, <a href="tempBoleto/#{controleVenda.caminhoBoleto}">click</a> to download pdf instead.
-                        </object>
-                    </h:panelGrid>
+                    <!--                    <h:panelGrid id="pdf" columns="1">
+                                            <object  type="application/pdf" data="tempBoleto/#-{controleVenda.carregaCaminhoBoleto()}" height="500px" width="700px" internalinstanceid="4">
+                                                Your browser can't display pdf, <a href="tempBoleto/#-{controleVenda.carregaCaminhoBoleto()}">click</a> to download pdf instead.
+                                            </object>
+                                        </h:panelGrid>-->
                 </h:form>                
             </div>
         </div>

@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <div class="col-sm-10">
                         #{controleUsuario.setCmd(param.cmd)}
-                        <p:commandButton  class="btn btn-block btn-lg btn-success"  value="Entrar" action="#{controleUsuario.altenticarUsuario()}"/>
+                        <p:commandButton  class="btn btn-block btn-lg btn-success"  value="Entrar" action="#{controleUsuario.altenticarUsuario()}" update=":messages"/>
                     </div>
                 </div>
             </h:form>

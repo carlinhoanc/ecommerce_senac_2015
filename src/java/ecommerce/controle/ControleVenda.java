@@ -8,6 +8,7 @@ import br.com.caelum.stella.boleto.Endereco;
 import br.com.caelum.stella.boleto.Pagador;
 import br.com.caelum.stella.boleto.bancos.BancoDoBrasil;
 import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
+import br.com.caelum.stella.boleto.transformer.GeradorDeBoletoHTML;
 import ecommerce.dao.VendaDao;
 import ecommerce.dao.VendaDaoImp;
 import ecommerce.entidade.Pessoa;
@@ -17,7 +18,10 @@ import ecommerce.entidade.Venda;
 import ecommerce.util.MD5;
 import ecommerce.util.Protocolo;
 import ecommerce.util.SessionContext;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -26,6 +30,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import java.util.Date;
+import javax.faces.context.ExternalContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -41,6 +50,8 @@ public class ControleVenda {
     private DataModel modelVendaDespachar;
     private VendaDao vDao;
     private FacesContext contexto;
+    private StreamedContent file;
+    private String caminhoBoleto;
 
     @PostConstruct
     public void inicia() {
@@ -81,6 +92,14 @@ public class ControleVenda {
         return carrinho;
     }
 
+    public String getCaminhoBoleto() {
+        return caminhoBoleto;
+    }
+
+    public void setCaminhoBoleto(String caminhoBoleto) {
+        this.caminhoBoleto = caminhoBoleto;
+    }
+
     public String redirecionaPaginaVenda() {
         Pessoa p = SessionContext.getInstance().getUsuarioLogado();
         String url;
@@ -108,16 +127,18 @@ public class ControleVenda {
             venda.setBoletoCartao("Cartão");
             venda.setNumeroBoletoCartao("33444556667730000888");
             vDao.salvar(venda);
-            //gerarBoleto();
+
         } catch (Exception e) {
             System.out.println("Erro ao salvar " + e.getMessage());
         }
-   
+
     }
-      /**
-       * Metodo que gera o boleto AVISO! ainda nao esta funcionado quando o comendo de geração vem da tela de venda
-       * Mais funciona quando eu uso a public static void main para execultar
-       */
+
+    /**
+     * Metodo que gera o boleto AVISO! ainda nao esta funcionado quando o
+     * comendo de geração vem da tela de venda Mais funciona quando eu uso a
+     * public static void main para execultar
+     */
     public void salvarVendaBoleto(Pessoa p, List<Produto> carrinho) {
         vDao = new VendaDaoImp();
         System.out.println("Entrou");
@@ -131,15 +152,16 @@ public class ControleVenda {
             venda.setStatusVenda(s);
             venda.setProtocolo(Protocolo.getNumeroProtocolo());
             venda.setBoletoCartao("Boleto");
-            venda.setNumeroBoletoCartao("33444556667730000888");
+            String nomeBoletoNumero = Protocolo.getNumeroProtocolo();
+            venda.setNumeroBoletoCartao(nomeBoletoNumero);
             vDao.salvar(venda);
-            gerarBoleto();
+            gerarBoleto(nomeBoletoNumero);
         } catch (Exception e) {
             System.out.println("Erro ao salvar " + e.getMessage());
         }
     }
 
-    private void gerarBoleto() {
+    private void gerarBoleto(String nome) {
         Datas datas = Datas.novasDatas()
                 .comDocumento(1, 5, 2008)
                 .comProcessamento(1, 5, 2008)
@@ -189,21 +211,32 @@ public class ControleVenda {
                 .comBeneficiario(beneficiario)
                 .comPagador(pagador)
                 .comValorBoleto(venda.getValorTotal())
-                .comNumeroDoDocumento(Protocolo.getNumeroProtocolo())
+                .comNumeroDoDocumento(nome)
                 .comInstrucoes(prod)
                 .comLocaisDePagamento("Caixa Econômica Federal", "Banco do Brasil");
 
-       GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);      
+        GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);
         // Para gerar um array de bytes a partir de um PDF  
         byte[] bPDF = gerador.geraPDF();
+
         try {
-            FileOutputStream fos = new FileOutputStream("C:\\Users\\Gustavo\\Desktop\\arq\\BancoDoBrasil.pdf");
+            File e = new File(getRealPath() + "\\tempBoleto\\");
+            e.mkdirs();
+            FileOutputStream fos = new FileOutputStream(getRealPath() + "\\tempBoleto\\" + nome + ".pdf");
             fos.write(bPDF);
             fos.close();
+            caminhoBoleto = nome + ".pdf";
         } catch (Exception ex) {
-            //Logger.getLogger(Boletoto.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Erro ao gravar Boleto MSG " + ex.getMessage());
         }
+    }
+
+    public String getRealPath() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
+        FacesContext aFacesContext = FacesContext.getCurrentInstance();
+        ServletContext context = (ServletContext) aFacesContext.getExternalContext().getContext();
+        return context.getRealPath("/");
     }
 
     public void listarVendasPendentes() {

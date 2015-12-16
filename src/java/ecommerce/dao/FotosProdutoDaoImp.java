@@ -20,8 +20,8 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
     /**
      * Este método é responsável por salvar as fotos dos produtos.
      * 
-     * @param obj
-     * @return
+     * @param obj - varivel do tipo Object
+     * @return retorna um Object
      * @throws Exception 
      */
     @Override
@@ -56,9 +56,9 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
      * Este método é responsável por pesquisar a foto do produto de acordo
      * com o código informado.
      * 
-     * @param id
-     * @return
-     * @throws Exception 
+     * @param id - varivel do tipo int
+     * @return retorna um Object
+     * @throws Exception - caso ocorra alguma falha para pesquisar fotos
      */
     @Override
     public Object pesquisar(int id) throws Exception {
@@ -87,9 +87,9 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
      * Este método é responsável por excluir a foto de um produto de acordo
      * com o código informado.
      * 
-     * @param id
-     * @return
-     * @throws Exception 
+     * @param id - varivel do tipo int
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para excluir foto
      */
     @Override
     public boolean excluir(int id) throws Exception {
@@ -112,9 +112,9 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
      * Este método é responsável por pesquisar uma lista de fotos de acordo
      * com o código do produto informado.
      * 
-     * @param idProduto
-     * @return
-     * @throws Exception 
+     * @param idProduto - variavel do tipo int
+     * @return retorna um List do tipo FotosProduto
+     * @throws Exception  - caso ocorra alguma falha para fazer a conexao com as fotos
      */
     @Override
     public List<FotosProduto> pesquisaImgProduto(int idProduto) throws Exception {
@@ -144,9 +144,9 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
      * Este método é responsável por ativar a imagem principal do produto,
      * é essa imagem que aparece quando o cliente pesquisa o produto.
      * 
-     * @param idProduto
-     * @param idImg
-     * @throws Exception 
+     * @param idProduto - variavel do tipo int
+     * @param idImg - variavel do tipo int
+     * @throws Exception  - caso ocorra alguma falha para alterar imagem principal
      */
     @Override
     public void ativarImgPrincipal(int idProduto, int idImg) throws Exception {
@@ -172,9 +172,9 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
     /**
      * Este método é responsável por pesquisar a imagem principal do produto.
      * 
-     * @param idProduto
-     * @return
-     * @throws Exception 
+     * @param idProduto - variavel do tipo int
+     * @return retorna um list do tipo FotosProduto
+     * @throws Exception - caso ocorra alguma falha para lista de imagens
      */
     @Override
     public List<FotosProduto> buscaImgPrincipal(int idProduto) throws Exception {

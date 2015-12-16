@@ -66,19 +66,7 @@ public class ControleProdutos {
     private FacesContext contexto;
     private static final long serialVersionUID = 1L;
 
-    @PostConstruct
-    public void inicia() {
-
-//        Pessoa p = (Pessoa) SessionContext.getInstance().getUsuarioLogado();
-//        if (p.getUsuario().getTpUsuario().equals("admin")) {
-//            produto = new Produto();
-//            produto.setDataCadastro(new Date());
-//        } else {
-//            if (produto == null) {
-//                produto = new Produto();
-//            }
-//        }
-    }
+    private String limpaCarrinho;
 
     public DataModel getModelProduto() {
         return modelProduto;
@@ -154,10 +142,18 @@ public class ControleProdutos {
         return carrinhoCompra;
     }
 
-//    @PostConstruct
-//    public void inicia() {
-//       
-//    }
+    public String getLimpaCarrinho() {
+        return limpaCarrinho;
+    }
+
+    public void setLimpaCarrinho(String limpaCarrinho) {
+        this.limpaCarrinho = limpaCarrinho;
+    }
+
+    /**
+     *
+     * @return
+     */
     public List<SelectItem> getComboboxMarcas() {
         List<SelectItem> listMarcas = new ArrayList<SelectItem>();
         MarcaDao mDao = new MarcaDaoImp();
@@ -172,6 +168,10 @@ public class ControleProdutos {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<SelectItem> getComboboxCtgProd() {
         CategoriaProdutoDao cpDao = new CategoriaProdutoDaoImp();
         List<SelectItem> listCategorias = new ArrayList<SelectItem>();
@@ -186,6 +186,9 @@ public class ControleProdutos {
         return null;
     }
 
+    /**
+     *
+     */
     public void salvar() {
         pDao = new ProdutoDaoImp();
         produto.setCategoria(cp);
@@ -284,6 +287,9 @@ public class ControleProdutos {
         }
     }
 
+    /**
+     *
+     */
     public void deletaImagenProduto() {
         fpDao = new FotosProdutoDaoImp();
         try {
@@ -297,6 +303,10 @@ public class ControleProdutos {
         }
     }
 
+    /**
+     * *
+     *
+     */
     public void pesquisarImagensPriduto() {
         fpDao = new FotosProdutoDaoImp();
         try {
@@ -309,6 +319,9 @@ public class ControleProdutos {
         }
     }
 
+    /**
+     *
+     */
     public void listarTodosProdutos() {
         pDao = new ProdutoDaoImp();
         try {
@@ -321,6 +334,9 @@ public class ControleProdutos {
         }
     }
 
+    /**
+     *
+     */
     public void alterarProduto() {
         produto = (Produto) modelProduto.getRowData();
         marca = produto.getMarca();
@@ -328,12 +344,19 @@ public class ControleProdutos {
         pesquisarImagensPriduto();
     }
 
+    /**
+     *
+     */
     private void limpa() {
         produto = null;
         marca = null;
         cp = null;
     }
 
+    /**
+     *
+     * @return
+     */
     public String paginaProduto() {
         limpa();
         produto = new Produto();
@@ -343,6 +366,10 @@ public class ControleProdutos {
         return "produtos";
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Produto> listaProdutosSiteAcessos() {
         pDao = new ProdutoDaoImp();
         try {
@@ -356,6 +383,10 @@ public class ControleProdutos {
         return produtosSite;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Produto> listaProdutosSiteUltimosSalvos() {
         pDao = new ProdutoDaoImp();
         try {
@@ -369,6 +400,9 @@ public class ControleProdutos {
         return produtosSite;
     }
 
+    /**
+     *
+     */
     public void adicionarImagemPrincipal() {
         try {
             fotoProd = (FotosProduto) modelImgProd.getRowData();
@@ -382,6 +416,11 @@ public class ControleProdutos {
         }
     }
 
+    /**
+     *
+     * @param idProduto
+     * @return
+     */
     public String produtoSelectSite(int idProduto) {
         try {
             pDao = new ProdutoDaoImp();
@@ -394,6 +433,9 @@ public class ControleProdutos {
         return "produto_selecionado.faces";
     }
 
+    /**
+     *
+     */
     public void filtroProdutoAdmin() {
         try {
             modelProduto = null;
@@ -408,6 +450,9 @@ public class ControleProdutos {
         ativo = null;
     }
 
+    /**
+     *
+     */
     public void adicionarProdutoCarrinho() {
         if (carrinhoCompra == null) {
             carrinhoCompra = new ArrayList();
@@ -456,10 +501,19 @@ public class ControleProdutos {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Produto> listarCarrinho() {
         return carrinhoCompra;
     }
 
+    /**
+     *
+     * @param idProduto
+     * @param quantidade
+     */
     public void addMiasProduto(int idProduto, int quantidade) {
         pDao = new ProdutoDaoImp();
         ++quantidade;
@@ -518,19 +572,30 @@ public class ControleProdutos {
     }
 
     public int quantidadeItensCarrinho() {
-
+        if (limpaCarrinho != null) {
+            if (limpaCarrinho.equals("limpaCarrinho")) {
+                carrinhoCompra = null;
+                this.limpaCarrinho = "";
+            }
+        }
         if (carrinhoCompra == null) {
             return 0;
         } else {
             return carrinhoCompra.size();
         }
+        // return 0;
     }
 
     public double somaValorCarrinho() {
         double valorCarrinho = 0;
-        for (Produto p : carrinhoCompra) {
-            valorCarrinho = valorCarrinho + (p.getQuantidade() * p.getValorVenda());
+        try {
+            for (Produto p : carrinhoCompra) {
+                valorCarrinho = valorCarrinho + (p.getQuantidade() * p.getValorVenda());
+            }
+            return valorCarrinho;
+        } catch (Exception ex) {
+            System.out.println("Erro ao somar carrinho " + ex.getMessage());
         }
-        return valorCarrinho;
+        return 0;
     }
 }

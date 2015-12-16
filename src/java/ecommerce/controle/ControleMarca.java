@@ -44,7 +44,9 @@ public class ControleMarca {
         return modelMarca;
     }
 
-    /* Metodos que manipulão Marca*/
+    /**
+     * Metodos que manipulão Marca, criar ou alterar uma marca
+     */
     public void salvar() {
         mDao = new MarcaDaoImp();
         if (marca == null) {
@@ -53,7 +55,6 @@ public class ControleMarca {
         }
         contexto = FacesContext.getCurrentInstance();
         try {
-
             if (marca.getAtivoString().equals("sim")) {
                 marca.setAtivo(true);
             } else {
@@ -73,6 +74,9 @@ public class ControleMarca {
         pesquiarMarcas();
     }
 
+    /**
+     * Método responsável por listar todas as categorias cadastradas
+     */
     public void pesquiarMarcas() {
         mDao = new MarcaDaoImp();
         try {
@@ -83,10 +87,18 @@ public class ControleMarca {
         }
     }
 
+    /**
+     * Metodo para pegar a Marca que está na linha databela para alterar
+     */
     public void alterarMarca() {
         marca = (Marca) modelMarca.getRowData();
     }
 
+    /**
+     * Metodo que carrega todas as marcas cadastradas
+     *
+     * @return retorna string para redirecionamento
+     */
     public String paginaMarca() {
         pesquiarMarcas();
         return "marcas";

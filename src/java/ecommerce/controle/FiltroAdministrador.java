@@ -27,6 +27,15 @@ public class FiltroAdministrador implements Filter {
         System.out.println("");
     }
 
+    /**
+     * Metodo usado para validar se o usuário administrativo está logado u não no sistema
+     * 
+     * @param request variavel do tipo ServletRequest
+     * @param response variavel do tipo ServletResponse
+     * @param chain variavel do tipo FilterChain
+     * @throws IOException - caso ocorra alguma falha para  filtrar
+     * @throws ServletException - caso ocorra alguma falha para filtrar
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String cmd = request.getParameter("cmd");
@@ -46,7 +55,6 @@ public class FiltroAdministrador implements Filter {
         } else if ((usuario != null) && (usuario.getUsuario().getTpUsuario().equals("admin"))) {
             chain.doFilter(request, response);
         } else {            
-           // request.setAttribute("msg", "Você não esta logado no sistema!!!");
             rd = request.getRequestDispatcher("../admin/index.faces?msg=Você não esta logado no sistema!!!");
             rd.forward(request, response);
         }

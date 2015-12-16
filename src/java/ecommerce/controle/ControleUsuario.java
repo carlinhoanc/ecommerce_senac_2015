@@ -54,6 +54,11 @@ public class ControleUsuario {
         this.cmd = cmd;
     }
 
+    /**
+     * Metodo para encaminhar para pagina de login
+     * 
+     * @return retorna uma String para redirecionamento
+     */
     public String redirecionaPaginaLogin() {
         return "login.faces?faces-redirect=true&cmd=" + MD5.criptografia("primeiroCadastro");
     }
@@ -130,10 +135,20 @@ public class ControleUsuario {
         return "/index.faces?faces-redirect=true";
     }
 
+    /**
+     * Metodo para pegar os dados do usuário na sessao
+     * 
+     * @return  retorna um objeto do tipo Pessoa
+     */
     public Pessoa getUserLogado() {
         return (Pessoa) SessionContext.getInstance().getUsuarioLogado();
     }
 
+    /**
+     * Metodo para pegar os dados do usuário logado para editar-los
+     * 
+     * @return retorna uma String para redirecionamento
+     */
     public String pesqUsuarioAltera() {
         Pessoa p = getUserLogado();
         usuario = p.getUsuario();

@@ -21,7 +21,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 import java.util.List;
 import java.util.ArrayList;
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -151,8 +150,9 @@ public class ControleProdutos {
     }
 
     /**
+     * Método responsável por listar todas as marcas cadastradas para o Combobox
      *
-     * @return
+     * @return retorna um List do tipo SelectItem
      */
     public List<SelectItem> getComboboxMarcas() {
         List<SelectItem> listMarcas = new ArrayList<SelectItem>();
@@ -169,8 +169,10 @@ public class ControleProdutos {
     }
 
     /**
+     * Método responsável por listar todas as categorias cadastradas para o
+     * Combobox
      *
-     * @return
+     * @return retorna um List do tipo SelectItem
      */
     public List<SelectItem> getComboboxCtgProd() {
         CategoriaProdutoDao cpDao = new CategoriaProdutoDaoImp();
@@ -187,7 +189,7 @@ public class ControleProdutos {
     }
 
     /**
-     *
+     * Metodo que executa a alteração ou criação de um produto
      */
     public void salvar() {
         pDao = new ProdutoDaoImp();
@@ -272,7 +274,8 @@ public class ControleProdutos {
      *
      * @param bytes - variavel do tipo byte[]
      * @param arquivo - variavel do tipo String
-     * @throws java.io.IOException - caso ocorra alguma falha ou exceção gravar o arquivo
+     * @throws java.io.IOException - caso ocorra alguma falha ou exceção gravar
+     * o arquivo
      */
     public void criaArquivo(byte[] bytes, String arquivo) throws IOException {
         FileOutputStream fos;
@@ -288,7 +291,7 @@ public class ControleProdutos {
     }
 
     /**
-     *
+     * Metodo para deletar a imagem do produto
      */
     public void deletaImagenProduto() {
         fpDao = new FotosProdutoDaoImp();
@@ -304,8 +307,7 @@ public class ControleProdutos {
     }
 
     /**
-     * *
-     *
+     * Metodo para pesquisar a imagem do produto
      */
     public void pesquisarImagensPriduto() {
         fpDao = new FotosProdutoDaoImp();
@@ -320,7 +322,7 @@ public class ControleProdutos {
     }
 
     /**
-     *
+     * Metodo para listar todos os produtos
      */
     public void listarTodosProdutos() {
         pDao = new ProdutoDaoImp();
@@ -335,7 +337,7 @@ public class ControleProdutos {
     }
 
     /**
-     *
+    * Metodo usado para chamar a pagina para aalterar o  produto selecionado n omodal do administrativo
      */
     public void alterarProduto() {
         produto = (Produto) modelProduto.getRowData();
@@ -345,7 +347,7 @@ public class ControleProdutos {
     }
 
     /**
-     *
+     * metodo para limpar atributos de produto , marca e cp
      */
     private void limpa() {
         produto = null;
@@ -354,21 +356,22 @@ public class ControleProdutos {
     }
 
     /**
+     * Metodo usado para chamar a pagina para adicionar um novo produto no administrativo
      *
-     * @return
+     * @return retorna uma String para redirecionamento
      */
     public String paginaProduto() {
         limpa();
         produto = new Produto();
         marca = new Marca();
         cp = new CategoriaProduto();
-//        listarTodosProdutos();
         return "produtos";
     }
 
     /**
+     * Metodo responsanvel por pesquiar os 8 (oito) produtos mais acessados
      *
-     * @return
+     * @return retorna uma List de produto
      */
     public List<Produto> listaProdutosSiteAcessos() {
         pDao = new ProdutoDaoImp();
@@ -384,8 +387,10 @@ public class ControleProdutos {
     }
 
     /**
+     * Metodo responsanvel por pesquiar os 8 (oito) produtos que foram inseridos
+     * recentemente
      *
-     * @return
+     * @return retorna uma List de produto
      */
     public List<Produto> listaProdutosSiteUltimosSalvos() {
         pDao = new ProdutoDaoImp();
@@ -401,7 +406,7 @@ public class ControleProdutos {
     }
 
     /**
-     *
+     * Metodo para adicionar imagem principal ao produto
      */
     public void adicionarImagemPrincipal() {
         try {
@@ -417,9 +422,10 @@ public class ControleProdutos {
     }
 
     /**
+     * Método responsável por pesquisar os dados do produto selecionado.
      *
-     * @param idProduto
-     * @return
+     * @param idProduto variavel do tipo int
+     * @return retorna uma String para redirecionamento
      */
     public String produtoSelectSite(int idProduto) {
         try {
@@ -434,6 +440,8 @@ public class ControleProdutos {
     }
 
     /**
+     * Método responsável por listar produtos pelo filtro escolhido pelo
+     * administador na área administrativa do sistema
      *
      */
     public void filtroProdutoAdmin() {
@@ -451,7 +459,8 @@ public class ControleProdutos {
     }
 
     /**
-     *
+     * Metodo para adicionar produtos no carrinho, verifica se a quantidade
+     * pedida é maior que a quantidade em estoque
      */
     public void adicionarProdutoCarrinho() {
         if (carrinhoCompra == null) {
@@ -502,17 +511,20 @@ public class ControleProdutos {
     }
 
     /**
+     * Metodo para listar produtos no carrinho
      *
-     * @return
+     * @return retorna um List de Produtos
      */
     public List<Produto> listarCarrinho() {
         return carrinhoCompra;
     }
 
     /**
+     * Metodo para adicionar mais produto no estoqe, aumentar a quantidade do
+     * produto em estoque recebe o id do produto e a quantidade
      *
-     * @param idProduto
-     * @param quantidade
+     * @param idProduto variavel do tipo ind
+     * @param quantidade variavel do tipo ind
      */
     public void addMiasProduto(int idProduto, int quantidade) {
         pDao = new ProdutoDaoImp();
@@ -543,6 +555,12 @@ public class ControleProdutos {
         listarCarrinho();
     }
 
+    /**
+     * Metodo para remover produtos do carrinho
+     *
+     * @param idProduto variavel do tipo int
+     * @param quantidade variavel do tipo int
+     */
     public void removeProdutoCarrinho(int idProduto, int quantidade) {
         --quantidade;
         contexto = FacesContext.getCurrentInstance();
@@ -571,6 +589,11 @@ public class ControleProdutos {
         listarCarrinho();
     }
 
+    /**
+     * Metodo para verificar a quantidade de produtos no carrinho
+     *
+     * @return a quantidade de itens no carrinho
+     */
     public int quantidadeItensCarrinho() {
         if (limpaCarrinho != null) {
             if (limpaCarrinho.equals("limpaCarrinho")) {
@@ -586,6 +609,11 @@ public class ControleProdutos {
         // return 0;
     }
 
+    /**
+     * Metodo para somar o valor de todoso os produtos adicionado no carrinho
+     *
+     * @return retorna um double da soma do carrinho
+     */
     public double somaValorCarrinho() {
         double valorCarrinho = 0;
         try {

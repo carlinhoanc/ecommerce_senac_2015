@@ -26,7 +26,16 @@ public class FiltroUsuario implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         System.out.println("");
     }
-
+    
+    /**
+     * * Metodo usado para validar se o usuário comum está logado u não no sistema
+     * 
+     * @param request variavel do tipo ServletRequest
+     * @param response variavel do tipo ServletResponse
+     * @param chain variavel do tipo FilterChain
+     * @throws IOException - caso ocorra alguma falha para  filtrar
+     * @throws ServletException - caso ocorra alguma falha para filtrar
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String cmd = request.getParameter("cmd");

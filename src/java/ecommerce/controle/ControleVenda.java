@@ -162,6 +162,9 @@ public class ControleVenda {
         }
     }
 
+    /**
+     * Metodo para ativar o campo para inserir o numero do cartão
+     */
     public void ativaCampoNumCartao() {
         vendaCartao = true;
     }

@@ -43,6 +43,9 @@ public class ControleCategoriaProduto {
         return modelCategoriaProd;
     }
 
+    /**
+     * Metodo para criar ou alterar categorias
+     */
     public void salvar() {
         cpDao = new CategoriaProdutoDaoImp();
         try {
@@ -65,6 +68,9 @@ public class ControleCategoriaProduto {
         listaCtgEdicao();
     }
 
+    /**
+     * Método responsável por listar todas as categorias cadastradas
+     */
     public void listaCtgEdicao() {
         cpDao = new CategoriaProdutoDaoImp();
         try {
@@ -75,10 +81,18 @@ public class ControleCategoriaProduto {
         }
     }
 
+    /**
+     * Metodo para pegar a Categoria que está na linha databela para alterar
+     */
     public void alteraCtg() {
         cp = (CategoriaProduto) modelCategoriaProd.getRowData();
     }
 
+    /**
+     * Metodo que carrega todas as categorias cadastradas
+     * 
+     * @return retorna string para redirecionamento
+     */
     public String paginaCtg() {
         listaCtgEdicao();
         return "categoria_produto";

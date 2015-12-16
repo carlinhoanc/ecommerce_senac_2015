@@ -23,7 +23,8 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
      *
      * @param obj - variavel do tipo Object
      * @return retorna um boleano
-     * @throws Exception - caso ocorra alguma falha para salvar a categoria do produto
+     * @throws Exception - caso ocorra alguma falha para salvar a categoria do
+     * produto
      */
     @Override
     public boolean salvar(Object obj) throws Exception {
@@ -77,11 +78,25 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
         return flag;
     }
 
+    /**
+     * Método abstrato implemtado automaticamente de CategoriaProdutoDao
+     *
+     * @param id - varivel do tipo int
+     * @return retorna um obejo do tipo Object
+     * @throws Exception - caso ocorra alguma falha para pesquisar
+     */
     @Override
     public Object pesquisar(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Método abstrato implemtado automaticamente de CategoriaProdutoDao
+     *
+     * @param id - varivel do tipo int
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para excluir
+     */
     @Override
     public boolean excluir(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -25,7 +25,7 @@ public class VendaDaoImp implements VendaDao {
      * Este método é responsável por salvar os dados da venda, percorre a lista
      * de produtos para obter o valor total da venda e insere
      *
-     * @param obj - uma variavel do tipo Object
+     * @param obj - variavel do tipo Object
      * @return - retorna a variavel falg do tipo boleana
      * @throws Exception - caso ocorra alguma falha para salvar a venda
      */
@@ -69,8 +69,7 @@ public class VendaDaoImp implements VendaDao {
      * Este método é responsável por inserir idVenda e idProduto na tabela
      * pedido que é um relacionamento n menosr m entre a tabela venda e produto
      *
-     *
-     * @param v - um objeto do tipo Venda
+     * @param v - variavel objeto do tipo Venda
      * @throws java.lang.Exception - caso ocorra alguma falha para salvar um pedido
      */
     public void salvarPedido(Venda v) throws Exception {
@@ -92,16 +91,37 @@ public class VendaDaoImp implements VendaDao {
         }
     }
 
+      /**
+     * Método abstrato implemtado automaticamente de VendaDao
+     *
+     * @param obj  - variavel objeto do tipo Object
+     * @return - retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para alterar
+     */
     @Override
     public boolean alterar(Object obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+      /**
+     * Método abstrato implemtado automaticamente de VendaDao
+     *
+     * @param id  - variavel do tipo int
+     * @return - retorna um  objeto do tipo Object
+     * @throws Exception - caso ocorra alguma falha para pesquisar
+     */
     @Override
     public Object pesquisar(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+     /**
+     * Método abstrato implemtado automaticamente de VendaDao
+     *
+     * @param id  - variavel do tipo int
+     * @return - retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para excluir
+     */
     @Override
     public boolean excluir(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -265,6 +285,13 @@ public class VendaDaoImp implements VendaDao {
         return flag;
     }
 
+     /**
+     * Método responsável por alterar o status da venda para "despachada".
+     *
+     * @param idUsuario - variavel do tipo int
+     * @return retorna um List de Venda
+     * @throws Exception - caso ocorra alguma falha para listas compras do Usuario
+     */
     @Override
     public List<Venda> comprasUsuario(int idUsuario) throws Exception {
         List<Venda> compras = new ArrayList();

@@ -71,6 +71,12 @@ public class ControleCliente {
         this.cmd = cmd;
     }
 
+    /**
+     * Metodo para criar ou alterar cadatro do usuário
+     * 
+     * @return retorna caminho para redirecionamento
+     */
+    
     public String salvar() {
         pDao = new PessoaDaoImp();
         pessoa.setEndereco(endereco);
@@ -102,6 +108,9 @@ public class ControleCliente {
         return null;
     }
 
+    /**
+     * Metodo para pesquisar endereço apartir do cep digitado
+     */
     public void pesquisaCep() {
         if (endereco.getCep() != null) {
             try {
@@ -116,6 +125,11 @@ public class ControleCliente {
         }
     }
 
+    /**
+     * Metodo que busca as informações do usuário logado no sistema
+     *
+     * @return retorna um objeto do tipo Pessoa
+     */
     public Pessoa pesquisaDadosPessoaisFenalizaVenda() {
         Pessoa p = SessionContext.getInstance().getUsuarioLogado();
         pDao = new PessoaDaoImp();
@@ -128,6 +142,11 @@ public class ControleCliente {
         return pp;
     }
 
+    /**
+     * Metodo que busca as informações do usuário logado no sistema
+     *
+     * @return retorna o caminho para dados do usuario
+     */
     public String pesquisaDadosUsuarioLogado() {
         Pessoa p = SessionContext.getInstance().getUsuarioLogado();
         pDao = new PessoaDaoImp();

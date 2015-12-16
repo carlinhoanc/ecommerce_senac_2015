@@ -47,6 +47,13 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
         return flag;
     }
 
+    /**
+     * Método abstrato implemtado automaticamente de FotosProdutoDao
+     *
+     * @param obj - varivel do tipo Object
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para alterar
+     */
     @Override
     public boolean alterar(Object obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -27,18 +27,18 @@ public interface VendaDao extends BaseDao {
     List<Venda> listarVendaDespachar() throws Exception;
 
     /**
-     * Metodo responsavel por modificar o estatus da venda para aprivado
+     * Metodo responsavel por modificar o estatus da venda para aprovado
      *
-     * @param idVenda -é o id da venda
+     * @param idVenda - variavel do tipo int
      * @return - retorna um valor do tipo boleano
      * @throws Exception - caso ocorra alguma falha para gerar o valor boleano
      */
     boolean aprovarVenda(int idVenda) throws Exception;
 
     /**
-     * Metodo responsavel por rejeitar a venda especifica informado pelo a
+     * Metodo responsavel por rejeitar a venda especifica informado pelo id
      *
-     * @param idVenda -é o id da venda
+     * @param idVenda -  variavel do tipo int
      * @return - retorna um valor do tipo boleano
      * @throws Exception - caso ocorra alguma falha para gerar o valor boleano
      */
@@ -53,6 +53,13 @@ public interface VendaDao extends BaseDao {
      */
     boolean despacharVenda(int idVenda) throws Exception;
 
+    /**
+     * Metodo responsavel por mudar os estatos da venda para enviado
+     *
+     * @param idUsuario - variavel do tipo int
+     * @return - retorna  um List de Venda
+     * @throws Exception - caso ocorra alguma falha para gerar o List de Venda
+     */
     List<Venda> comprasUsuario(int idUsuario) throws Exception;
 
 }

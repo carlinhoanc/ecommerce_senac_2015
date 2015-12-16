@@ -18,8 +18,7 @@ public class UsuarioDaoImp implements UsuarioDao {
     private ResultSet rs = null;
 
     /**
-     * Método responsável por salvar dados do usuário, como: email, senha e o
-     * tipo do usuário.
+     * Método abstrato implemtado automaticamente de UsuarioDao
      *
      * @param obj - uma variavel do tipo Object
      * @return retorna um boleano
@@ -30,11 +29,28 @@ public class UsuarioDaoImp implements UsuarioDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
+    /**
+     * Método abstrato implemtado automaticamente de UsuarioDao
+     *
+     * @param obj - uma variavel do tipo Object
+     * @return retorna um boleano
+     * @throws Exception - caso caia em alguma exceção 
+     */
     @Override
     public boolean alterar(Object obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
+    /**
+     * Método responsável por salvar dados do usuário, como: email, senha e o
+     * tipo do usuário.
+     *
+     * @param id - variavel do tipo int
+     * @return retorna um objeto do tipo Object
+        * @throws Exception - caso ocorra alguma falha para pesquisar usuario
+     */
     @Override
     public Object pesquisar(int id) throws Exception {
         Usuario user = null;
@@ -60,8 +76,8 @@ public class UsuarioDaoImp implements UsuarioDao {
      * Método responsável por desativar usuário de acordo com o código
      * informado.
      *
-     * @param id - é uma variavel int 
-     * @return um boleado 
+     * @param id - variavel do tipo int
+     * @return retorna um boleado 
      * @throws Exception - caso ocorra alguma falha para desativar o usuário
      */
     @Override
@@ -86,13 +102,12 @@ public class UsuarioDaoImp implements UsuarioDao {
      * Método responsável por salvar dados do usuário, como: email, senha e o
      * tipo do usuário inserido.
      *
-     * @param u - um objeto do tipo Usuario
+     * @param u - variavel objeto do tipo Usuario
      * @return Retorna um objeto do tipo Usuario
      * @throws Exception - caso ocorra alguma falha para salvar o usuário
      */
     @Override
     public Usuario salvar(Usuario u) throws Exception {
-
         try {
             String query = "INSERT INTO usuario (email,senha,tipoUsuario) VALUES(?,?,?)";
             conn = Conexao.abrirConexao();
@@ -117,7 +132,7 @@ public class UsuarioDaoImp implements UsuarioDao {
      * Método responsável por autenticar o login do usuário.
      *
      * @param u - variavel objeto do tipo Usuario
-     * @return um objeto do tipo Pessoa
+     * @return retorna um objeto do tipo Pessoa
      * @throws Exception - caso ocorra alguma falha para autenticar o login
      */
     @Override
@@ -147,6 +162,13 @@ public class UsuarioDaoImp implements UsuarioDao {
         return p;
     }
 
+     /**
+     * Método responsável por alterar dados do usuário
+     *
+     * @param usuario - variavel objeto do tipo Usuario
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para alterar dados do usuario
+     */
     @Override
     public boolean alteraDadosUsuario(Usuario usuario) throws Exception {
         boolean flag = true;

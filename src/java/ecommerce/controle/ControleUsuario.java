@@ -58,6 +58,12 @@ public class ControleUsuario {
         return "login.faces?faces-redirect=true&cmd=" + MD5.criptografia("primeiroCadastro");
     }
 
+    /**
+     * Metodo para autenticar usuário para acessar o front-end do sistema para
+     * poder finalizar compras
+     *
+     * @return retorna uma string para redirecionamento
+     */
     public String altenticarUsuario() {
         try {
             contexto = FacesContext.getCurrentInstance();
@@ -67,15 +73,13 @@ public class ControleUsuario {
             if (p == null) {
                 contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Usuário ou senha incorreto", null));
                 System.out.println("Usuário ou senha incorretos!");
+            } else if (cmd.equals(MD5.criptografia("primeiroCadastro"))) {
+                SessionContext.getInstance().setAttribute("usuarioLogado", p);
+                return "index.faces?faces-redirect=true";
             } else {
-                if (cmd.equals(MD5.criptografia("primeiroCadastro"))) {
-                    SessionContext.getInstance().setAttribute("usuarioLogado", p);
-                    return "index.faces?faces-redirect=true";
-                } else{
-                    SessionContext.getInstance().setAttribute("usuarioLogado", p);
+                SessionContext.getInstance().setAttribute("usuarioLogado", p);
 //                    return "venda.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra");
-                    return "finaliza.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra");
-                }
+                return "finaliza.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra");
             }
         } catch (Exception e) {
             System.out.println("Erro ao autenticar usuário: " + e.getMessage());
@@ -83,6 +87,12 @@ public class ControleUsuario {
         return null;
     }
 
+    /**
+     * Metodo para autenticar usuário para acessar a área administrativa do
+     * sistema
+     *
+     * @return retorna uma string para redirecionamento
+     */
     public String altenticarAdmin() {
         try {
             contexto = FacesContext.getCurrentInstance();
@@ -102,11 +112,19 @@ public class ControleUsuario {
         return null;
     }
 
+    /**
+     *Metodo para sair do adminstrativo do sistema
+     * @return retorna uma string para redirecionamento
+     */
     public String logoutAdmin() {
         SessionContext.getInstance().encerrarSessao();
         return "admin/index.faces?faces-redirect=true";
     }
 
+    /**
+     *Metodo para sair do front-end do sistema
+     * @return retorna uma string para redirecionamento
+     */
     public String logoutUsuario() {
         SessionContext.getInstance().encerrarSessao();
         return "/index.faces?faces-redirect=true";
@@ -122,6 +140,9 @@ public class ControleUsuario {
         return "dados_conta_usuario.faces";
     }
 
+    /**
+     * Metodo para alterar dados do usuario
+     */
     public void salvar() {
         Pessoa p = getUserLogado();
         try {

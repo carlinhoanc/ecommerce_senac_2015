@@ -149,6 +149,14 @@ public class PessoaDaoImp implements PessoaDao {
         return p;
     }
 
+     /**
+     * Método responsável por excluir usuário de acordo com o código
+     * informado.
+     *
+     * @param id - variavel do tipo int
+     * @return retorna um boleado 
+     * @throws Exception - caso ocorra alguma falha para desativar o usuário
+     */
     @Override
     public boolean excluir(int id) throws Exception {
         return false;

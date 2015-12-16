@@ -52,6 +52,9 @@ public class ControleVenda {
     private String caminhoBoleto;
     private boolean vendaCartao = false;
 
+    /**
+     * Metodo para listar as vendas despachadas e pendentes ao acessar o administrativo do sistema
+     */
     @PostConstruct
     public void inicia() {
         Pessoa p = (Pessoa) SessionContext.getInstance().getUsuarioLogado();
@@ -114,6 +117,13 @@ public class ControleVenda {
         return file;
     }
 
+    /**
+     * Método que redireciona usuario para finalizar a venda no produto, caso
+     * nao este logado ao clicar em em "Comprar" é redirecionado para finalizar
+     * compra se nao estiver logado é direcionado para o carrinho
+     *
+     * @return
+     */
     public String redirecionaPaginaVenda() {
         Pessoa p = SessionContext.getInstance().getUsuarioLogado();
         String url;
@@ -121,11 +131,16 @@ public class ControleVenda {
             url = "finaliza.faces?cmd=" + MD5.criptografia("finalizarCompra");
         } else {
             url = "venda.faces";
-
         }
         return url;
     }
 
+    /**
+     * Metodo para salvar venda do tipo Cartão
+     * 
+     * @param p variavel objeto do tipo Pessoa
+     * @param carrinho variavel List do tipo Produto
+     */
     public void salvarVendaCartao(Pessoa p, List<Produto> carrinho) {
         vDao = new VendaDaoImp();
         System.out.println("Entrou");
@@ -138,7 +153,7 @@ public class ControleVenda {
             s.setCodigo(1);
             venda.setStatusVenda(s);
             venda.setProtocolo(Protocolo.getNumeroProtocolo());
-            venda.setBoletoCartao("Cartão");          
+            venda.setBoletoCartao("Cartão");
             vDao.salvar(venda);
             vendaCartao = true;
             this.carrinho = null;
@@ -146,17 +161,16 @@ public class ControleVenda {
             System.out.println("Erro ao salvar " + e.getMessage());
         }
     }
+
     public void ativaCampoNumCartao() {
         vendaCartao = true;
     }
 
     /**
-     * Metodo que gera o boleto 
-     * 
+     * Metodo para salvar a venda por boleto
+     *
      * @param p - objeto do tipo pessoa
      * @param carrinho - lista de produto que está no carrinho
-     * @param p
-     * @param carrinho
      */
     public void salvarVendaBoleto(Pessoa p, List<Produto> carrinho) {
         vDao = new VendaDaoImp();
@@ -174,14 +188,16 @@ public class ControleVenda {
             String nomeBoletoNumero = Protocolo.getNumeroProtocolo();
             venda.setNumeroBoletoCartao(nomeBoletoNumero);
             vDao.salvar(venda);
-            gerarBoleto(nomeBoletoNumero);                
+            gerarBoleto(nomeBoletoNumero);
         } catch (Exception e) {
             System.out.println("Erro ao salvar " + e.getMessage());
-        }     
+        }
     }
+
     /**
-     * 
-     * @param nome 
+     * Metodo que gera o boleto
+     *
+     * @param nome - variavel do tipo String
      */
     private void gerarBoleto(String nome) {
         Datas datas = Datas.novasDatas()
@@ -262,6 +278,11 @@ public class ControleVenda {
         file = new DefaultStreamedContent(stream, null, caminhoBoleto);
     }
 
+    /**
+     * Metodo resposanvel por disponibilizar o cminho real do path
+     *
+     * @return retorna o caminho real do path
+     */
     public String getRealPath() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
@@ -270,6 +291,9 @@ public class ControleVenda {
         return context.getRealPath("/");
     }
 
+    /**
+     * Metodo responsavel por listar os vendas pendentes
+     */
     public void listarVendasPendentes() {
         vDao = new VendaDaoImp();
         try {
@@ -280,6 +304,10 @@ public class ControleVenda {
         }
     }
 
+    /**
+     * Metodo responsavel por listar os vendas que estão com estatos de
+     * pagamento OK e ainda nao foram para entrega
+     */
     public void listarVendasDespache() {
         vDao = new VendaDaoImp();
         try {
@@ -290,11 +318,20 @@ public class ControleVenda {
         }
     }
 
+    /**
+     * Metodo para carregar a lista de vendas num modal
+     *
+     * @param model variavel do tipo DataModel
+     * @return retorna objeto do tipo Venda
+     */
     private Venda carregaModalVenda(DataModel model) {
         Venda v = (Venda) model.getRowData();
         return v;
     }
 
+    /**
+     * Metodo responsavel por modificar o estatus da venda para aprovado
+     */
     public void aprovarVanda() {
         vDao = new VendaDaoImp();
         Venda v = carregaModalVenda(modelVendaPendente);
@@ -314,6 +351,10 @@ public class ControleVenda {
         }
     }
 
+    /**
+     * Metodo responsavel por rejeitar a venda especifica informado pelo id da
+     * venda
+     */
     public void rejeitarVenda() {
         vDao = new VendaDaoImp();
         Venda v = carregaModalVenda(modelVendaPendente);
@@ -332,6 +373,10 @@ public class ControleVenda {
         }
     }
 
+    /**
+     * Metodo responsavel por despachar a Venda mudar os estatos da venda para
+     * enviado
+     */
     public void despacharVenda() {
         vDao = new VendaDaoImp();
         Venda v = carregaModalVenda(modelVendaDespachar);
@@ -351,6 +396,11 @@ public class ControleVenda {
         }
     }
 
+    /**
+     * Metodo responsavel por gerar a lista de compras do usuário
+     *
+     * @return retorna uma List de Venda
+     */
     public List<Venda> comprasUsuario() {
         vDao = new VendaDaoImp();
         try {

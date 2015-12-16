@@ -9,8 +9,24 @@ import java.util.List;
  */
 public interface ProdutoDao extends BaseDao {
 
+    /**
+     * Método responsável por salvar dados do produto retornando o código
+     * inserido.
+     *
+     * @param produto - variavel objeto do tipo Produto
+     * @return retorna um objeto do tipo Produto
+     * @throws Exception - caso ocorra alguma falha para salvar o produto
+     */
     Produto salvarProduto(Produto produto) throws Exception;
 
+    /**
+     * Método responsável por listar todos os produtos cadastrados no banco de
+     * dados.
+     *
+     * @return retorna um List do tipo Produto
+     * @throws Exception - caso ocorra alguma falha para listar produtos
+     * cadastrados
+     */
     List<Produto> listarProdutos() throws Exception;
 
     /**
@@ -30,8 +46,26 @@ public interface ProdutoDao extends BaseDao {
      */
     List<Produto> listarProdutosAtivosSiteRecentes() throws Exception;
 
+    /**
+     * Método responsável por listar produtos pelo filtro escolhido pelo
+     * administador.
+     *
+     * @param idCategoria - variavel do tipo int
+     * @param idMarca - variavel do tipo int
+     * @param ativo - variavel do tipo String
+     * @return retorna um List do tipo Produto
+     * @throws Exception - caso ocorra alguma falha para filtrar produtos
+     */
     List<Produto> filtroProdutoAdmin(int idCategoria, int idMarca, String ativo) throws Exception;
 
+    /**
+     * Método responsável por pesquisar os dados do produto selecionado.
+     *
+     * @param idProduto - variavel do tipo int
+     * @return retorna um objeto do tipo Produto
+     * @throws Exception - caso ocorra alguma falha para pesquisar dados do
+     * produto
+     */
     Produto pesqProdutoSelectSite(int idProduto) throws Exception;
 
     /**

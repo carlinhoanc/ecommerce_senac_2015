@@ -20,18 +20,24 @@ public class ProdutoDaoImp implements ProdutoDao {
     private PreparedStatement pstm = null;
     private ResultSet rs = null;
 
+    /**
+     * Método abstrato implemtado automaticamente de ProdutoDao
+     *
+     * @param obj - variavel objeto do tipo Object
+     * @return retorna um boelano
+     * @throws Exception - caso ocorra alguma falha para salvar
+     */
     @Override
     public boolean salvar(Object obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
-     * Método responsável por alterar todos os dados do produto de acordo com o
-     * código informado.
+     * Método abstrato implemtado automaticamente de ProdutoDao
      *
-     * @param obj - um objeto do tipo  Object
+     * @param obj - variavel objeto do tipo Object
      * @return retorna um boelano
-     * @throws Exception - caso ocorra alguma falha para alterar o produto
+     * @throws Exception - caso ocorra alguma falha para alterar
      */
     @Override
     public boolean alterar(Object obj) throws Exception {
@@ -61,11 +67,25 @@ public class ProdutoDaoImp implements ProdutoDao {
         return flag;
     }
 
+    /**
+     * Método abstrato implemtado automaticamente de ProdutoDao
+     *
+     * @param id - variavel do tipo int
+     * @return retorna um objeto do tipo Object
+     * @throws Exception - caso ocorra alguma falha para pesquisar
+     */
     @Override
     public Object pesquisar(int id) throws Exception {
         return null;
     }
 
+    /**
+     * Método abstrato implemtado automaticamente de ProdutoDao
+     *
+     * @param id - variavel do tipo int
+     * @return retorna um boelano
+     * @throws Exception - caso ocorra alguma falha para alterar o produto
+     */
     @Override
     public boolean excluir(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -75,7 +95,7 @@ public class ProdutoDaoImp implements ProdutoDao {
      * Método responsável por salvar dados do produto retornando o código
      * inserido.
      *
-     * @param produto - um objeto do tipo Produto
+     * @param produto - variavel objeto do tipo Produto
      * @return retorna um objeto do tipo Produto
      * @throws Exception - caso ocorra alguma falha para salvar o produto
      */
@@ -113,7 +133,8 @@ public class ProdutoDaoImp implements ProdutoDao {
      * dados.
      *
      * @return retorna um List do tipo Produto
-     * @throws Exception - caso ocorra alguma falha para listar produtos cadastrados
+     * @throws Exception - caso ocorra alguma falha para listar produtos
+     * cadastrados
      */
     @Override
     public List<Produto> listarProdutos() throws Exception {
@@ -161,7 +182,8 @@ public class ProdutoDaoImp implements ProdutoDao {
      * Método responsável por listar os oito produtos mais acessados no site.
      *
      * @return retorna um List do tipo Produto
-     * @throws Exception - caso ocorra alguma falha para listar produtos mais acessados
+     * @throws Exception - caso ocorra alguma falha para listar produtos mais
+     * acessados
      */
     @Override
     public List<Produto> listarProdutosAtivosSiteAcessos() throws Exception {

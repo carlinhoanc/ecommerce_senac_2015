@@ -5,9 +5,10 @@ package ecommerce.dao;
  * @author Gustavo
  */
 public interface BaseDao {
+
     /*
-     * Metodos resposavel por salvar os objetos no bano de dados
-     */
+    * Metodos resposavel por salvar os objetos no bano de dados
+    */
     boolean salvar(Object obj) throws Exception;
 
     /*

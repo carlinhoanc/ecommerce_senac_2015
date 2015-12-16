@@ -7,4 +7,5 @@ package ecommerce.dao;
  */
 public interface PessoaDao extends BaseDao{
    
+    
 }

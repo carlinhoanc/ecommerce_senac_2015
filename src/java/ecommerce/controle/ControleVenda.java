@@ -138,16 +138,14 @@ public class ControleVenda {
             s.setCodigo(1);
             venda.setStatusVenda(s);
             venda.setProtocolo(Protocolo.getNumeroProtocolo());
-            venda.setBoletoCartao("Cartão");
-            //  venda.setNumeroBoletoCartao("33444556667730000888");
+            venda.setBoletoCartao("Cartão");          
             vDao.salvar(venda);
             vendaCartao = true;
+            this.carrinho = null;
         } catch (Exception e) {
             System.out.println("Erro ao salvar " + e.getMessage());
         }
-
     }
-
     public void ativaCampoNumCartao() {
         vendaCartao = true;
     }
@@ -157,6 +155,8 @@ public class ControleVenda {
      * 
      * @param p - objeto do tipo pessoa
      * @param carrinho - lista de produto que está no carrinho
+     * @param p
+     * @param carrinho
      */
     public void salvarVendaBoleto(Pessoa p, List<Produto> carrinho) {
         vDao = new VendaDaoImp();
@@ -174,12 +174,15 @@ public class ControleVenda {
             String nomeBoletoNumero = Protocolo.getNumeroProtocolo();
             venda.setNumeroBoletoCartao(nomeBoletoNumero);
             vDao.salvar(venda);
-            gerarBoleto(nomeBoletoNumero);
+            gerarBoleto(nomeBoletoNumero);                
         } catch (Exception e) {
             System.out.println("Erro ao salvar " + e.getMessage());
-        }
+        }     
     }
-
+    /**
+     * 
+     * @param nome 
+     */
     private void gerarBoleto(String nome) {
         Datas datas = Datas.novasDatas()
                 .comDocumento(1, 5, 2008)

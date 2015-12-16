@@ -18,12 +18,12 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
     private ResultSet rs = null;
 
     /**
-     * Este método é responsável por inserir na tabela categoriaProduto,
-     * os dados da categoria do produto como: nome, descrição e ativo.
-     * 
-     * @param obj
-     * @return boolean
-     * @throws Exception 
+     * Este método é responsável por inserir na tabela categoriaProduto, os
+     * dados da categoria do produto como: nome, descrição e ativo.
+     *
+     * @param obj - variavel do tipo Object
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para salvar a categoria do produto
      */
     @Override
     public boolean salvar(Object obj) throws Exception {
@@ -47,12 +47,13 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
     }
 
     /**
-     * Este método é responsável por alterar os dados da categoria do produto 
-     * de acordo com o código informado.
-     * 
-     * @param obj
-     * @return boolean
-     * @throws Exception 
+     * Este método é responsável por alterar os dados da categoria do produto de
+     * acordo com o código informado.
+     *
+     * @param obj - variavel do tipo Object
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para alterar a categoria do
+     * produto
      */
     @Override
     public boolean alterar(Object obj) throws Exception {
@@ -87,11 +88,12 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
     }
 
     /**
-     * Este método é responsável por listar todas as categorias de produtos ativas
-     * cadastradas no banco de dados.
-     * 
+     * Este método é responsável por listar todas as categorias de produtos
+     * ativas cadastradas no banco de dados.
+     *
      * @return retorna um List do CategoriaProduto
-     * @throws Exception 
+     * @throws Exception - caso ocorra alguma falha para listar as categorias de
+     * produtos ativas
      */
     @Override
     public List<CategoriaProduto> listar() throws Exception {
@@ -118,11 +120,12 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
     }
 
     /**
-     * Este método é responsável por listar todas as categorias cadastradas 
-     * no banco de dados.
-     * 
+     * Este método é responsável por listar todas as categorias cadastradas no
+     * banco de dados.
+     *
      * @return retorna um List do CategoriaProduto
-     * @throws Exception - caso ocorra alguma falha para listar todas as categorias de produtos
+     * @throws Exception - caso ocorra alguma falha para listar todas as
+     * categorias de produtos
      */
     @Override
     public List<CategoriaProduto> listarEdicao() throws Exception {

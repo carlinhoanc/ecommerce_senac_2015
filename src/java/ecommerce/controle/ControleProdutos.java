@@ -267,9 +267,9 @@ public class ControleProdutos {
     /**
      * Metodo responsavel por salvar o arquivo na pasta comprovantesBancarios
      *
-     * @param bytes 
-     * @param arquivo
-     * @throws java.io.IOException
+     * @param bytes - variavel do tipo byte[]
+     * @param arquivo - variavel do tipo String
+     * @throws java.io.IOException - caso ocorra alguma falha ou exceção gravar o arquivo
      */
     public void criaArquivo(byte[] bytes, String arquivo) throws IOException {
         FileOutputStream fos;

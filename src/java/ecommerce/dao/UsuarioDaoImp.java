@@ -62,7 +62,7 @@ public class UsuarioDaoImp implements UsuarioDao {
      *
      * @param id
      * @return
-     * @throws Exception
+     * @throws Exception - caso ocorra alguma falha para desativar o usuário
      */
     @Override
     public boolean excluir(int id) throws Exception {
@@ -88,7 +88,7 @@ public class UsuarioDaoImp implements UsuarioDao {
      *
      * @param u - um objeto do tipo Usuario
      * @return Retorna um objeto do tipo Usuario
-     * @throws Exception - caso ocorra alguma falha 
+     * @throws Exception - caso ocorra alguma falha para salvar o usuário
      */
     @Override
     public Usuario salvar(Usuario u) throws Exception {
@@ -116,9 +116,9 @@ public class UsuarioDaoImp implements UsuarioDao {
     /**
      * Método responsável por autenticar o login do usuário.
      *
-     * @param u
+     * @param u - variavel 
      * @return
-     * @throws Exception
+     * @throws Exception - caso ocorra alguma falha para autenticar o login
      */
     @Override
     public Pessoa autenticar(Usuario u) throws Exception {

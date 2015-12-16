@@ -355,7 +355,7 @@ public class ProdutoDaoImp implements ProdutoDao {
      * Método responsável por inserir número de acessos de determinado produto.
      * 
      * @param idProduto
-     * @throws Exception 
+     * @throws Exception  - caso ocorra alguma falha para registrar acessos do produto
      */
     public void marcaVisualizacao(int idProduto) throws Exception {
         String queryConsuta = "SELECT acessos FROM produto WHERE codigo = ?";
@@ -385,7 +385,7 @@ public class ProdutoDaoImp implements ProdutoDao {
     /**
      * Método responsável por listar os últimos oito produtos cadastrados no site.
      * @return
-     * @throws Exception 
+     * @throws Exception - caso ocorra alguma falha para listar últimos produtos inseridos
      */
     @Override
     public List<Produto> listarProdutosAtivosSiteRecentes() throws Exception {

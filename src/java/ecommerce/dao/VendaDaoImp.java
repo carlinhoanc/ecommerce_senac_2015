@@ -25,9 +25,9 @@ public class VendaDaoImp implements VendaDao {
      * Este método é responsável por salvar os dados da venda, percorre a lista
      * de produtos para obter o valor total da venda e insere
      *
-     * @param obj
-     * @return
-     * @throws Exception
+     * @param obj - uma variavel do tipo Object
+     * @return - retorna a variavel falg do tipo boleana
+     * @throws Exception - caso ocorra alguma falha para salvar a venda
      */
     @Override
     public boolean salvar(Object obj) throws Exception {

@@ -26,11 +26,12 @@ public class ProdutoDaoImp implements ProdutoDao {
     }
 
     /**
-     * Método responsável por alterar todos os dados do produto de acordo 
-     * com o código informado.
-     * @param obj
-     * @return
-     * @throws Exception 
+     * Método responsável por alterar todos os dados do produto de acordo com o
+     * código informado.
+     *
+     * @param obj - um objeto do tipo  Object
+     * @return retorna um boelano
+     * @throws Exception - caso ocorra alguma falha para alterar o produto
      */
     @Override
     public boolean alterar(Object obj) throws Exception {
@@ -71,11 +72,12 @@ public class ProdutoDaoImp implements ProdutoDao {
     }
 
     /**
-     * Método responsável por salvar dados do produto retornando o código inserido.
-     * 
-     * @param produto
-     * @return
-     * @throws Exception 
+     * Método responsável por salvar dados do produto retornando o código
+     * inserido.
+     *
+     * @param produto - um objeto do tipo Produto
+     * @return retorna um objeto do tipo Produto
+     * @throws Exception - caso ocorra alguma falha para salvar o produto
      */
     @Override
     public Produto salvarProduto(Produto produto) throws Exception {
@@ -107,9 +109,11 @@ public class ProdutoDaoImp implements ProdutoDao {
     }
 
     /**
-     * Método responsável por listar todos os produtos cadastrados no banco de dados.
-     * @return
-     * @throws Exception 
+     * Método responsável por listar todos os produtos cadastrados no banco de
+     * dados.
+     *
+     * @return retorna um List do tipo Produto
+     * @throws Exception - caso ocorra alguma falha para listar produtos cadastrados
      */
     @Override
     public List<Produto> listarProdutos() throws Exception {
@@ -155,8 +159,9 @@ public class ProdutoDaoImp implements ProdutoDao {
 
     /**
      * Método responsável por listar os oito produtos mais acessados no site.
-     * @return
-     * @throws Exception 
+     *
+     * @return retorna um List do tipo Produto
+     * @throws Exception - caso ocorra alguma falha para listar produtos mais acessados
      */
     @Override
     public List<Produto> listarProdutosAtivosSiteAcessos() throws Exception {
@@ -194,12 +199,14 @@ public class ProdutoDaoImp implements ProdutoDao {
     }
 
     /**
-     * Método responsável por listar produtos pelo filtro escolhido pelo administador.
-     * @param idCategoria
-     * @param idMarca
-     * @param ativo
-     * @return
-     * @throws Exception 
+     * Método responsável por listar produtos pelo filtro escolhido pelo
+     * administador.
+     *
+     * @param idCategoria - variavel do tipo int
+     * @param idMarca - variavel do tipo int
+     * @param ativo - variavel do tipo String
+     * @return retorna um List do tipo Produto
+     * @throws Exception - caso ocorra alguma falha para filtrar produtos
      */
     @Override
     public List<Produto> filtroProdutoAdmin(int idCategoria, int idMarca, String ativo) throws Exception {
@@ -239,37 +246,35 @@ public class ProdutoDaoImp implements ProdutoDao {
                 pstm.setInt(2, idCategoria);
                 pstm.setBoolean(3, atv);
                 rs = pstm.executeQuery();
+            } else if ((idCategoria != 0) && (idMarca != 0)) {
+                pstm = conn.prepareCall(queryCategMarca);
+                pstm.setInt(1, idCategoria);
+                pstm.setInt(2, idMarca);
+                rs = pstm.executeQuery();
+            } else if ((idCategoria != 0) && (ativo != null)) {
+                pstm = conn.prepareCall(queriAtivoCeteg);
+                pstm.setBoolean(1, atv);
+                pstm.setInt(2, idCategoria);
+                rs = pstm.executeQuery();
+            } else if ((idMarca != 0) && (ativo != null)) {
+                pstm = conn.prepareCall(queriMarcaAtivo);
+                pstm.setInt(1, idMarca);
+                pstm.setBoolean(2, atv);
+                rs = pstm.executeQuery();
+            } else if (idCategoria != 0) {
+                pstm = conn.prepareCall(queryCateg);
+                pstm.setInt(1, idCategoria);
+                rs = pstm.executeQuery();
+            } else if (idMarca != 0) {
+                pstm = conn.prepareCall(queryMarca);
+                pstm.setInt(1, idMarca);
+                rs = pstm.executeQuery();
+            } else if (ativo != null) {
+                pstm = conn.prepareCall(queryAtivo);
+                pstm.setBoolean(1, atv);
+                rs = pstm.executeQuery();
             } else {
-                if ((idCategoria != 0) && (idMarca != 0)) {
-                    pstm = conn.prepareCall(queryCategMarca);
-                    pstm.setInt(1, idCategoria);
-                    pstm.setInt(2, idMarca);
-                    rs = pstm.executeQuery();
-                } else if ((idCategoria != 0) && (ativo != null)) {
-                    pstm = conn.prepareCall(queriAtivoCeteg);
-                    pstm.setBoolean(1, atv);
-                    pstm.setInt(2, idCategoria);
-                    rs = pstm.executeQuery();
-                } else if ((idMarca != 0) && (ativo != null)) {
-                    pstm = conn.prepareCall(queriMarcaAtivo);
-                    pstm.setInt(1, idMarca);
-                    pstm.setBoolean(2, atv);
-                    rs = pstm.executeQuery();
-                } else if (idCategoria != 0) {
-                    pstm = conn.prepareCall(queryCateg);
-                    pstm.setInt(1, idCategoria);
-                    rs = pstm.executeQuery();
-                } else if (idMarca != 0) {
-                    pstm = conn.prepareCall(queryMarca);
-                    pstm.setInt(1, idMarca);
-                    rs = pstm.executeQuery();
-                } else if (ativo != null) {
-                    pstm = conn.prepareCall(queryAtivo);
-                    pstm.setBoolean(1, atv);
-                    rs = pstm.executeQuery();
-                } else {
-                    produtos = listarProdutos();
-                }
+                produtos = listarProdutos();
             }
             if (rs != null) {
                 while (rs.next()) {
@@ -308,9 +313,11 @@ public class ProdutoDaoImp implements ProdutoDao {
 
     /**
      * Método responsável por pesquisar os dados do produto selecionado.
-     * @param idProduto
-     * @return
-     * @throws Exception 
+     *
+     * @param idProduto - variavel do tipo int
+     * @return retorna um objeto do tipo Produto
+     * @throws Exception - caso ocorra alguma falha para pesquisar dados do
+     * produto
      */
     @Override
     public Produto pesqProdutoSelectSite(int idProduto) throws Exception {
@@ -353,9 +360,10 @@ public class ProdutoDaoImp implements ProdutoDao {
 
     /**
      * Método responsável por inserir número de acessos de determinado produto.
-     * 
-     * @param idProduto
-     * @throws Exception  - caso ocorra alguma falha para registrar acessos do produto
+     *
+     * @param idProduto - variavel do tipo int
+     * @throws Exception - caso ocorra alguma falha para registrar acessos do
+     * produto
      */
     public void marcaVisualizacao(int idProduto) throws Exception {
         String queryConsuta = "SELECT acessos FROM produto WHERE codigo = ?";
@@ -383,9 +391,12 @@ public class ProdutoDaoImp implements ProdutoDao {
     }
 
     /**
-     * Método responsável por listar os últimos oito produtos cadastrados no site.
-     * @return
-     * @throws Exception - caso ocorra alguma falha para listar últimos produtos inseridos
+     * Método responsável por listar os últimos oito produtos cadastrados no
+     * site.
+     *
+     * @return retorna um List do tipo Produto
+     * @throws Exception - caso ocorra alguma falha para listar últimos produtos
+     * inseridos
      */
     @Override
     public List<Produto> listarProdutosAtivosSiteRecentes() throws Exception {
@@ -423,11 +434,14 @@ public class ProdutoDaoImp implements ProdutoDao {
     }
 
     /**
-     * Método responsável por verificar a quantidade do produto de acordo com o código informado.
-     * @param idProduto
-     * @param quantidade
-     * @return
-     * @throws Exception 
+     * Método responsável por verificar a quantidade do produto de acordo com o
+     * código informado.
+     *
+     * @param idProduto - variavel do tipo int
+     * @param quantidade - variavel do tipo int
+     * @return retorna um boeano
+     * @throws Exception - caso ocorra alguma falha para pesquisar quantidade do
+     * produto
      */
     @Override
     public boolean verificaQuantidadeProduto(int idProduto, int quantidade) throws Exception {

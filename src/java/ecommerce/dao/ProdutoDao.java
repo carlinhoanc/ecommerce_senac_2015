@@ -16,8 +16,8 @@ public interface ProdutoDao extends BaseDao {
     /**
      * Metodo responsanvel por pesquiar os 8 (oito) produtos mais acessados
      *
-     * @return List produtos
-     * @throws Exception
+     * @return retorna um List Produto
+     * @throws Exception - caso ocorra alguma falha ou exceção
      */
     List<Produto> listarProdutosAtivosSiteAcessos() throws Exception;
 
@@ -25,25 +25,25 @@ public interface ProdutoDao extends BaseDao {
      * Metodo responsanvel por pesquiar os 8 (oito) produtos que foram inseridos
      * recentemente
      *
-     * @return List produtos
-     * @throws Exception
+     * @return retorna um List Produto
+     * @throws Exception - caso ocorra alguma falha ou exceção
      */
     List<Produto> listarProdutosAtivosSiteRecentes() throws Exception;
 
     List<Produto> filtroProdutoAdmin(int idCategoria, int idMarca, String ativo) throws Exception;
 
     Produto pesqProdutoSelectSite(int idProduto) throws Exception;
-    
-     /**
-     * Metodo responsavel por verificar a quantidade do produto quanto o usuario esta na 
-     * tebela do carrinho de compras e adiciona mais um produto do mesmo tipo se a 
-     * quantidade fornecida pelo o usuario for maior que a quantidade em estoque o
-     * metodo retorna false.
-     * 
-     * @param idProduto
-     * @param quantidade
-     * @return
-     * @throws Exception 
-     */    
-    boolean verificaQuantidadeProduto(int idProduto , int quantidade) throws Exception;
+
+    /**
+     * Metodo responsavel por verificar a quantidade do produto quanto o usuario
+     * esta na tebela do carrinho de compras e adiciona mais um produto do mesmo
+     * tipo se a quantidade fornecida pelo o usuario for maior que a quantidade
+     * em estoque o metodo retorna false.
+     *
+     * @param idProduto - variavel do tipo int
+     * @param quantidade - variavel do tipo int
+     * @return retorna um boeano
+     * @throws Exception - caso ocorra alguma falha ou exceção
+     */
+    boolean verificaQuantidadeProduto(int idProduto, int quantidade) throws Exception;
 }

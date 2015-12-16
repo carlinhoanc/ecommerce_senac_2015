@@ -21,9 +21,9 @@ public class UsuarioDaoImp implements UsuarioDao {
      * Método responsável por salvar dados do usuário, como: email, senha e o
      * tipo do usuário.
      *
-     * @param obj
-     * @return
-     * @throws Exception
+     * @param obj - uma variavel do tipo Object
+     * @return retorna um boleano
+     * @throws Exception - caso caia em alguma exceção 
      */
     @Override
     public boolean salvar(Object obj) throws Exception {
@@ -60,8 +60,8 @@ public class UsuarioDaoImp implements UsuarioDao {
      * Método responsável por desativar usuário de acordo com o código
      * informado.
      *
-     * @param id
-     * @return
+     * @param id - é uma variavel int 
+     * @return um boleado 
      * @throws Exception - caso ocorra alguma falha para desativar o usuário
      */
     @Override
@@ -116,8 +116,8 @@ public class UsuarioDaoImp implements UsuarioDao {
     /**
      * Método responsável por autenticar o login do usuário.
      *
-     * @param u - variavel 
-     * @return
+     * @param u - variavel objeto do tipo Usuario
+     * @return um objeto do tipo Pessoa
      * @throws Exception - caso ocorra alguma falha para autenticar o login
      */
     @Override

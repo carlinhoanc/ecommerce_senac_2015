@@ -22,9 +22,9 @@ public class PessoaDaoImp implements PessoaDao {
     /**
      * Este método é responsável por salvar os dados da pessoa e endereço.
      *
-     * @param obj
-     * @return
-     * @throws Exception
+     * @param obj - variavel do tipo Object
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para salvar pessoa
      */
     @Override
     public boolean salvar(Object obj) throws Exception {
@@ -71,9 +71,9 @@ public class PessoaDaoImp implements PessoaDao {
     /**
      * Este método é responsável por alterar os dados da pessoa e endereço.
      *
-     * @param obj
-     * @return
-     * @throws Exception
+     * @param obj - variavel do tipo Object
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para alterar pessoa
      */
     @Override
     public boolean alterar(Object obj) throws Exception {
@@ -113,9 +113,9 @@ public class PessoaDaoImp implements PessoaDao {
      * Método responsável por pesquisar dados da pessoa de acordo com o código
      * informado.
      *
-     * @param id
-     * @return
-     * @throws Exception
+     * @param id - variavel do tipo int
+     * @return retorna um Object
+     * @throws Exception - caso ocorra alguma falha para pesquisar pessoa
      */
     @Override
     public Object pesquisar(int id) throws Exception {

@@ -76,9 +76,9 @@ public class MarcaDaoImp implements MarcaDao {
     
     /**
      * Este método é responsável por pesquisar a marca de acordo com o código informado.
-     * @param id
+     * @param id - variavel do tipo int
      * @return Object do tipo Marca
-     * @throws Exception 
+     * @throws Exception  - caso ocorra alguma falha para pesquisar marca
      */
     @Override
     public Object pesquisar(int id) throws Exception {
@@ -106,9 +106,9 @@ public class MarcaDaoImp implements MarcaDao {
     
     /**
      * Este método é responsável por excluir a marca de acordo com o código informado.
-     * @param id
-     * @return boolean
-     * @throws Exception 
+     * @param id - variavel do tipo int
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para excluir marca
      */
     @Override
     public boolean excluir(int id) throws Exception {
@@ -130,8 +130,8 @@ public class MarcaDaoImp implements MarcaDao {
     
     /**
      * Este método é responsável por listar todas as marcas ativas no banco de dados.
-     * @return List<Marca>
-     * @throws Exception 
+     * @return List do tipo Marca
+     * @throws Exception  - caso ocorra alguma falha para listar marcas ativas
      */
     @Override
     public List<Marca> listar() throws Exception {
@@ -160,8 +160,8 @@ public class MarcaDaoImp implements MarcaDao {
     /**
      * Este método é responsável por listar todas as marcas cadastradas no banco,
      * independente se está ativa ou não para que possam ser editadas. 
-     * @return List<Marca>
-     * @throws Exception 
+     * @return List do tipo Marca
+     * @throws Exception  - caso ocorra alguma falha para listar marcas para edição
      */
     @Override
     public List<Marca> listarEdicao() throws Exception {

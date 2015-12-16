@@ -70,8 +70,8 @@ public class VendaDaoImp implements VendaDao {
      * pedido que é um relacionamento n menosr m entre a tabela venda e produto
      *
      *
-     * @param v
-     * @throws java.lang.Exception
+     * @param v - um objeto do tipo Venda
+     * @throws java.lang.Exception - caso ocorra alguma falha para salvar um pedido
      */
     public void salvarPedido(Venda v) throws Exception {
         try {
@@ -110,8 +110,8 @@ public class VendaDaoImp implements VendaDao {
     /**
      * Método responsável por listar todas as vendas pendentes.
      *
-     * @return
-     * @throws Exception
+     * @return um List do tipo Venda
+     * @throws Exception - caso ocorra alguma falha para listar as vendas pendentes
      */
     @Override
     public List<Venda> listarVendaPendente() throws Exception {
@@ -149,8 +149,8 @@ public class VendaDaoImp implements VendaDao {
      * Método responsável por listar todas as vendas que estão com o status:
      * "despachar".
      *
-     * @return
-     * @throws Exception
+     * @return retorna um List do tipo Venda
+     * @throws Exception - caso ocorra alguma falha para listar as vendas para despache
      */
     @Override
     public List<Venda> listarVendaDespachar() throws Exception {
@@ -188,9 +188,9 @@ public class VendaDaoImp implements VendaDao {
      * Método responsável por alterar o status da venda para "aprovada", de
      * acordo com o código informado.
      *
-     * @param idVenda
-     * @return
-     * @throws Exception
+     * @param idVenda - variavel do tipo int
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para aprovar a venda
      */
     @Override
     public boolean aprovarVenda(int idVenda) throws Exception {
@@ -216,9 +216,9 @@ public class VendaDaoImp implements VendaDao {
      * Método responsável por alterar o status da venda para "rejeitada", ação
      * permitida apenas pelo admin do sistema.
      *
-     * @param idVenda
-     * @return
-     * @throws Exception
+     * @param idVenda - variavel do tipo int
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para rejeitar a venda
      */
     @Override
     public boolean rejeitarVenda(int idVenda) throws Exception {
@@ -242,9 +242,9 @@ public class VendaDaoImp implements VendaDao {
     /**
      * Método responsável por alterar o status da venda para "despachada".
      *
-     * @param idVenda
-     * @return
-     * @throws Exception
+     * @param idVenda - variavel do tipo int
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para despachar a venda
      */
     @Override
     public boolean despacharVenda(int idVenda) throws Exception {

@@ -220,7 +220,7 @@ public final class WebServiceCep {
 	 * <BR>Por Exemplo:
 	 * <BR>Uma <tt>{@link String} "14.568-910"</tt> é automaticamente passada para
 	 * <tt>"14568910"</tt>.
-	 * <BR>Uma <tt>{@link String} "1%4#5?55%16a8&910"</tt> é automaticamente passada para
+	 * <BR>Uma <tt>{@link String} "1%4#5?55%16a8#910"</tt> é automaticamente passada para
 	 * <tt>"14555168"</tt>, só levando em conta os primeiros 8 números.
 	 * @param	cep Número do cep a ser carregado. Só serão considerados os primeiros 8 
 	 * 			números da {@link String} enviada. Todos os caracters não numéricos serão

@@ -86,9 +86,9 @@ public class UsuarioDaoImp implements UsuarioDao {
      * Método responsável por salvar dados do usuário, como: email, senha e o
      * tipo do usuário inserido.
      *
-     * @param u
-     * @return
-     * @throws Exception
+     * @param u - um objeto do tipo Usuario
+     * @return Retorna um objeto do tipo Usuario
+     * @throws Exception - caso ocorra alguma falha 
      */
     @Override
     public Usuario salvar(Usuario u) throws Exception {

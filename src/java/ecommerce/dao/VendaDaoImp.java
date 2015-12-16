@@ -67,7 +67,7 @@ public class VendaDaoImp implements VendaDao {
 
     /**
      * Este método é responsável por inserir idVenda e idProduto na tabela
-     * pedido que é um relacionamento n > m entre a tabela venda e produto
+     * pedido que é um relacionamento n menosr m entre a tabela venda e produto
      *
      *
      * @param v

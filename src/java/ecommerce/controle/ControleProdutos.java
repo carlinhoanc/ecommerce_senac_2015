@@ -213,7 +213,7 @@ public class ControleProdutos {
      * Metodo responsavel por pegar o caminho relativo da pasta onde sera salvo
      * o aqruivo
      *
-     * @return
+     * @return context.getRealPath
      */
     public String getRealPath() {
         ExternalContext externalContext

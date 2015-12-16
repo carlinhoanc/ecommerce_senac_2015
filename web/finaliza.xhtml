@@ -19,15 +19,16 @@
         <p:growl id="messages"/> 
         <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
         <p:dialog modal="true" widgetVar="statusDialog" draggable="false" closable="false">
-            <p:graphicImage value="#{request.contextPath}/imagensSistema/carregando.gif"/>
+            <p:graphicImage value="imagensSistema/carregando.gif"/>
         </p:dialog>
         <div class="container-fluid painelUser">
             <div class="container">
-                <h:form>
+                <h:form prependId="false">
                     <p:dataTable id="gridCarrinho" value="#{controleProdutos.listarCarrinho()}" var="carrinho" 
                                  paginatorPosition="bottom" 
                                  styleClass="dataTableHorus"
-                                 paginator="true" rows="15">
+                                 paginator="true" rows="15"
+                                  emptyMessage="Carrinho vazio">
                         <p:column width="100">
                             <f:facet name="header">Codigo</f:facet>
                                 #{carrinho.codigo}
@@ -66,10 +67,10 @@
                     </h:panelGrid>
                     <h:panelGrid columns="2">  
                         <p:commandButton styleClass="buttonProd btn btn-info" value="Cartão" icon="fa fa-credit-card"  oncomplete="ativaCampoCartao();" actionListener="#{controleVenda.ativaCampoNumCartao()}" ajax="true"/>
-                        <p:commandButton  styleClass="buttonProd btn btn-info" icon="fa fa-barcode" value="Boleto" actionListener="#{controleVenda.salvarVendaBoleto(controleCliente.pesquisaDadosPessoaisFenalizaVenda(),controleProdutos.listarCarrinho())}" ajax="false"  >
-                            <p:fileDownload value="#{controleVenda.file}" />
-                        </p:commandButton>
-                        <!--<a styleClass="buttonProd btn btn-info" onclick="ativaCampoCartao();" href="#" >activa</a>-->
+                        <p:commandButton  styleClass="buttonProd btn btn-info" icon="fa fa-barcode" value="Boleto" actionListener="#{controleVenda.salvarVendaBoleto(controleCliente.pesquisaDadosPessoaisFenalizaVenda(),controleProdutos.listarCarrinho())}" ajax="false" >
+                            <p:fileDownload value="#{controleVenda.file}"/>
+                            <p:ajax event="click" delay="2000" oncomplete="#{controleProdutos.setLimpaCarrinho('limpaCarrinho')}"  update=":menuPrincipal:btnCarrinho :gridCarrinho"/>
+                        </p:commandButton>                      
                         <script type="text/javascript">
                             function ativaCampoCartao() {
                                 $('#campoCartao').css('display', 'block');
@@ -79,13 +80,8 @@
                     <div id="campoCartao" style="display: none" > 
                         <h:outputText value="Numero do cartão"/>
                         <p:inputMask  value="#{controleVenda.venda.numeroBoletoCartao}" mask="9999 9999 9999 9999"/>
-                        <p:commandButton id="vai" styleClass="buttonProd btn btn-info" value="Concluir Compra" icon="fa fa-credit-card" action="#{controleVenda.salvarVendaCartao(controleCliente.pesquisaDadosPessoaisFenalizaVenda(),controleProdutos.listarCarrinho())}" ajax="false" update="pdf"/>
-                    </div>
-                    <!--                    <h:panelGrid id="pdf" columns="1">
-                                            <object  type="application/pdf" data="tempBoleto/#-{controleVenda.carregaCaminhoBoleto()}" height="500px" width="700px" internalinstanceid="4">
-                                                Your browser can't display pdf, <a href="tempBoleto/#-{controleVenda.carregaCaminhoBoleto()}">click</a> to download pdf instead.
-                                            </object>
-                                        </h:panelGrid>-->
+                        <p:commandButton styleClass="buttonProd btn btn-info" value="Concluir Compra" icon="fa fa-credit-card" action="#{controleVenda.salvarVendaCartao(controleCliente.pesquisaDadosPessoaisFenalizaVenda(),controleProdutos.listarCarrinho())}" ajax="false" />
+                    </div>                    
                 </h:form>                
             </div>
         </div>

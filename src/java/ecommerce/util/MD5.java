@@ -14,6 +14,12 @@ import java.security.NoSuchAlgorithmException;
  * @author Gustavo
  */
 public class MD5 {
+    
+    /**
+     * Gera a criptografia das senhas dos usuarios e urls
+     * @param senhaGerada
+     * @return uma String
+     */
      public static String criptografia(String senhaGerada) {
 
         MessageDigest m = null;

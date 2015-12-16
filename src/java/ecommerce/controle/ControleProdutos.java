@@ -226,9 +226,9 @@ public class ControleProdutos {
     }
 
     /**
-     * Metodo responsavel por pegar o aquivo(Imagen do produto) da tela
+     * Metodo responsavel por pegar o aquivo(Imagem do produto) da tela
      *
-     * @param event
+     * @param event - parametro do tipo FileUploadEvent
      */
     public void handleFileUploadAction(FileUploadEvent event) {
         fpDao = new FotosProdutoDaoImp();
@@ -265,9 +265,9 @@ public class ControleProdutos {
     }
 
     /**
-     * Metodo responsavel por salvar o arquivo na pasta comprocantesBancarios
+     * Metodo responsavel por salvar o arquivo na pasta comprovantesBancarios
      *
-     * @param bytes
+     * @param bytes 
      * @param arquivo
      * @throws java.io.IOException
      */

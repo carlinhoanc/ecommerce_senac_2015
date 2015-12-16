@@ -153,9 +153,10 @@ public class ControleVenda {
     }
 
     /**
-     * Metodo que gera o boleto AVISO! ainda nao esta funcionado quando o
-     * comendo de geração vem da tela de venda Mais funciona quando eu uso a
-     * public static void main para execultar
+     * Metodo que gera o boleto 
+     * 
+     * @param p - objeto do tipo pessoa
+     * @param carrinho - lista de produto que está no carrinho
      */
     public void salvarVendaBoleto(Pessoa p, List<Produto> carrinho) {
         vDao = new VendaDaoImp();
@@ -360,21 +361,18 @@ public class ControleVenda {
     }
 
     /**
-     * Valida de o usuario esta ira verificar se o usuario esta logado para
+     * Método responsável por verificar se o usuario esta logado para
      * redirecionamento de pagina.
      *
-     * @return
+     * @return String - retorna a página
      */
     public String validacoesParaCompra() {
-        // this.carrinho = carrinho;
         Pessoa p = SessionContext.getInstance().getUsuarioLogado();
         if (p == null) {
-            return "/login.faces?faces-redirect=true&cmd=" + MD5.criptografia("compra"); // bloco de tela que ira pedir para o usuario logar ou se cadastrar;
+            return "/login.faces?faces-redirect=true&cmd=" + MD5.criptografia("compra"); // bloco de tela que pede para o usuario logar ou se cadastrar;
         } else {
-//            return "/venda.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra"); // bloco de tela que finalizario a venda;
-            return "/finaliza.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra"); // bloco de tela que finalizario a venda;
+            return "/finaliza.faces?faces-redirect=true&cmd=" + MD5.criptografia("finalizarCompra"); // bloco de tela que finaliza a venda;
         }
-        //return null;
     }
 
 }

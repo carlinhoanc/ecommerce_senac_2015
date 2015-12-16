@@ -12,19 +12,18 @@ import java.util.ArrayList;
  * @author Gustavo
  */
 public class MarcaDaoImp implements MarcaDao {
-    
+
     private Connection conn = null;
     private PreparedStatement pstm = null;
     private ResultSet rs = null;
-    
-    
+
     /**
-     * Este método é responsável por salvar os dados da marca, como: nome, descrição
-     * e se está ativa.
-     * 
-     * @param obj
-     * @return boolean
-     * @throws Exception 
+     * Este método é responsável por salvar os dados da marca, como: nome,
+     * descrição e se está ativa.
+     *
+     * @param obj - variavel do tipo Object
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para salvar a marca
      */
     @Override
     public boolean salvar(Object obj) throws Exception {
@@ -46,13 +45,13 @@ public class MarcaDaoImp implements MarcaDao {
         }
         return flag;
     }
-    
+
     /**
      * Este método é responsável por alterar os dados da marca.
-     * 
-     * @param obj
-     * @return boolean
-     * @throws Exception 
+     *
+     * @param obj - variavel do tipo Object
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para alterar marca
      */
     @Override
     public boolean alterar(Object obj) throws Exception {
@@ -73,12 +72,14 @@ public class MarcaDaoImp implements MarcaDao {
         }
         return flag;
     }
-    
+
     /**
-     * Este método é responsável por pesquisar a marca de acordo com o código informado.
+     * Este método é responsável por pesquisar a marca de acordo com o código
+     * informado.
+     *
      * @param id - variavel do tipo int
      * @return Object do tipo Marca
-     * @throws Exception  - caso ocorra alguma falha para pesquisar marca
+     * @throws Exception - caso ocorra alguma falha para pesquisar marca
      */
     @Override
     public Object pesquisar(int id) throws Exception {
@@ -103,9 +104,11 @@ public class MarcaDaoImp implements MarcaDao {
         }
         return m;
     }
-    
+
     /**
-     * Este método é responsável por excluir a marca de acordo com o código informado.
+     * Este método é responsável por excluir a marca de acordo com o código
+     * informado.
+     *
      * @param id - variavel do tipo int
      * @return retorna um boleano
      * @throws Exception - caso ocorra alguma falha para excluir marca
@@ -127,11 +130,13 @@ public class MarcaDaoImp implements MarcaDao {
         }
         return flag;
     }
-    
+
     /**
-     * Este método é responsável por listar todas as marcas ativas no banco de dados.
+     * Este método é responsável por listar todas as marcas ativas no banco de
+     * dados.
+     *
      * @return List do tipo Marca
-     * @throws Exception  - caso ocorra alguma falha para listar marcas ativas
+     * @throws Exception - caso ocorra alguma falha para listar marcas ativas
      */
     @Override
     public List<Marca> listar() throws Exception {
@@ -156,35 +161,37 @@ public class MarcaDaoImp implements MarcaDao {
         }
         return marcas;
     }
-    
+
     /**
-     * Este método é responsável por listar todas as marcas cadastradas no banco,
-     * independente se está ativa ou não para que possam ser editadas. 
+     * Este método é responsável por listar todas as marcas cadastradas no
+     * banco, independente se está ativa ou não para que possam ser editadas.
+     *
      * @return List do tipo Marca
-     * @throws Exception  - caso ocorra alguma falha para listar marcas para edição
+     * @throws Exception - caso ocorra alguma falha para listar marcas para
+     * edição
      */
     @Override
     public List<Marca> listarEdicao() throws Exception {
         List<Marca> marcas = new ArrayList();
         try {
-        String query = "SELECT * FROM marca";
-        conn = Conexao.abrirConexao();
-        pstm = conn.prepareCall(query);
-        rs = pstm.executeQuery();
-        
-        while (rs.next()) {
-            Marca m = new Marca();
-            m.setCodigo(rs.getInt("codigo"));
-            m.setNome(rs.getString("nome"));
-            m.setDescricao(rs.getString("descricao"));
-            m.setAtivo(rs.getBoolean("ativo"));
-            if (m.isAtivo()) {
-                m.setAtivoString("sim");
-            } else {
-                m.setAtivoString("nao");
+            String query = "SELECT * FROM marca";
+            conn = Conexao.abrirConexao();
+            pstm = conn.prepareCall(query);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                Marca m = new Marca();
+                m.setCodigo(rs.getInt("codigo"));
+                m.setNome(rs.getString("nome"));
+                m.setDescricao(rs.getString("descricao"));
+                m.setAtivo(rs.getBoolean("ativo"));
+                if (m.isAtivo()) {
+                    m.setAtivoString("sim");
+                } else {
+                    m.setAtivoString("nao");
+                }
+                marcas.add(m);
             }
-            marcas.add(m);
-        }
         } catch (Exception e) {
             System.out.println("Erro ao listar marcas para edição: " + e.getMessage());
         } finally {

@@ -22,7 +22,7 @@ public class FotosProdutoDaoImp implements FotosProdutoDao {
      * 
      * @param obj - varivel do tipo Object
      * @return retorna um Object
-     * @throws Exception 
+     * @throws Exception  - caso ocorra alguma falha para salvar fotos
      */
     @Override
     public boolean salvar(Object obj) throws Exception {

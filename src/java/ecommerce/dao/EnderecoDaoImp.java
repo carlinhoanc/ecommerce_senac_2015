@@ -19,9 +19,9 @@ public class EnderecoDaoImp implements EnderecoDao {
     /**
      * Este método é responsável por salvar os dados de endereço da pessoa
      *
-     * @param obj
-     * @return boolean
-     * @throws Exception
+     * @param obj - variavel do tipo Object
+     * @return retorna boleano
+     * @throws Exception - caso ocorra alguma falha para salvar o endereço
      */
     @Override
     public boolean salvar(Object obj) throws Exception {
@@ -53,9 +53,9 @@ public class EnderecoDaoImp implements EnderecoDao {
      * Este método é responsável por alterar o endereço da pessoa pelo código
      * informado
      *
-     * @param obj
-     * @return boolean
-     * @throws Exception
+     * @param obj - variavel do tipo Object
+     * @return retorna boleano
+     * @throws Exception - caso ocorra alguma falha para alterar o endereço
      */
     @Override
     public boolean alterar(Object obj) throws Exception {
@@ -86,9 +86,9 @@ public class EnderecoDaoImp implements EnderecoDao {
      * Este método é responsável por listar o endereço de acordo com o código
      * informado
      *
-     * @param id
-     * @return
-     * @throws Exception
+     * @param id - variavel do tipo int
+     * @return retorna um Objet
+     * @throws Exception - caso ocorra alguma falha para pesquisar endereço
      */
     @Override
     public Object pesquisar(int id) throws Exception {
@@ -122,9 +122,9 @@ public class EnderecoDaoImp implements EnderecoDao {
     /**
      * Este método é responsável por excluir o endereço pelo código informado
      *
-     * @param id
-     * @return
-     * @throws Exception
+     * @param id - variavel do tipo int
+     * @return retorna um boleano
+     * @throws Exception - caso ocorra alguma falha para excluir endereço
      */
     @Override
     public boolean excluir(int id) throws Exception {

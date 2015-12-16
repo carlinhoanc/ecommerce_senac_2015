@@ -10,7 +10,7 @@
             <p:separator style="width: 98%; height: 0px; margin-top: 5px;" />             
             <h:form prependId="false" id="fomMenu"> 
                 <p:menubar>  
-                    <p:menuitem value="Pesquisar"  actionListener="#{controleProdutos.listarTodosProdutos()}" ajax="true" oncomplete="PF('dlgProd').show();" update=":formTabelaProd:gridProduto" />    
+                    <p:menuitem value="Pesquisar" icon="fa fa-search" actionListener="#{controleProdutos.listarTodosProdutos()}" ajax="true" oncomplete="PF('dlgProd').show();" update=":formTabelaProd:gridProduto" />    
                 </p:menubar>   
             </h:form>  
             <p:separator style="width:98%; height: 0px; margin-top:10px;"/>
@@ -74,7 +74,7 @@
                                 Produto
                             </f:facet>
                             <p:graphicImage  value="../imagensProdutos/#{produtoGrid.nome}" width="100" height="80" />
-                            <!--                           // <h:outputText value="#-{extratoGrid.nome}"/>-->
+                           
                         </p:column>
                         <p:column width="50">
                             <p:commandButton styleClass="btn btn-danger" title="Excluir imagem" ajax="true" actionListener="#{controleProdutos.deletaImagenProduto()}"  icon="fa fa-trash-o" update="gridProduto"/>

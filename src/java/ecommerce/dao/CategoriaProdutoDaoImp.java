@@ -90,7 +90,7 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
      * Este método é responsável por listar todas as categorias de produtos ativas
      * cadastradas no banco de dados.
      * 
-     * @return List<CategoriaProduto>
+     * @return retorna um List do CategoriaProduto
      * @throws Exception 
      */
     @Override
@@ -121,8 +121,8 @@ public class CategoriaProdutoDaoImp implements CategoriaProdutoDao {
      * Este método é responsável por listar todas as categorias cadastradas 
      * no banco de dados.
      * 
-     * @return List<CategoriaProduto>
-     * @throws Exception 
+     * @return retorna um List do CategoriaProduto
+     * @throws Exception - caso ocorra alguma falha para listar todas as categorias de produtos
      */
     @Override
     public List<CategoriaProduto> listarEdicao() throws Exception {
